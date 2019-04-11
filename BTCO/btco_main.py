@@ -24,9 +24,16 @@ import public, json
 
 class btco_main:
     __BtcoPath = '/www/server/panel/plugin/btco' #BTCO 主体路径
+    __SitePath = '/www/server/panel/BTPanel/templates/default' #宝塔面板模板路径
+    __BtcoNick = 'btco.html' #BTCO 网页文件名
 
     # 实例化BTCO
     def __init__(self):
-        pass
+        if os.path.exists(self.__SitePath)
+            if not os.path.isfile(self.__SitePath + self.__BtcoNick)
+                public.ExecShell('cp -rf  %s' % self.__BtcoPath + '/Main/' + self.__BtcoNick +' '+ self.__SitePath)
+
+    def BTCO(self, get):
+        return public.returnMsg(True, 'Rua!')
 
     #Coding more...
