@@ -37,7 +37,7 @@ class btco_main:
 
     # BTCO 安装
     def BtcoInstall(self, get):
-        if self.GetStar(get.github): return public.returnMsg(False, '请先授权')
+        if self.GetStar(get.github): return public.returnMsg(False, '请先到GitHub点击Star并授权')
         initobj = open(self.__BT_init,'r')
         for initLine in initobj:
             for btcoin in ['@app.route(\'/btco\'']:
@@ -51,14 +51,14 @@ class btco_main:
 
     # Github Star 授权服务 PS：还不去点点Star吗...´_>`
     def GetStarAuth(self, get):
-        if not 'github' in get: return public.returnMsg(False, '缺少参数')
-        if self.GetStar(get.github): return public.returnMsg(True, '授权成功')
-        return public.returnMsg(False, '授权失败')
+        if not 'github' in get: return public.returnMsg(False, 'GitHub 用户名不能为空')
+        if self.GetStar(get.github): return public.returnMsg(True, '授权成功！请等待安装...')
+        return public.returnMsg(False, '未检测到Star记录')
     
     # 获取GitHub Star
     def GetStar(self, Github):
         headers = {"User-Agent":"Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36"}
-        GitOfBtco = requests.get("https://github.com/LF112/BTCO",headers = headers)
+        GitOfBtco = requests.get("https://github.com/LF112/BTCO/stargazers",headers = headers)
         GitOfBtco = re.findall(re.compile(r'<a data-hovercard-type="user".*?>(.*?)</a>',re.S),GitOfBtco.text)
         for StarList in GitOfBtco:
             if Github.upper() == StarList.upper(): return True
