@@ -58,10 +58,10 @@ class btco_main:
     # 获取GitHub Star
     def GetStar(self, Github):
         headers = {"User-Agent":"Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36"}
-        GitOfBtco = requests.get("https://github.com/LF112/BTCO/stargazers",headers = headers)
-        GitOfBtco = re.findall(re.compile(r'<a data-hovercard-type="user".*?>(.*?)</a>',re.S),GitOfBtco.text)
+        GitOfBtco = requests.get("https://github.com/" + Github + "?direction=desc&sort=created&tab=stars",headers = headers)
+        GitOfBtco = re.findall(re.compile(r'<div class="d-inline-block mb-1"*?>(.*?)</div>',re.S),GitOfBtco.text)
         for StarList in GitOfBtco:
-            if Github.upper() == StarList.upper(): return True
+ 			if re.findall(re.compile(r'</span>(.*?)<',re.S),StarList)[0].replace(' ', '').strip().upper() == 'BTCO'.upper(): return True
         return False
 
     # 发出丢人的声音
