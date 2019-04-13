@@ -23,10 +23,6 @@ sys.path.append("class/")
 import public, json, requests
 
 class btco_main:
-    __BtcoPath = '/www/server/panel/plugin/btco' #BTCO 主体路径
-    __SitePath = '/www/server/panel/BTPanel/templates/default' #宝塔面板模板路径
-    __BtcoNick = 'btco.html' #BTCO 网页文件名
-    __BT_init = '/www/server/panel/BTPanel/__init__.py' #宝塔面板核心文件
     BtcoIns = []
 
     # 实例化BTCO
@@ -38,12 +34,22 @@ class btco_main:
         pass
 
     def _check(self,args):
+        if not public.GetConfigValue('btco'): 
+            return public.returnMsg(False,'「BTCO」Please configure the license first.')
+        return True
+
+    def index(self,args):
         return True
 
     # BTCO 安装
     def BtcoInstall(self, get):
         if not self.GetStar(get.github): return public.returnMsg(False, '请先给该项目 Star')
-        return public.returnMsg(True, '安装成功')
+        if not public.GetConfigValue('btco'): 
+            public.SetConfigValue('btco',True)
+            return public.returnMsg(True, '安装成功，感谢支持.')
+        elif public.GetConfigValue('btco'):
+            return public.returnMsg(True,'您已安装过了.')
+        return public.returnMsg(False,'安装失败')
 
     # Github Star 授权服务 PS：还不去点点Star吗...´_>`
     def GetStarAuth(self, get):

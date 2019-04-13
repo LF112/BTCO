@@ -74,7 +74,7 @@ _     _____ _ _ ____               _
 
                     $.post("/plugin?action=a&s=BtcoInstall&name=btco",{ github: $('#BTCO-GithubNick').val() },function(rdata){
                         if(rdata.status) {
-                            $('#BTCO-Install').text('感谢支持，该插件无须安装(:з」∠)_');
+                            $('#BTCO-Install').text(rdata.msg);
                             $("#BTCO-Install").css({ "color": "rgb(136, 253, 141)" });
                             $(".LF112-Button:hover").css({ "box-shadow": "unset" });
                             setTimeout(function(){ $(".BTCO_Wrapper").fadeOut(500); },2500)
