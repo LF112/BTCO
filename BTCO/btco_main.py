@@ -31,23 +31,19 @@ class btco_main:
 
     # 实例化BTCO
     def __init__(self):
-        if os.path.exists(self.__SitePath):
-            if not os.path.isfile(self.__SitePath + self.__BtcoNick):
-                public.ExecShell('cp -rf  %s' % self.__BtcoPath + '/Main/' + self.__BtcoNick +' '+ self.__SitePath)
+    #    if os.path.exists(self.__SitePath):
+    #        if not os.path.isfile(self.__SitePath + self.__BtcoNick):
+    #            public.ExecShell('cp -rf  %s' % self.__BtcoPath + '/Main/' + self.__BtcoNick +' '+ self.__SitePath)
+        # 已向宝塔申请开发动态路由，转移文件已取消。
+        pass
+
+    def _check(self,args):
+        return True
 
     # BTCO 安装
     def BtcoInstall(self, get):
-        if self.GetStar(get.github): return public.returnMsg(False, '请先到GitHub点击Star并授权')
-        initobj = open(self.__BT_init,'r')
-        for initLine in initobj:
-            for btcoin in ['@app.route(\'/btco\'']:
-                if btcoin.upper() in initLine.upper():
-                    self.BtcoIns.append(btcoin)
-            if len(self.BtcoIns) != 0:
-                initobj.close()
-                return public.returnMsg(True, 'Rua!')
-        initobj.close()
-        return public.returnMsg(True, 'Not Found!')
+        if not self.GetStar(get.github): return public.returnMsg(False, '请先给该项目 Star')
+        return public.returnMsg(True, '安装成功')
 
     # Github Star 授权服务 PS：还不去点点Star吗...´_>`
     def GetStarAuth(self, get):

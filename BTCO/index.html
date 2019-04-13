@@ -40,7 +40,7 @@ _     _____ _ _ ____               _
         $("#BTCO").css({display: "block"});
         $(".BTCO_Wrapper").fadeIn(500);
         $('.BTCO-ghost').on('click', function () {
-        $(".BTCO_Wrapper").fadeOut(500);
+            $(".BTCO_Wrapper").fadeOut(500);
             setTimeout(function () {
                 $("#BTCO").css({display: "none"});
             }, 500);
@@ -71,6 +71,38 @@ _     _____ _ _ ____               _
                     $('#BTCO-Install').text('正在安装');
                     $("#BTCO-Install").css({ "color": "rgb(136, 253, 141)" });
                     $(".LF112-Button:hover").css({ "box-shadow": "unset" });
+
+                    $.post("/plugin?action=a&s=BtcoInstall&name=btco",{ github: $('#BTCO-GithubNick').val() },function(rdata){
+                        if(rdata.status) {
+                            $('#BTCO-Install').text('感谢支持，该插件无须安装(:з」∠)_');
+                            $("#BTCO-Install").css({ "color": "rgb(136, 253, 141)" });
+                            $(".LF112-Button:hover").css({ "box-shadow": "unset" });
+                            setTimeout(function(){ $(".BTCO_Wrapper").fadeOut(500); },2500)
+                            setTimeout(function () {
+                                $("#BTCO").css({display: "none"});
+                                $('#BTCO-Install').text('检查并安装'); 
+                                $("#BTCO-Install").css({
+                                    "background-color": "#6b7179",
+                                    "color": "#fff"
+                                });
+                                $(".LF112-Button:hover").css({ "box-shadow": "0 0 0 1px #6b7179, 0 1px 6px #6b7179" });
+                                $('#BTCO-GithubNick').val('');
+                            }, 3000);
+
+                        }else{
+                            $('#BTCO-Install').text(rdata.msg);
+                            $("#BTCO-Install").css({ "color": "rgb(253, 136, 136)" });
+                            setTimeout(function(){
+                                $('#BTCO-Install').text('检查并安装'); 
+                                $("#BTCO-Install").css({
+                                    "background-color": "#6b7179",
+                                    "color": "#fff"
+                                });
+                                $(".LF112-Button:hover").css({ "box-shadow": "0 0 0 1px #6b7179, 0 1px 6px #6b7179" });
+                            },1500) 
+                        }
+                    });
+
                 } else {
                     $('#BTCO-Install').text(rdata.msg);
                     $("#BTCO-Install").css({ "color": "rgb(253, 136, 136)" });
