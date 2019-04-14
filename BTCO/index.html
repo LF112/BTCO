@@ -69,7 +69,39 @@ _     _____ _ _ ____               _
 
                 }
 
-                if(Star != 0) $('#BTCOGithubStar').text(Star);
+                if(Star != 0) {
+                    $('#BTCOGithubStar').text(Star);
+                    
+                    $('#BtcoUnInstall').on('click', function () {
+
+                        layer.msg('正在移除 BTCO...', {time: 0})
+                        $.post("/plugin?action=a&s=BtcoRemove&name=btco",{ },function(rdata){
+                            if(rdata.status) {
+                                parent.layer.closeAll();
+                                $("#ThanksYou").fadeOut(500);
+                                setTimeout(function(){
+                                    $("#ThanksYou").text('晚安，BT-Panel.');
+                                    $("#ThanksYou").fadeIn(500);
+                                    setTimeout(function(){
+                                        $("#ThanksYou").fadeOut(500);
+                                        setTimeout(function(){
+                                            $("#ThanksYou").text('已成功移除 BTCO');
+                                            $("#ThanksYou").fadeIn(500);
+                                            $("#BtcoBottom").fadeOut(500);    
+                                        },500);
+                                    },500);
+                                },500);
+                                $('.BTCO-ghost').on('click', function () { window.location.reload() });
+                            }else{
+                                parent.layer.closeAll();
+                                layer.msg('移除 BTCO 失败了')
+                            }
+                        });
+                        
+
+                    });
+
+                }
 
                 $("#BTCO").css({display: "block"});
                 $(".BTCO_Wrapper").fadeIn(500);

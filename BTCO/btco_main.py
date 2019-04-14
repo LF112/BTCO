@@ -64,13 +64,37 @@ class btco_main:
             BtcoAddin = open('/www/server/panel/BTPanel/templates/default/layout.html','w')
             BtcoAddin.write(BtcoAddIn[0] + BtcoAdd + "</head>" + BtcoAddIn[1])
             BtcoAddin.close()
-
+            public.restart_panel()
             public.SetConfigValue('btco_ghnick',get.github)
             public.SetConfigValue('btco',True)
             return public.returnMsg(True, '安装成功，感谢支持.')
         elif public.GetConfigValue('btco'):
             return public.returnMsg(True,'您已安装过了.')
         return public.returnMsg(False,'安装失败')
+
+    #BTCO 卸载
+    def BtcoRemove(self, get):
+        if not public.GetConfigValue('btco'): return public.returnMsg(False,'未安装怎么移除？')
+        initobj = open('/www/server/panel/BTPanel/templates/default/layout.html','r')
+        for initLine in initobj:
+            for btcoin in ['<!--BTCO-->']:
+                if btcoin.upper() in initLine.upper():
+                    self.BtcoIns.append(btcoin)
+        if len(self.BtcoIns) > 0:        
+            initCoutent = open('/www/server/panel/BTPanel/templates/default/layout.html','r')
+            BtcoAddOn = initCoutent.read().split("<!--BTCO-->")
+            initCoutent.close()
+            BtcoAddOnd = open('/www/server/panel/BTPanel/templates/default/layout.html','w')
+            BtcoAddOnd.write(BtcoAddOn[0] + BtcoAddOn[2])
+            BtcoAddOnd.close()
+            public.restart_panel()
+            public.SetConfigValue('btco_ghnick','')
+            public.SetConfigValue('btco',False)
+            return public.returnMsg(True,'移除成功！')
+        public.SetConfigValue('btco_ghnick','')
+        public.SetConfigValue('btco',False)
+        return public.returnMsg(True,'移除成功')
+        
 
     #BTCO 安装检测
     def BtcoInstallCheck(self, get):
