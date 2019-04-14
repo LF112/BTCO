@@ -45,11 +45,39 @@ class btco_main:
     def BtcoInstall(self, get):
         if not self.GetStar(get.github): return public.returnMsg(False, '请先给该项目 Star')
         if not public.GetConfigValue('btco'): 
+        
+            initobj = open('/www/server/panel/BTPanel/templates/default/layout.html','r')
+            for initLine in initobj:
+                for btcoin in ['<!--BTCO-->']:
+                    if btcoin.upper() in initLine.upper():
+                        self.BtcoIns.append(btcoin)
+                if len(self.BtcoIns) != 0:
+                    initobj.close()
+                    return public.returnMsg(True, '您已安装过了.')
+            # BTCO 强制跳转写入
+            BtcoAdd = '\n   <!--BTCO-->\n   <script> navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)&&(window.location.href="' + public.getPanelAddr() + '/btco' + '"); </script> \n   <!--BTCO-->\n\n'
+            initCoutent = open('/www/server/panel/BTPanel/templates/default/layout.html','r')
+            BtcoAddIn = initCoutent.read().split("</head>")
+            initCoutent.close()
+            BtcoAddin = open('/www/server/panel/BTPanel/templates/default/layout.html','w')
+            BtcoAddin.write(BtcoAddIn[0] + BtcoAdd + "</head>" + BtcoAddIn[1])
+            BtcoAddin.close()
+
+            public.SetConfigValue('btco_ghnick',get.github)
             public.SetConfigValue('btco',True)
             return public.returnMsg(True, '安装成功，感谢支持.')
         elif public.GetConfigValue('btco'):
             return public.returnMsg(True,'您已安装过了.')
         return public.returnMsg(False,'安装失败')
+
+    #BTCO 安装检测
+    def BtcoInstallCheck(self, get):
+        if public.GetConfigValue('btco'):
+            if not self.GetStar(public.GetConfigValue('btco_ghnick')):
+                public.SetConfigValue('btco',False)
+                return public.returnMsg(True,'UnStar')
+            return public.returnMsg(True,public.GetConfigValue('btco_ghnick'))
+        return public.returnMsg(False,'未安装')
 
     # Github Star 授权服务 PS：还不去点点Star吗...´_>`
     def GetStarAuth(self, get):
