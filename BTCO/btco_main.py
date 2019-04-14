@@ -53,6 +53,8 @@ class btco_main:
                         self.BtcoIns.append(btcoin)
                 if len(self.BtcoIns) != 0:
                     initobj.close()
+                    public.SetConfigValue('btco_ghnick',get.github)
+                    public.SetConfigValue('btco',True)
                     return public.returnMsg(True, '您已安装过了.')
             # BTCO 强制跳转写入
             BtcoAdd = '\n   <!--BTCO-->\n   <script> navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)&&(window.location.href="' + public.getPanelAddr() + '/btco' + '"); </script> \n   <!--BTCO-->\n\n'
