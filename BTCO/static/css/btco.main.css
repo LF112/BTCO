@@ -1,0 +1,31 @@
+/*
+_     _____ _ _ ____               _
+| |   |  ___/ / |___ \   _ __   ___| |_
+| |   | |_  | | | __) | | '_ \ / _ \ __|
+| |___|  _| | | |/ __/ _| | | |  __/ |_
+|_____|_|   |_|_|_____(_)_| |_|\___|\__|
+
+ Made with love by LF112 [https://lf112.net]
+ (｢･ω･)｢ Do you believe in destiny and fate?
++-------------------------------------------------------------------
+|  ____ _____ ____ ___  
+| | __ )_   _/ ___/ _ \ 
+| |  _ \ | || |  | | | |
+| | |_) || || |__| |_| |
+| |____/ |_| \____\___/ 
+|
+| BTCO - BT-Panel Responsive solution. [ https://github.com/LF112/BTCO ]
++-------------------------------------------------------------------
+*/
+
+html, body {
+    height: 100%;
+    display: flex;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    word-wrap: break-word;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
