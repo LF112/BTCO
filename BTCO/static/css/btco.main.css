@@ -26,6 +26,7 @@ html, body {
     word-wrap: break-word;
     box-sizing: border-box;
     -webkit-box-sizing: border-box;
+    font-family: Titillium Web,-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Helvetica Neue",sans-serif;
 }
 
 body{ background-color: #303030; }
@@ -47,7 +48,40 @@ header{
     position: relative;
     padding: 0 12px;
     z-index: 1000;
-    text-align: center;
     -webkit-box-shadow: 0 1px 3px rgba(26,26,26,.1);
     box-shadow: 0 1px 3px rgba(26,26,26,.1);
+}
+
+.BTCO-Header_row .BTCO-Title{
+    float: none;
+    display: inline-block;
+    height: 42px;
+    line-height: 42px;
+    color: #fff;
+    font-size: 16px;
+    margin-left: 6px;
+}
+
+.BTCO-Header_row .BTCO-SideStatus{
+    position: absolute;
+    margin: 5px 0;
+    left: 85px;
+    top: 0;
+    border-radius: 3px;
+    padding: 0 12px;
+    border-left: 3px solid rgb(57, 57, 57);
+}
+
+.BTCO-Header_row .BTCO-SideStatus .BTCO-BTPro{
+    border-radius: 2px;
+    box-shadow: inset 0 -1px 0 rgba(27,31,35,.12);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: 0.05em;
+    padding: 3px 4px;
+    background-color: #1919196b!important;
+    box-sizing: border-box;
+    text-align: center;
 }
