@@ -10,7 +10,7 @@
 # | BTCO - 宝塔响应式解决方案 [ https://github.com/LF112/BTCO ]
 # +-------------------------------------------------------------------
 # | Author: LF112 <lf@lf112.net>
-# | (｢･ω･)｢ Do you believe this is destined? 
+# | (｢･ω･)｢ Do you believe in destiny and fate? 
 # +-------------------------------------------------------------------
 
 import sys, os, re
@@ -21,6 +21,7 @@ if sys.version_info[0] == 2:
 os.chdir('/www/server/panel')
 sys.path.append("class/")
 import public, json, requests
+from BTPanel import comm,redirect
 
 class btco_main:
     BtcoIns = []
@@ -34,8 +35,10 @@ class btco_main:
         pass
 
     def _check(self,args):
-        if session["login"] != True:
-            return public.returnMsg(False,'「BTCO」Please login BT-Panel first.')
+        if not comm.local():
+            return True
+        else:
+            return redirect('/login',302)
         if not public.GetConfigValue('btco'): 
             return public.returnMsg(False,'「BTCO」Please configure the license first.')
         return True
