@@ -19,13 +19,35 @@ _     _____ _ _ ____               _
 */
 
 html, body {
-    height: 100%;
-    display: flex;
-    min-height: 100vh;
     margin: 0;
     padding: 0;
     border: 0;
+    background: 0 0;
     word-wrap: break-word;
     box-sizing: border-box;
     -webkit-box-sizing: border-box;
+}
+
+body{ background-color: #303030; }
+
+header{
+    width: 100%;
+    background: #515151;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.BTCO-Header_row{
+    margin: 0 auto;
+    height: 42px;
+    min-width: 60%;
+    max-width: 100%;
+    position: relative;
+    padding: 0 12px;
+    z-index: 1000;
+    text-align: center;
+    -webkit-box-shadow: 0 1px 3px rgba(26,26,26,.1);
+    box-shadow: 0 1px 3px rgba(26,26,26,.1);
 }
