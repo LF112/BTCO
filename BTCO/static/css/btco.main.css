@@ -85,3 +85,44 @@ header{
     box-sizing: border-box;
     text-align: center;
 }
+
+.BTCO-Header_row .BTCO-SideMenu{
+    float: right;
+    right: 0;
+    color: #fff;
+    line-height: 42px;
+    margin-right: 6px;
+}
+
+.BTCO-Header_row .BTCO-SideMenu .BTCO-Menu{
+    padding: 4px 0;
+    background-color: #515151;
+    box-shadow: 0px 1px 4px rgba(0,0,0,0.3);
+    border-radius: 4px;
+    z-index: 25;
+    position: absolute;
+    top: 20px;
+    right: 16px;
+    min-width: 88px;
+    font-size: 14px;
+}
+
+.BTCO-Header_row .BTCO-SideMenu .BTCO-Menu li{
+    list-style: none;
+    line-height: 30px;
+    padding: 0 14px;
+    cursor: pointer;
+    text-align: left;
+    color: #fff;
+}
+
+.BTCO-Header_row .BTCO-SideMenu .BTCO-Menu li:hover {
+    background-color: rgba(48, 48, 48, 0.38);
+}
+
+.icon {
+    width: 1em; height: 1em;
+    vertical-align: -0.15em;
+    fill: currentColor;
+    overflow: hidden;
+ }
