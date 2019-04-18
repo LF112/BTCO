@@ -126,3 +126,96 @@ header{
     fill: currentColor;
     overflow: hidden;
  }
+
+ main{
+    color: #fff;
+    min-height: 10em;
+    min-width: 60%;
+    max-width: 100%;
+    position: relative;
+    text-align: center;
+    padding: 12px;
+    margin-top: 42px;
+ }
+
+ main .BTCO-systemInfoList{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+ }
+
+ main .BTCO-systemInfoList li{
+    display: inline-block;
+ }
+
+ main .BTCO-systemInfoList .BTCO-APP_Main{
+    width: 145px;
+    height: 50px;
+    margin: 0 5px;
+    border-radius: 0 2px 2px 0;
+    background-color: rgba(81, 81, 81, 0.48);
+    box-shadow: 0px 1px 4px rgba(0,0,0,0.3);
+ }
+
+ main .BTCO-systemInfoList .BTCO-APP_StatusColor{
+    width: 10px;
+    height: 45px;
+    position: absolute;
+    background: rgb(85, 85, 85);
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.22);
+ }
+
+ main .BTCO-systemInfoList .BTCO-APP_Content{
+    padding: 5px;
+    width: 135px;
+    position: absolute;
+ }
+
+main .BTCO-systemInfoList .BTCO-APP_Content .Status{
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+ main .BTCO-systemInfoList .BTCO-APP_Content .Content{
+    font-size: 12px;
+    line-height: 0.8;
+ }
+
+ main .BTCO-systemInfoList .BTCO-APP_ProgressBox{
+    float: right;
+    position: relative;
+    background-color: #333333!important;
+    margin-top: 28px;
+    font-size: 13px;
+    line-height: 1;
+    letter-spacing: 0.05em;
+    padding: 2px 5px;
+    border-radius: 5px 0 0 0;
+ }
+
+ main .BTCO-systemInfoList .BTCO-APP_Progress{
+    position: absolute;
+    margin-top: 45px;
+    width: 145px;
+    height: 5px;
+    vertical-align: middle;
+ }
+
+ main .BTCO-systemInfoList .BTCO-APP_Progress .BTCO-APP_Progress-P1{
+    height: 5px!important;
+    background-color: rgba(100, 100, 100, 1);
+    overflow: hidden;
+    position: relative;
+    vertical-align: middle;
+ }
+
+ main .BTCO-systemInfoList .BTCO-APP_Progress .BTCO-APP_Progress-P1 .BTCO-APP_Progress-P2{
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    background-color: rgba(0, 145, 228, 0.69);
+    text-align: right;
+    line-height: 1;
+    transition: width 2s ease;
+ }
