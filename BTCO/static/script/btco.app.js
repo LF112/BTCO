@@ -37,6 +37,21 @@ $(document).ready(function(){
 
     });
 
+    $.post("/config?action=is_pro", {}, function(net){
+
+        if(net.code == -2 || net.code == -1){
+            $('#BTCO-BTPanel_Check').text('Free');
+            $('#BTCO-BTPanel_Check').css('background-color','#8c8c8c');
+        }
+
+    });
+
+    $.post("/system?action=GetSystemTotal", {}, function(net){
+
+        $('#BTCO-BTPanel_V').text(net.version);
+
+    });
+
     GetNetWork();
 
 })
