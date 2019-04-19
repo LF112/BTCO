@@ -20,8 +20,8 @@ if sys.version_info[0] == 2:
     sys.setdefaultencoding('utf-8')
 os.chdir('/www/server/panel')
 sys.path.append("class/")
-import public, json, requests
-from BTPanel import comm,redirect
+import public, json, requests, math, panelAuth
+from BTPanel import comm,redirect,session
 
 class btco_main:
     BtcoIns = []
@@ -129,4 +129,45 @@ class btco_main:
     def BTCO(self, get):
         return public.returnMsg(True, 'Rua!')
 
+    # BTCO 前端请求扩展
+    # ----------------
+    # 获取 / 
+    def BT_index(self, get):
+        BTIndex = {}
+        BTIndex['siteCount'] = public.M('sites').count()
+        BTIndex['ftpCount'] = public.M('ftps').count()
+        BTIndex['databaseCount'] = public.M('databases').count()
+        BTIndex['BTTitle'] = public.GetConfigValue('title')
+        BTIndex['time'] = self.GetBootTime()
+        BTIndex['version'] = session['version']
+        BTIndex['system'] = self.GetSystemVersion()
+        BTIndex['check'] = self.is_pro()
+        return BTIndex
+
+
+    #BT 原生扩展 / 一次加载使用
+    def GetBootTime(self):
+        conf = public.readFile('/proc/uptime').split()
+        tStr = float(conf[0])
+        min = tStr / 60
+        hours = min / 60
+        days = math.floor(hours / 24)
+        hours = math.floor(hours - (days * 24))
+        min = math.floor(min - (days * 60 * 24) - (hours * 60))
+        return public.getMsg('SYS_BOOT_TIME',(str(int(days)),str(int(hours)),str(int(min))))
+
+    def GetSystemVersion(self):
+        version = public.readFile('/etc/redhat-release')
+        if not version:
+            version = public.readFile('/etc/issue').strip().split("\n")[0].replace('\\n','').replace('\l','').strip()
+        else:
+            version = version.replace('release ','').strip()
+        return version
+
+    def is_pro(self):
+        pdata = panelAuth.panelAuth().create_serverid(None)
+        url = public.GetConfigValue('home') + '/api/panel/is_pro'
+        pluginTmp = public.httpPost(url,pdata)
+        pluginInfo = json.loads(pluginTmp)
+        return pluginInfo
     #Coding more...
