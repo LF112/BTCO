@@ -55,11 +55,144 @@ function RunApp(){
             $('#BTCO-BTPanel_Check').css('background-color','#8c8c8c');
         }
 
+        var Overviewadder = '',
+            Addlist = [['网站',net.siteCount],['FTP',net.ftpCount],['数据库',net.databaseCount]];
+        for (var i = 0; i < Addlist.length; i++) {
+            Overviewadder += "\n";
+            Overviewadder += "<li>\n";
+            Overviewadder += "	<div class=\"BTCO-PI_Ov-Box_P1\">"+ Addlist[i][1] +"<\/div>\n";
+            Overviewadder += "	<div class=\"BTCO-PI_Ov-Box_P2\">"+ Addlist[i][0] +"<\/div>\n";
+            Overviewadder += "<\/li>\n";
+            if(i + 1 !== Addlist.length) Overviewadder += "<li><div class=\"BTCO-PI_Ov-Box_P3\"><\/div><\/li>\n";
+            Overviewadder += "\n";
+        }
+
+        $('#BTCO-P3').append(Overviewadder)
+
+        if(/Centos/i.test(net.system)){
+            $('#BTCO-SysIcon').append('<svg class="icon" aria-hidden="true"><use xlink:href="#btcocentos"></use></svg>')
+        }else if(/Deepin/i.test(net.system)){
+            $('#BTCO-SysIcon').append('<svg class="icon" aria-hidden="true"><use xlink:href="#btcodeepin"></use></svg>')
+        }else if(/Ubuntu/i.test(net.system)){
+            $('#BTCO-SysIcon').append('<svg class="icon" aria-hidden="true"><use xlink:href="#btcoubuntu"></use></svg>')
+        }else $('#BTCO-SysIcon').append('<svg class="icon" aria-hidden="true"><use xlink:href="#btcofedora"></use></svg>')
+
+        $('#BTCO-SysInfo').text(net.system);
+        $('#BTCO-P3_1').text(net.ip);
         $('#BTCO-BTPanel_V').text(net.version);
         $("title").html(net.BTTitle);
 
     });
 
+    var RunCheck = [],RunCheck1 = [],RunCheck2 = [],RunCheck3 = [];
+    $('#BTCO-P4_0').click(function() {
+        if(RunCheck[0] == true) {
+            RunCheck = [true,$(this).attr('id'),$(this).text()]
+            $(this).text('正在响应');
+            setTimeout(function(){ $('#' + RunCheck[1]).text(RunCheck[2]);},1000);
+            return;
+        }
+        if(RunCheck.length !== 0 && RunCheck[1] == $(this).attr('id')){
+            $(this).text(RunCheck[0]);
+            RunCheck = [true,$(this).attr('id'),$(this).text()]
+
+            
+
+        }else if(RunCheck.length == 0){
+            RunCheck = [$(this).text(),$(this).attr('id')];
+            $(this).text('确定?');
+        }else {
+            $('#' + RunCheck[1]).text(RunCheck[0]);
+            RunCheck = []
+        }
+    });
+
+    $('#BTCO-P4_1').click(function() {
+        if(RunCheck1[0] == true) {
+            RunCheck1 = [true,$(this).attr('id'),$(this).text()]
+            $(this).text('正在响应');
+            setTimeout(function(){ $('#' + RunCheck1[1]).text(RunCheck1[2]);},1000);
+            return;
+        }
+        if(RunCheck1.length !== 0 && RunCheck1[1] == $(this).attr('id')){
+            $(this).text('稍等');
+            RunCheck1 = [true,$(this).attr('id'),$(this).text()]
+
+            $.post("/system?action=RepPanel", {}, function(net){
+                if(typeof net){
+
+                    $('#' + RunCheck1[1]).text('已修复');
+                    setTimeout(function(){ location.reload(true); },2000);
+
+                }else{ 
+                    $('#' + RunCheck1[1]).text('失败');
+                    setTimeout(function(){ $('#' + RunCheck1[1]).text(RunCheck1[2]);},1000);
+                }
+            })
+
+        }else if(RunCheck1.length == 0){
+            RunCheck1 = [$(this).text(),$(this).attr('id')];
+            $(this).text('确定?');
+        }else {
+            $('#' + RunCheck1[1]).text(RunCheck1[0]);
+            RunCheck1 = []
+        }
+    });
+
+    $('#BTCO-P4_2').click(function() {
+        if(RunCheck2[0] == true) {
+            RunCheck2 = [true,$(this).attr('id'),$(this).text()]
+            $(this).text('正在响应');
+            setTimeout(function(){ $('#' + RunCheck2[1]).text(RunCheck2[2]);},1000);
+            return;
+        }
+        if(RunCheck2.length !== 0 && RunCheck2[1] == $(this).attr('id')){
+            $(this).text('稍等');
+            RunCheck2 = [true,$(this).attr('id'),$(this).text()]
+
+            $.post("/system?action=ReWeb", {}, function(net){
+                if(net.status){
+
+                    $('#' + RunCheck2[1]).text('已重启');
+                    setTimeout(function(){ window.location.reload(); },2000);
+
+                }else{ 
+                    $('#' + RunCheck2[1]).text('失败');
+                    setTimeout(function(){ $('#' + RunCheck2[1]).text(RunCheck2[2]);},1000);
+                }
+            })
+
+        }else if(RunCheck2.length == 0){
+            RunCheck2 = [$(this).text(),$(this).attr('id')];
+            $(this).text('确定?');
+        }else {
+            $('#' + RunCheck2[1]).text(RunCheck2[0]);
+            RunCheck2 = []
+        }
+    });
+
+    $('#BTCO-P4_3').click(function() {
+        if(RunCheck3[0] == true) {
+            RunCheck3 = [true,$(this).attr('id'),$(this).text()]
+            $(this).text('正在响应');
+            setTimeout(function(){ $('#' + RunCheck3[1]).text(RunCheck3[2]);},1000);
+            return;
+        }
+        if(RunCheck3.length !== 0 && RunCheck3[1] == $(this).attr('id')){
+            $(this).text(RunCheck3[0]);
+            RunCheck3 = [true,$(this).attr('id'),$(this).text()]
+
+            
+
+        }else if(RunCheck3.length == 0){
+            RunCheck3 = [$(this).text(),$(this).attr('id')];
+            $(this).text('确定?');
+        }else {
+            $('#' + RunCheck3[1]).text(RunCheck3[0]);
+            RunCheck3 = []
+        }
+    });
+    
     GetNetWork();
 
     function GetNetWork(){

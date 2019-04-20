@@ -219,3 +219,126 @@ main .BTCO-systemInfoList .BTCO-APP_Content .Status{
     line-height: 1;
     transition: width 2s ease;
  }
+
+ main .BTCO-PanelInfo{
+    margin-top: 10px;
+    min-width: 60%;
+    max-width: 100%;
+    position: relative;
+ }
+
+ main .BTCO-PanelInfo .BTCO-PI_Main{
+    width: 100%;
+    height: 145px;
+    border-radius: 2px;
+    background-color: rgba(81, 81, 81, 0.48);
+    box-shadow: 0px 1px 4px rgba(0,0,0,0.3);
+ }
+
+ main .BTCO-PanelInfo .BTCO-PI_Main .BTCO-PI_Sys{
+    position: absolute;
+    border-radius: 0 0 6px 0;
+    background-color: rgba(51, 51, 51, 0.82)!important;
+ }
+
+ main .BTCO-PanelInfo .BTCO-PI_Main .BTCO-PI_Sys .BTCO-PI_Sysinfo{
+    display: inline-block;
+    padding: 3px 6px 3px 0;
+    font-size: 13px;
+ }
+
+ main .BTCO-PanelInfo .BTCO-PI_Main .BTCO-PI_Sys .BTCO-PI_SysIcon{
+    float: left;
+    min-width: 16px;
+    min-height: 23px;
+    padding: 2px 6px;
+    border-radius: 0 0 8px 0;
+    background-color: rgba(51, 51, 51, 0.82)!important;
+ }
+
+ main .BTCO-PanelInfo .BTCO-PI_Main .BTCO-PI_Overview{
+    padding: 0;
+    height: 40px;
+    width: 100%;
+    position: absolute;
+    margin-top: 105px;
+ }
+
+ main .BTCO-PanelInfo .BTCO-PI_Main .BTCO-PI_Overview .BTCO-PI_Ov-Line{
+    width: 100%;
+    height: 1px;
+    background: #c5c5c5;
+    box-shadow: 0px 0px 2px rgba(0,0,0,0.3);
+ }
+
+ main .BTCO-PanelInfo .BTCO-PI_Main .BTCO-PI_Overview .BTCO-PI_Ov-Box{
+    flex-direction: row;
+    align-items: center;
+    flex-shrink: 0;
+    flex-wrap: nowrap;
+    margin-top: 5px;
+ }
+
+ main .BTCO-PanelInfo .BTCO-PI_Main .BTCO-PI_Overview .BTCO-PI_Ov-Box ul{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+ }
+
+ main .BTCO-PanelInfo .BTCO-PI_Main .BTCO-PI_Overview .BTCO-PI_Ov-Box ul li{
+    display: inline-block;
+ }
+
+ main .BTCO-PanelInfo .BTCO-PI_Main .BTCO-PI_Overview .BTCO-PI_Ov-Box ul li .BTCO-PI_Ov-Box_P1{
+    font-size: 16px;
+    line-height: 1;
+ }
+
+ main .BTCO-PanelInfo .BTCO-PI_Main .BTCO-PI_Overview .BTCO-PI_Ov-Box ul li .BTCO-PI_Ov-Box_P2{
+    font-size: 12px;
+    line-height: 1.3;
+    color: #e6e6e6;
+ }
+
+ main .BTCO-PanelInfo .BTCO-PI_Main .BTCO-PI_Overview .BTCO-PI_Ov-Box ul li .BTCO-PI_Ov-Box_P3{
+    width: 1px;
+    height: 22px;
+    background: #c5c5c5;
+    margin: 0 15px;
+ }
+
+ main .BTCO-PanelInfo .BTCO-PI_Main .BTCO-PI_IPview{
+    position: absolute;
+    padding: 2px 10px;
+    font-size: 14px;
+    border-radius: 3px 3px 0 0;
+    background: rgba(85, 85, 85, 0.82)!important;
+    margin-top: 20px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+ }
+
+ main .BTCO-PanelInfo .BTCO-PI_Main .BTCO-PI_Menu{
+    position: absolute;
+    flex-direction: row;
+    align-items: center;
+    flex-shrink: 0;
+    flex-wrap: nowrap;
+    width: 100%;
+    margin-top: 25px;
+    left: 50%;
+    top: 20%;
+    transform: translate(-50%, -50%);
+ }
+
+ main .BTCO-PanelInfo .BTCO-PI_Main .BTCO-PI_Menu a{
+    margin: 0 5px;
+    color: #fff;
+    border: 0;
+    text-decoration: none;
+    padding: 3px 8px;
+    font-size: 12px;
+    border-radius: 2px;
+    background: #393939;
+ }

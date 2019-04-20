@@ -142,6 +142,7 @@ class btco_main:
         BTIndex['version'] = session['version']
         BTIndex['system'] = self.GetSystemVersion()
         BTIndex['check'] = self.is_pro()
+        BTIndex['ip'] = public.GetLocalIp()
         return BTIndex
 
 
