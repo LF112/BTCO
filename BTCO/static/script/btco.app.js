@@ -215,6 +215,12 @@ function RunApp(){
                 break;
             }
 
+            var series = chart.series[0],
+                shift = series.data.length > 5;
+
+            chart.series[0].addPoint([(new Date()).valueOf(),net.up], true, shift);
+            chart.series[1].addPoint([(new Date()).valueOf(),net.down], true, shift);
+
             if (item.title) $('#BTCO-P0').text(item.title);
             if (item.color) $('#BTCO-P0_0').css('background', item.color);
             $('#BTCO-P0_1').text(Math.round((net.load.one / net.load.max) * 100) + '%');
@@ -227,8 +233,127 @@ function RunApp(){
             $('#BTCO-P2').text(net.mem.memRealUsed + '/' + net.mem.memTotal + '(MB)');
             $('#BTCO-P2_1').text(btco_p2 + '%');
             $('#BTCO-P2_2').css('width', btco_p2 + '%');
+            
+            $('#BTCO-P5_0').text(net.up);
+            $('#BTCO-P5_1').text(net.down);
+            $('#BTCO-P5_2').text(Tosize(net.downTotal));
+            $('#BTCO-P5_3').text(Tosize(net.upTotal));
 
             setTimeout(function(){ GetNetWork() },2000)
         });
     }
+
+    Highcharts.setOptions({
+        global: {
+            useUTC: false
+        }
+    });
+    let chart = Highcharts.chart('BTCO-P5', {
+        chart: {
+            type: 'spline',
+            marginRight: 10,
+            backgroundColor: {
+                linearGradient: [0, 0, 500, 500],
+                stops: [
+                    [0, 'rgba(255, 255, 255,0)'],
+                    [1, 'rgba(240, 240, 255,0)']
+                ]
+            }
+        },
+        credits: {
+            text: '由 BTCO 强力驱动.',
+            href: 'https://btco.lf.tn'
+        },
+        title: {
+            text: null,
+            style: {
+                color: "#ffffff",
+                font_weight: "lighter!important",
+            }
+        },
+        xAxis: {
+            type: 'datetime',
+            tickPixelInterval: 150
+        },
+        yAxis: [{
+            title: {
+                text: null
+            }
+        }, {
+            title: {
+                text: null
+            }
+        }],
+        tooltip: {
+            backgroundColor: 'rgba(115, 115, 115, 0.54)',
+            shadow: false,
+            borderColor: 'rgba(240, 240, 255,0)',
+            borderRadius: 10,
+            crosshairs: true,
+            style: {
+                color: "#ffffff",
+            },
+            formatter: function () {
+                return Highcharts.dateFormat('%H:%M:%S', this.x) + '<br/>' +
+                    Highcharts.numberFormat(this.y, 2) + 'KB'
+            }
+        },
+        legend: {
+            enabled: false
+        },
+        series: [{
+            name: '',
+            data: [],
+            color: '#515151'
+        }, {
+            name: '',
+            data: [],
+            color: '#ffffff'
+        }]
+    });
 }
+
+// BT
+function Tosize(bytes ,is_unit,fixed, end_unit) //字节转换，到指定单位结束 is_unit：是否显示单位  fixed：小数点位置 end_unit：结束单位
+    {
+        if (bytes == undefined) return 0;
+
+		if(is_unit==undefined) is_unit = true;
+		if(fixed==undefined) fixed = 2;
+        if (end_unit == undefined) end_unit = '';
+       
+		if(typeof bytes == 'string') bytes = parseInt(bytes);
+		var unit = [' B',' KB',' MB',' GB','TB'];
+		var c = 1024;
+		for(var i=0;i<unit.length;i++){
+			var cUnit = unit[i];				
+			if(end_unit)
+			{
+				if(cUnit.trim() == end_unit.trim())
+				{
+					var val = i == 0 ? bytes : fixed==0? bytes:bytes.toFixed(fixed)
+					if(is_unit){
+						return  val + cUnit;
+					}
+					else{
+						val = parseFloat(val);		
+						return val;					
+					}
+				}
+			}
+			else{
+				if(bytes < c){
+					var val = i == 0 ? bytes : fixed==0? bytes:bytes.toFixed(fixed)
+					if(is_unit){
+						return  val + cUnit;
+					}
+					else{
+						val = parseFloat(val);		
+						return val;
+					}
+				}
+			}
+	
+			bytes /= c;
+		}
+	}
