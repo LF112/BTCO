@@ -448,6 +448,7 @@ main .BTCO-ServerFlow .BTCO-SF_Main .BTCO-SF_InfoBox ul li .BTCO-SF_InfoBox_P3{
 .BTCO-LF_POP .BTCO-LF_POP-Main span{
    position: absolute;
    color: #fff;
+   font-size: 13px;
    margin-top: 30px;
    margin-left: 10px;
    line-height: 2;

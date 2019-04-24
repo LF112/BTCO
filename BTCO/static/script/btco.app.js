@@ -91,111 +91,93 @@ function RunApp(){
 
     var RunCheck = [],RunCheck1 = [],RunCheck2 = [],RunCheck3 = [];
     $('#BTCO-P4_0').click(function() {
-        if(RunCheck[0] == true) {
-            RunCheck = [true,$(this).attr('id'),$(this).text()]
-            $(this).text('正在响应');
-            setTimeout(function(){ $('#' + RunCheck[1]).text(RunCheck[2]);},1000);
-            return;
-        }
-        if(RunCheck.length !== 0 && RunCheck[1] == $(this).attr('id')){
-            $(this).text(RunCheck[0]);
-            RunCheck = [true,$(this).attr('id'),$(this).text()]
+        $(this).text('稍等');
+        $.post("/ajax?action=UpdatePanel", {}, function(net){
+            $('#BTCO-P4_0').text('更新');
 
+            if(net.msg.is_beta == 1){ 
+                $('#BTCO-LF_POP-04').text('您当前为测试版，点击按钮切换或更新');
+                $('#BTCO-LF_POP-03').text('更新面板 V' + net.msg.beta.version);
+             }else { 
+                $('#BTCO-LF_POP-04').text('您当前为最新版，点击按钮切换或更新');
+                $('#BTCO-LF_POP-03').text('更新面板 V' + net.msg.version);
+             }
             
+            $('#BTCO-LF_POP-05').text('正式版');
+            $('#BTCO-LF_POP-06').text('测试版');
 
-        }else if(RunCheck.length == 0){
-            RunCheck = [$(this).text(),$(this).attr('id')];
-            $(this).text('确定?');
-        }else {
-            $('#' + RunCheck[1]).text(RunCheck[0]);
-            RunCheck = []
-        }
+            $("#BTCO-LF_POP-01").css({display: "block"});
+            $("#BTCO-LF_POP-02").fadeIn(500);
+            $("#BTCO-LF_POP-05").on('click', function () {
+                alert('正在升级');//临时弹窗，待更新弹出组件
+                $.post("/ajax?action=UpdatePanel", { toUpdate: 'yes' }, function(net){
+                    window.location.reload()
+                });
+    
+            });
+            $("#BTCO-LF_POP-06").on('click', function () {
+                alert('正在升级');//临时弹窗，待更新弹出组件
+                $.post("/ajax?action=UpdatePanel", { check: true }, function(net){
+                    window.location.reload()
+                });
+    
+            });
+        });
     });
 
     $('#BTCO-P4_1').click(function() {
-        if(RunCheck1[0] == true) {
-            RunCheck1 = [true,$(this).attr('id'),$(this).text()]
-            $(this).text('正在响应');
-            setTimeout(function(){ $('#' + RunCheck1[1]).text(RunCheck1[2]);},1000);
-            return;
-        }
-        if(RunCheck1.length !== 0 && RunCheck1[1] == $(this).attr('id')){
-            $(this).text('稍等');
-            RunCheck1 = [true,$(this).attr('id'),$(this).text()]
+        $('#BTCO-LF_POP-03').text('修复面板');
+        $('#BTCO-LF_POP-04').text('将尝试校验并修复面板程序，继续吗？');
+            
+        $('#BTCO-LF_POP-05').text('立即修复');
 
-            $.post("/system?action=RepPanel", {}, function(net){
-                if(typeof net){
-
-                    $('#' + RunCheck1[1]).text('已修复');
-                    setTimeout(function(){ location.reload(true); },2000);
-
-                }else{ 
-                    $('#' + RunCheck1[1]).text('失败');
-                    setTimeout(function(){ $('#' + RunCheck1[1]).text(RunCheck1[2]);},1000);
-                }
-            })
-
-        }else if(RunCheck1.length == 0){
-            RunCheck1 = [$(this).text(),$(this).attr('id')];
-            $(this).text('确定?');
-        }else {
-            $('#' + RunCheck1[1]).text(RunCheck1[0]);
-            RunCheck1 = []
-        }
+        $("#BTCO-LF_POP-01").css({display: "block"});
+        $("#BTCO-LF_POP-02").fadeIn(500);
+        $("#BTCO-LF_POP-05").on('click', function () {
+            alert('正在尝试效验模块');//临时弹窗，待更新弹出组件
+            $.post("/system?action=RepPanel", { }, function(net){
+                window.location.reload()
+            });
+    
+        });
     });
 
     $('#BTCO-P4_2').click(function() {
-        if(RunCheck2[0] == true) {
-            RunCheck2 = [true,$(this).attr('id'),$(this).text()]
-            $(this).text('正在响应');
-            setTimeout(function(){ $('#' + RunCheck2[1]).text(RunCheck2[2]);},1000);
-            return;
-        }
-        if(RunCheck2.length !== 0 && RunCheck2[1] == $(this).attr('id')){
-            $(this).text('稍等');
-            RunCheck2 = [true,$(this).attr('id'),$(this).text()]
+        $('#BTCO-LF_POP-03').text('重启面板');
+        $('#BTCO-LF_POP-04').text('重启BT面板服务');
+            
+        $('#BTCO-LF_POP-05').text('重启');
 
+        $("#BTCO-LF_POP-01").css({display: "block"});
+        $("#BTCO-LF_POP-02").fadeIn(500);
+        $("#BTCO-LF_POP-05").on('click', function () {
+            alert('正在重启');//临时弹窗，待更新弹出组件
             $.post("/system?action=ReWeb", {}, function(net){
                 if(net.status){
-
-                    $('#' + RunCheck2[1]).text('已重启');
-                    setTimeout(function(){ window.location.reload(); },2000);
-
-                }else{ 
-                    $('#' + RunCheck2[1]).text('失败');
-                    setTimeout(function(){ $('#' + RunCheck2[1]).text(RunCheck2[2]);},1000);
-                }
+                    window.location.reload();
+                }else alert('重启失败了。')//临时弹窗，待更新弹出组件
             })
-
-        }else if(RunCheck2.length == 0){
-            RunCheck2 = [$(this).text(),$(this).attr('id')];
-            $(this).text('确定?');
-        }else {
-            $('#' + RunCheck2[1]).text(RunCheck2[0]);
-            RunCheck2 = []
-        }
+    
+        });
     });
 
     $('#BTCO-P4_3').click(function() {
-        if(RunCheck3[0] == true) {
-            RunCheck3 = [true,$(this).attr('id'),$(this).text()]
-            $(this).text('正在响应');
-            setTimeout(function(){ $('#' + RunCheck3[1]).text(RunCheck3[2]);},1000);
-            return;
-        }
-        if(RunCheck3.length !== 0 && RunCheck3[1] == $(this).attr('id')){
-            $(this).text(RunCheck3[0]);
-            RunCheck3 = [true,$(this).attr('id'),$(this).text()]
-
+        $('#BTCO-LF_POP-03').text('重启服务器');
+        $('#BTCO-LF_POP-04').text('若您的服务器是一个容器，请取消！');
             
+        $('#BTCO-LF_POP-05').text('重启');
 
-        }else if(RunCheck3.length == 0){
-            RunCheck3 = [$(this).text(),$(this).attr('id')];
-            $(this).text('确定?');
-        }else {
-            $('#' + RunCheck3[1]).text(RunCheck3[0]);
-            RunCheck3 = []
-        }
+        $("#BTCO-LF_POP-01").css({display: "block"});
+        $("#BTCO-LF_POP-02").fadeIn(500);
+        $("#BTCO-LF_POP-05").on('click', function () {
+            alert('正在重启');//临时弹窗，待更新弹出组件
+            $.post("/system?action=RestartServer", {}, function(net){
+                if(net.status){
+                    window.location.reload();
+                }else alert('重启失败了。')//临时弹窗，待更新弹出组件
+            })
+    
+        });
     });
     
     GetNetWork();
@@ -304,14 +286,36 @@ function RunApp(){
         series: [{
             name: '',
             data: [],
-            color: '#515151'
+            color: '#363636'
         }, {
             name: '',
             data: [],
-            color: '#ffffff'
+            color: 'rgba(0, 145, 228, 0.69)'
         }]
     });
 }
+
+$('.BTCO-LF_Ghost').on('click', function () {
+    $("#BTCO-LF_POP-02").fadeOut(500);
+    $('#BTCO-LF_POP-03').text('提示');
+    $('#BTCO-LF_POP-04').text('您确定要继续吗');
+    $('#BTCO-LF_POP-05').text('确定');
+    $('#BTCO-LF_POP-06').text('取消');
+    setTimeout(function () {
+        $("#BTCO-LF_POP-01").css({display: "none"});
+    }, 500);
+});
+
+$("#BTCO-LF_POP-06").on('click', function () {
+    $("#BTCO-LF_POP-02").fadeOut(500);
+    $('#BTCO-LF_POP-03').text('提示');
+    $('#BTCO-LF_POP-04').text('您确定要继续吗');
+    $('#BTCO-LF_POP-05').text('确定');
+    $('#BTCO-LF_POP-06').text('取消');
+    setTimeout(function () {
+        $("#BTCO-LF_POP-01").css({display: "none"});
+    }, 500);
+});
 
 // BT
 function Tosize(bytes ,is_unit,fixed, end_unit) //字节转换，到指定单位结束 is_unit：是否显示单位  fixed：小数点位置 end_unit：结束单位
