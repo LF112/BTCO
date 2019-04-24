@@ -398,3 +398,33 @@ main .BTCO-ServerFlow .BTCO-SF_Main .BTCO-SF_InfoBox ul li .BTCO-SF_InfoBox_P3{
    background: #c5c5c5;
    margin: 0 10px;
 }
+
+.BTCO-LF_POP{
+   position: fixed;
+   z-index: 100000;
+   left: 0;
+   top: 0;
+   height: 100%;
+   width: 100%;
+}
+
+.BTCO-LF_POP .BTCO-LF_Ghost{
+   position: absolute;
+   left: 0;
+   top: 0;
+   width: 100%;
+   height: 100%;
+   opacity: .6;
+}
+
+.BTCO-LF_POP .BTCO-LF_POP-Main{
+   position: relative;
+   border-radius: 4px;
+   width: 245px;
+   min-height: 95px;
+   background: rgb(85, 85, 85);
+   left: 50%;
+   top: 50%;
+   transform: translate(-50%,-50%);
+   padding: 0;
+}

@@ -261,7 +261,7 @@ function RunApp(){
             }
         },
         credits: {
-            text: '由 BTCO 强力驱动.',
+            text: '由 BTCO 强力驱动',
             href: 'https://btco.lf.tn'
         },
         title: {
