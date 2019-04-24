@@ -428,3 +428,43 @@ main .BTCO-ServerFlow .BTCO-SF_Main .BTCO-SF_InfoBox ul li .BTCO-SF_InfoBox_P3{
    transform: translate(-50%,-50%);
    padding: 0;
 }
+
+.BTCO-LF_POP .BTCO-LF_POP-Main p{
+   color: #fff;
+   font-size: 14px;
+   margin: 5px 0 0 10px;
+   padding: 0;
+   position: absolute;
+}
+
+.BTCO-LF_POP .BTCO-LF_POP-Main .BTCO-LF_POP-Line{
+   width: 100%;
+   height: 1px;
+   position: absolute;
+   margin-top: 30px;
+   background: #393939;
+}
+
+.BTCO-LF_POP .BTCO-LF_POP-Main span{
+   position: absolute;
+   color: #fff;
+   margin-top: 30px;
+   margin-left: 10px;
+   line-height: 2;
+   width: 225px;
+   height: 30px;
+}
+
+.BTCO-LF_POP .BTCO-LF_POP-Main .BTCO-LF_POP-M_Check{
+   position: absolute;
+   color: #fff;
+   width: 245px;
+   height: 35px;
+   margin-top: 60px;
+}
+
+.BTCO-LF_POP .BTCO-LF_POP-Main .BTCO-LF_POP-M_Check a{
+   color: #fff;
+   line-height: 2;
+   padding: 0 30px;
+}
