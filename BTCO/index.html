@@ -189,14 +189,15 @@ _     _____ _ _ ____               _
                                 layer.msg('抱歉！插件无法请求GitHub，</br>' +
                                 '请到本插件根目录修改 btco_main.py 文件，</br>' +
                                 '找到 199行 或 "# 获取GitHub Star" 注释处，</br>' +
-                                '将该方法替换成以下内容并刷新页面即可。</br></br>' +
+                                '将该方法替换成以下内容并重启面板即可。</br></br>' +
                                 '   def GetStar(self, Github):</br>' +
                                 '       return True</br></br>' +
-                                '注意缩进！另外，替换既代表本插件无法检测Star</br>' +
+                                '注意缩进！缩进按键盘上Tab件即可，而不是4个空格！' +
+                                '另外，替换既代表本插件无法检测Star</br>' +
                                 '但还是希望您能保留对本项目的Star，</br>' +
                                 '这将是继续制作该插件的动力。'
                                 , {time: 0})
-                                setTimeout(function(){ alert('请注意缩进！\n\n  def GetStar(self, Github):\n        return True') },500)
+                                setTimeout(function(){ alert('请注意缩进！\n\n    def GetStar(self, Github):\n        return True') },500)
                             }
                             $('#BTCO-Install').text(rdata.msg);
                             $("#BTCO-Install").css({ "color": "rgb(253, 136, 136)" });
