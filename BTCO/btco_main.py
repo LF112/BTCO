@@ -48,7 +48,7 @@ class btco_main:
 
     # BTCO 安装
     def BtcoInstall(self, get):
-        if not self.GetStar(get.github): return public.returnMsg(False, '请先给该项目 Star')
+        if not 'github' in get: return public.returnMsg(False, 'GitHub 用户名不能为空')
         if not public.GetConfigValue('btco'): 
         
             initobj = open('/www/server/panel/BTPanel/templates/default/layout.html','r')
@@ -100,30 +100,17 @@ class btco_main:
         public.SetConfigValue('btco',False)
         return public.returnMsg(True,'移除成功')
         
+    #BTCO UnAuth
+    def BtcoAuthRemove(self, get):
+        public.SetConfigValue('btco_ghnick','')
+        public.SetConfigValue('btco',False)
+        return public.returnMsg(True,'成功')
 
     #BTCO 安装检测
     def BtcoInstallCheck(self, get):
         if public.GetConfigValue('btco'):
-            if not self.GetStar(public.GetConfigValue('btco_ghnick')):
-                public.SetConfigValue('btco',False)
-                return public.returnMsg(True,'UnStar')
             return public.returnMsg(True,public.GetConfigValue('btco_ghnick'))
         return public.returnMsg(False,'未安装')
-
-    # Github Star 授权服务 PS：还不去点点Star吗...´_>`
-    def GetStarAuth(self, get):
-        if not 'github' in get: return public.returnMsg(False, 'GitHub 用户名不能为空')
-        if self.GetStar(get.github): return public.returnMsg(True, '授权成功！请等待安装...')
-        return public.returnMsg(False, '未检测到Star记录')
-    
-    # 获取GitHub Star
-    def GetStar(self, Github):
-        headers = {"User-Agent":"Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36"}
-        GitOfBtco = requests.get("https://github.com/" + Github + "?direction=desc&sort=created&tab=stars",headers = headers)
-        GitOfBtco = re.findall(re.compile(r'<div class="d-inline-block mb-1"*?>(.*?)</div>',re.S),GitOfBtco.text)
-        for StarList in GitOfBtco:
- 			if re.findall(re.compile(r'</span>(.*?)<',re.S),StarList)[0].replace(' ', '').strip().upper() == 'BTCO'.upper(): return True
-        return False
 
     # 发出丢人的声音
     def BTCO(self, get):
