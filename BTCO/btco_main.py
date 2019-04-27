@@ -48,7 +48,6 @@ class btco_main:
 
     # BTCO 安装
     def BtcoInstall(self, get):
-        if not 'github' in get: return public.returnMsg(False, 'GitHub 用户名不能为空')
         if not public.GetConfigValue('btco'): 
         
             initobj = open('/www/server/panel/BTPanel/templates/default/layout.html','r')
@@ -58,7 +57,6 @@ class btco_main:
                         self.BtcoIns.append(btcoin)
                 if len(self.BtcoIns) != 0:
                     initobj.close()
-                    public.SetConfigValue('btco_ghnick',get.github)
                     public.SetConfigValue('btco',True)
                     return public.returnMsg(True, '您已安装过了.')
             # BTCO 强制跳转写入
@@ -70,7 +68,6 @@ class btco_main:
             BtcoAddin.write(BtcoAddIn[0] + BtcoAdd + "</head>" + BtcoAddIn[1])
             BtcoAddin.close()
             public.restart_panel()
-            public.SetConfigValue('btco_ghnick',get.github)
             public.SetConfigValue('btco',True)
             return public.returnMsg(True, '安装成功，感谢支持.')
         elif public.GetConfigValue('btco'):
@@ -93,23 +90,15 @@ class btco_main:
             BtcoAddOnd.write(BtcoAddOn[0] + BtcoAddOn[2])
             BtcoAddOnd.close()
             public.restart_panel()
-            public.SetConfigValue('btco_ghnick','')
             public.SetConfigValue('btco',False)
             return public.returnMsg(True,'移除成功！')
-        public.SetConfigValue('btco_ghnick','')
         public.SetConfigValue('btco',False)
         return public.returnMsg(True,'移除成功')
-        
-    #BTCO UnAuth
-    def BtcoAuthRemove(self, get):
-        public.SetConfigValue('btco_ghnick','')
-        public.SetConfigValue('btco',False)
-        return public.returnMsg(True,'成功')
 
     #BTCO 安装检测
     def BtcoInstallCheck(self, get):
         if public.GetConfigValue('btco'):
-            return public.returnMsg(True,public.GetConfigValue('btco_ghnick'))
+            return public.returnMsg(True,'已安装')
         return public.returnMsg(False,'未安装')
 
     # 发出丢人的声音

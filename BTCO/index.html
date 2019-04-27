@@ -39,13 +39,13 @@ _     _____ _ _ ____               _
             function RunBtcoMain(){
                 $.get("https://api.github.com/repos/LF112/BTCO",function(rdata){
                     parent.layer.closeAll();
-                    BTCOAddIn(BtcoMainCss, BtcoMainHtml, false, rdata.stargazers_count)
+                    BTCOAddIn(BtcoMainCss, BtcoMainHtml, rdata.stargazers_count)
                 });
             }   
             
         }
 
-        function BTCOAddIn(BtcoMainCss, BtcoMainHtml, StarCheck, Star = 0){
+        function BTCOAddIn(BtcoMainCss, BtcoMainHtml, Star = 0){
             if (document.getElementById('BTCO') == null) {
                 // 导入 CSS
                 var BtcoCSS = document.createElement('style');
@@ -63,17 +63,6 @@ _     _____ _ _ ____               _
                 BtcoMain.setAttribute('id', 'BTCO');
                 BtcoMain.innerHTML = BtcoMainHtml;
                 document.body.insertBefore(BtcoMain, document.body.firstChild);
-                
-                if(StarCheck){
-
-                    $('#BtcoBottom').css({"display": "none"});
-                    $("#ThanksYou").text('您似乎取消了Star...');
-                    setTimeout(function(){ 
-                        $("#ThanksYou").text('授权已停止，请重新授权！');
-                        $('.BTCO-ghost').on('click', function () { window.location.reload() });
-                    },1500)
-
-                }
 
                 if(Star != 0) {
                     $('#BTCOGithubStar').text(Star);
@@ -110,6 +99,21 @@ _     _____ _ _ ____               _
 
                     });
 
+                }else{
+                    setTimeout(function(){
+                    $(".BTCO-Main_LOGO").slideToggle("slow");
+                    setTimeout(function(){
+                        $(".BTCO-Main_LOGO").addClass('Gog');
+                        $.get("https://api.github.com/repos/LF112/BTCO",function(rdata){
+                            setTimeout(function(){
+                                $(".BTCO-Main_LOGO").slideToggle("slow")
+                                if(rdata.stargazers_count >= 0) var num=0,t=setInterval(function(){num++;document.getElementById("BTCO-Stars").innerText=num;rdata.stargazers_count==num&&clearInterval(t)},35);
+                                $("#BTCO-Main").fadeIn(650);
+                                setTimeout(function(){ $("#BTCO-GitHubBox").slideToggle("slow") },200)
+                            },800)
+                        });
+                    },200)
+                },200)
                 }
 
                 $("#BTCO").css({display: "block"});
@@ -125,26 +129,6 @@ _     _____ _ _ ____               _
                     }, 500);
                 });
 
-                setTimeout(function(){
-                    $(".BTCO-Main_LOGO").slideToggle("slow");
-                    setTimeout(function(){
-                        $(".BTCO-Main_LOGO").addClass('Gog');
-                        $.get("https://api.github.com/repos/LF112/BTCO",function(rdata){
-                            setTimeout(function(){
-                                $(".BTCO-Main_LOGO").slideToggle("slow")
-                                var num=0,t=setInterval(function(){num++;document.getElementById("BTCO-Stars").innerText=num;rdata.stargazers_count==num&&clearInterval(t)},20);
-                                $("#BTCO-Main").fadeIn(650);
-                                setTimeout(function(){ $("#BTCO-GitHubBox").slideToggle("slow") },200)
-                            },800)
-                        });
-                    },200)
-                },200)
-
-                $('.LF112-Input').keydown(function(e){
-                    if(e.keyCode == 13){
-                        $('#BTCO-Install').click();
-                    }
-                });
                 $('#BTCO-Install').on('click', function () {
                     if($('#BTCO-Install').text() === '正在安装') {
                         $('#BTCO-Install').text('请等待安装！');
@@ -162,82 +146,29 @@ _     _____ _ _ ____               _
                     });
                     $(".LF112-Button:hover").css({ "box-shadow": "unset" });
 
-                    if ($('#BTCO-GithubNick').val().replace(/(^s*)|(s*$)/g, "").length == 0) {
-                        $('#BTCO-Install').text('GitHub 用户名不能为空');
-                        $("#BTCO-Install").css({ "color": "rgb(253, 136, 136)" });
-                        setTimeout(function(){
-                            $('#BTCO-Install').text('检查并安装'); 
-                            $("#BTCO-Install").css({
-                                "background-color": "#6b7179",
-                                "color": "#fff"
-                            });
-                            $(".LF112-Button:hover").css({ "box-shadow": "0 0 0 1px #6b7179, 0 1px 6px #6b7179" });
-                        },1500) 
-                        return;
-                    }
+                    $('#BTCO-Install').text('正在安装');
+                    $("#BTCO-Install").css({ "color": "rgb(136, 253, 141)" });
+                    $(".LF112-Button:hover").css({ "box-shadow": "unset" });
 
-                    $.ajax({
-                        type: "GET",
-                        url: " https://p1zulfny.api.lncld.net/1.1/classes/Github",
-                        beforeSend: function(request) {
-                            request.setRequestHeader("X-LC-Id", "p1zULfnyH8jIRVaWEDwi9Cml-gzGzoHsz");
-                            request.setRequestHeader("X-LC-Key", "CPlolQCbb1y7SWMsNtciyS2P");
-                        },
-                        success: function(result) {
+                    $.post("/plugin?action=a&s=BtcoInstall&name=btco",{ github: $('#BTCO-GithubNick').val() },function(rdata){
+                        if(rdata.status) {
+                            $('#BTCO-Install').text(rdata.msg);
+                            $("#BTCO-Install").css({ "color": "rgb(136, 253, 141)" });
+                            $(".LF112-Button:hover").css({ "box-shadow": "unset" });
+                            setTimeout(function(){ $(".BTCO_Wrapper").fadeOut(500); setTimeout(function(){ window.location.reload() },500) },2500)
+                            setTimeout(function () {
+                                $("#BTCO").css({display: "none"});
+                                $('#BTCO-Install').text('检查并安装'); 
+                                $("#BTCO-Install").css({
+                                    "background-color": "#6b7179",
+                                    "color": "#fff"
+                                });
+                                $(".LF112-Button:hover").css({ "box-shadow": "0 0 0 1px #6b7179, 0 1px 6px #6b7179" });
+                                $('#BTCO-GithubNick').val('');
+                            }, 3000);
 
-                            eval('var StarList = ' + result.results[0].Stars + ';')
-                            for (var i = 0; i < StarList.length; i++) {
-                                if(StarList[i] === $('#BTCO-GithubNick').val()){
-                                    
-                                    //Install
-                                        $('#BTCO-Install').text('正在安装');
-                                        $("#BTCO-Install").css({ "color": "rgb(136, 253, 141)" });
-                                        $(".LF112-Button:hover").css({ "box-shadow": "unset" });
-
-                                        $.post("/plugin?action=a&s=BtcoInstall&name=btco",{ github: $('#BTCO-GithubNick').val() },function(rdata){
-                                            if(rdata.status) {
-                                                $('#BTCO-Install').text(rdata.msg);
-                                                $("#BTCO-Install").css({ "color": "rgb(136, 253, 141)" });
-                                                $(".LF112-Button:hover").css({ "box-shadow": "unset" });
-                                                setTimeout(function(){ $(".BTCO_Wrapper").fadeOut(500); setTimeout(function(){ window.location.reload() },500) },2500)
-                                                setTimeout(function () {
-                                                    $("#BTCO").css({display: "none"});
-                                                    $('#BTCO-Install').text('检查并安装'); 
-                                                    $("#BTCO-Install").css({
-                                                        "background-color": "#6b7179",
-                                                        "color": "#fff"
-                                                    });
-                                                    $(".LF112-Button:hover").css({ "box-shadow": "0 0 0 1px #6b7179, 0 1px 6px #6b7179" });
-                                                    $('#BTCO-GithubNick').val('');
-                                                }, 3000);
-
-                                            }else{
-                                                $('#BTCO-Install').text(rdata.msg);
-                                                $("#BTCO-Install").css({ "color": "rgb(253, 136, 136)" });
-                                                setTimeout(function(){
-                                                    $('#BTCO-Install').text('检查并安装'); 
-                                                    $("#BTCO-Install").css({
-                                                        "background-color": "#6b7179",
-                                                        "color": "#fff"
-                                                    });
-                                                    $(".LF112-Button:hover").css({ "box-shadow": "0 0 0 1px #6b7179, 0 1px 6px #6b7179" });
-                                                },1500) 
-                                            }
-                                        });
-                                    //-------
-
-                                    return;
-                                }
-                            }
-
-                            $('#BTCO-Install').text('正在响应 [ 1/2 ]');
-                            $("#BTCO-Install").css({ "color": "rgb(253, 136, 136)" });
-
-                            $.get("https://github.com/" + 'LF112' + "?direction=desc&sort=created&tab=stars",function(rdata){
-                                console.log(rdata)
-                            });
-
-                            $('#BTCO-Install').text('未检测到Star记录');
+                        }else{
+                            $('#BTCO-Install').text(rdata.msg);
                             $("#BTCO-Install").css({ "color": "rgb(253, 136, 136)" });
                             setTimeout(function(){
                                 $('#BTCO-Install').text('检查并安装'); 
@@ -246,7 +177,7 @@ _     _____ _ _ ____               _
                                     "color": "#fff"
                                 });
                                 $(".LF112-Button:hover").css({ "box-shadow": "0 0 0 1px #6b7179, 0 1px 6px #6b7179" });
-                            },1500)
+                            },1500) 
                         }
                     });
 
