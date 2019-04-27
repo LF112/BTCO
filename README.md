@@ -20,7 +20,24 @@ BT-Panel Responsive solution.
 	- 配色方案
 - 特征
 	- 响应式
-  
+
+## 版本送代
+V0.2
+
+>1.更新插件页样式
+>
+>2.移除GitHub Star验证
+
+V0.1
+
+> 1.初始化项目
+>
+> 2.初始构造插件页 (宝塔第三方插件首个不使用官方插件模板)
+>
+> 3.GitHub Star授权验证
+>
+> 4.增加首页响应式
+
 ## 作者
 
 BTCO © [LF112](https://www.lf112.net), 根据 [GPL-3.0](./LICENSE) 开源许可发布。<br>
