@@ -18,7 +18,7 @@ _     _____ _ _ ____               _
 +-------------------------------------------------------------------
 */
 
-html, body {
+html, body, * {
     margin: 0;
     padding: 0;
     border: 0;
@@ -27,4 +27,88 @@ html, body {
     box-sizing: border-box;
     -webkit-box-sizing: border-box;
     font-family: Titillium Web,-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Helvetica Neue",sans-serif;
+}
+
+body{
+    background-color: #303030;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+}
+
+header {
+    width: 922px;
+    height: 70px;
+    margin-top: 100px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    flex-shrink: 0;
+    align-self: stretch;
+    align-items: center;
+}
+
+header .BTCO-ws_logo{
+    display: block;
+    position: relative;
+    font-size: 30px;
+    line-height: 1;
+    letter-spacing: .02em;
+}
+
+header .BTCO-ws_logo svg{
+    position: absolute;
+    width: 50px;
+    height: 38px;
+}
+
+header .BTCO-ws_logo .BTCO-ws_title{
+    padding: 0 0 0 50px;
+    text-align: center;
+    color: #ffffff;
+}
+
+header .BTCO-ws_logo .BTCO-ws_title a{
+    display: inline-block;
+    width: auto;
+    user-select: none;
+    font-size: 21px;
+    line-height: 35px;
+    float: left;
+}
+
+header .BTCO-ws_spacer{
+    flex-grow: 1;
+    flex-shrink: 0;
+}
+
+header .BTCO-ws_menu{
+    flex-direction: row;
+    align-items: center;
+    flex-shrink: 0;
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+header .BTCO-ws_menu a{
+    margin-top: 10px;
+    color:#dcdcdc;
+}
+
+header .BTCO-ws_bottom{
+    width: 780px;
+    position: absolute;
+    margin-top: 35px;
+    border-bottom: 1px solid #dcdfe6;
+}
+
+main{
+    position: absolute;
+    width: 1140px;
+    height: 70px;
+    padding: 45px;
+    margin-top: 125px;
+    display: flex;
+    align-items: center;
 }
