@@ -65,7 +65,7 @@ _     _____ _ _ ____               _
                 document.body.insertBefore(BtcoMain, document.body.firstChild);
 
                 if(Star != 0) {
-                    $('#BTCOGithubStar').text(Star);
+                    var num=0,t=setInterval(function(){num++;document.getElementById("BTCOGithubStar").innerText=num;Star==num&&clearInterval(t)},35);
                     licount({APPID:'wtwjciT6TbExSi8ycBr4mths-gzGzoHsz',APPKEY:'eS6MEQRmOox89KBjxGHhmX2Y',Main:[
                         ['BtcoUseCount','Add'],
                     ]});
