@@ -244,7 +244,7 @@ function RunApp(){
         },
         credits: {
             text: '由 BTCO 强力驱动',
-            href: 'https://btco.lf.tn'
+            href: 'https://lf.tn'
         },
         title: {
             text: null,
@@ -286,7 +286,7 @@ function RunApp(){
         series: [{
             name: '',
             data: [],
-            color: '#363636'
+            color: '#fff'
         }, {
             name: '',
             data: [],
