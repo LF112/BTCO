@@ -48,8 +48,12 @@ class btco_main:
 
     # BTCO 安装
     def BtcoInstall(self, get):
+        v = public.version()
+        if v[-2] == '.': 
+            if  v < '6.9.1': public.returnMsg(False,'抱歉，面板当前版本不支持BTCO，请升级面板至最新版')
+            else:
+                if v < '6.9.15': public.returnMsg(False,'抱歉，面板当前版本不支持BTCO，请升级面板至最新版')
         if not public.GetConfigValue('btco'): 
-        
             initobj = open('/www/server/panel/BTPanel/templates/default/layout.html','r')
             for initLine in initobj:
                 for btcoin in ['<!--BTCO-->']:
