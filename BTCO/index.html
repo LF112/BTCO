@@ -183,24 +183,28 @@ _     _____ _ _ ____               _
 
                 });
             }else {
-                setTimeout(function(){
-                    $(".BTCO-Main_LOGO").slideToggle("slow");
+                if(Star != 0){
+                    $("#BTCO").css({display: "block"});
+                    $(".BTCO_Wrapper").fadeIn(500);
+                    var num=0,t=setInterval(function(){num++;document.getElementById("BTCOGithubStar").innerText=num;Star==num&&clearInterval(t)},50);
+                }else{ 
+                    $("#BTCO").css({display: "block"});
+                    $(".BTCO_Wrapper").fadeIn(500);
                     setTimeout(function(){
-                        $(".BTCO-Main_LOGO").addClass('Gog');
-                        $.get("https://api.github.com/repos/LF112/BTCO",function(rdata){
-                            setTimeout(function(){
-                                $(".BTCO-Main_LOGO").slideToggle("slow")
-                                if(Star != 0){
-                                    if(rdata.stargazers_count >= 0) var num=0,t=setInterval(function(){num++;document.getElementById("BTCOGithubStar").innerText=num;rdata.stargazers_count==num&&clearInterval(t)},50);
-                                }else if(rdata.stargazers_count >= 0) var num=0,t=setInterval(function(){num++;document.getElementById("BTCO-Stars").innerText=num;rdata.stargazers_count==num&&clearInterval(t)},50);
-                                $("#BTCO-Main").fadeIn(650);
-                                setTimeout(function(){ $("#BTCO-GitHubBox").slideToggle("slow") },200)
-                            },800)
-                        });
+                        $(".BTCO-Main_LOGO").slideToggle("slow");
+                        setTimeout(function(){
+                            $(".BTCO-Main_LOGO").addClass('Gog');
+                            $.get("https://api.github.com/repos/LF112/BTCO",function(rdata){
+                                setTimeout(function(){
+                                    $(".BTCO-Main_LOGO").slideToggle("slow") 
+                                    if(rdata.stargazers_count >= 0) var num=0,t=setInterval(function(){num++;document.getElementById("BTCO-Stars").innerText=num;rdata.stargazers_count==num&&clearInterval(t)},50);
+                                    $("#BTCO-Main").fadeIn(650);
+                                    setTimeout(function(){ $("#BTCO-GitHubBox").slideToggle("slow") },200)
+                                },800)
+                            });
+                        },200)
                     },200)
-                },200)
-                $("#BTCO").css({display: "block"});
-                $(".BTCO_Wrapper").fadeIn(500);
+                }
             }
         }
 
