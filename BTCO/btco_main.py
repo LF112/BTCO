@@ -20,7 +20,7 @@ if sys.version_info[0] == 2:
     sys.setdefaultencoding('utf-8')
 os.chdir('/www/server/panel')
 sys.path.append("class/")
-import public, json, requests, math, panelAuth
+import public, json, math, panelAuth
 from BTPanel import comm,redirect,session
 
 class btco_main:
