@@ -22,11 +22,21 @@ BT-Panel Responsive solution.
 	- 响应式
 
 ## 版本送代
+V0.3
+
+>1.修复插件页动画BUG
+>
+>2.新增 BTCO POP
+>
+>3.去除因导入残余库导致的保存
+
 V0.2
 
 >1.更新插件页样式
 >
 >2.移除GitHub Star验证
+>
+>3.面板版本限制
 
 V0.1
 
