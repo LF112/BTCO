@@ -89,96 +89,185 @@ function RunApp(){
 
     });
 
-    var RunCheck = [],RunCheck1 = [],RunCheck2 = [],RunCheck3 = [];
     $('#BTCO-P4_0').click(function() {
         $(this).text('稍等');
         $.post("/ajax?action=UpdatePanel", {}, function(net){
             $('#BTCO-P4_0').text('更新');
 
             if(net.msg.is_beta == 1){ 
-                $('#BTCO-LF_POP-04').text('您当前为测试版，点击按钮切换或更新');
-                $('#BTCO-LF_POP-03').text('更新面板 V' + net.msg.beta.version);
+                var Contents = '当前为测试版，点击按钮切换或更新'
              }else { 
-                $('#BTCO-LF_POP-04').text('您当前为最新版，点击按钮切换或更新');
-                $('#BTCO-LF_POP-03').text('更新面板 V' + net.msg.version);
+                var Contents = '当前为最新版，点击按钮切换或更新'
              }
-            
-            $('#BTCO-LF_POP-05').text('正式版');
-            $('#BTCO-LF_POP-06').text('测试版');
 
-            $("#BTCO-LF_POP-01").css({display: "block"});
-            $("#BTCO-LF_POP-02").fadeIn(500);
-            $("#BTCO-LF_POP-05").on('click', function () {
-                alert('正在升级');//临时弹窗，待更新弹出组件
-                $.post("/ajax?action=UpdatePanel", { toUpdate: 'yes' }, function(net){
-                    window.location.reload()
+            BTCO_POP(Contents,function(ID){
+                $('#' + ID[0]).slideToggle();
+                $('#' + ID[1]).click(function(){
+                    BTCO_POP('请稍等，正在升级',10000);
+                    $.post("/ajax?action=UpdatePanel", { toUpdate: 'yes' }, function(net){
+                        window.location.reload()
+                    });
+                    $('#' + ID[0]).slideToggle();
+                    setTimeout(function(){
+                        $('#' + ID[0]).remove()
+                    },500);
                 });
-    
-            });
-            $("#BTCO-LF_POP-06").on('click', function () {
-                alert('正在升级');//临时弹窗，待更新弹出组件
-                $.post("/ajax?action=UpdatePanel", { check: true }, function(net){
-                    window.location.reload()
+                $('#' + ID[2]).click(function(){
+                    BTCO_POP('请稍等，正在升级',10000);
+                    $.post("/ajax?action=UpdatePanel", { check: true }, function(net){
+                        window.location.reload()
+                    });
+                    $('#' + ID[0]).slideToggle();
+                    setTimeout(function(){
+                        $('#' + ID[0]).remove()
+                    },500);
                 });
-    
             });
         });
     });
 
     $('#BTCO-P4_1').click(function() {
-        $('#BTCO-LF_POP-03').text('修复面板');
-        $('#BTCO-LF_POP-04').text('将尝试校验并修复面板程序，继续吗？');
-            
-        $('#BTCO-LF_POP-05').text('立即修复');
-
-        $("#BTCO-LF_POP-01").css({display: "block"});
-        $("#BTCO-LF_POP-02").fadeIn(500);
-        $("#BTCO-LF_POP-05").on('click', function () {
-            alert('正在尝试效验模块');//临时弹窗，待更新弹出组件
-            $.post("/system?action=RepPanel", { }, function(net){
-                window.location.reload()
+        BTCO_POP('将尝试校验并修复面板程序，继续吗？',function(ID){
+            $('#' + ID[0]).slideToggle();
+            $('#' + ID[1]).click(function(){
+                BTCO_POP('正在尝试效验模块',5000);
+                setTimeout(function(){
+                    $('#' + ID[0]).slideToggle();
+                    setTimeout(function(){
+                        $('#' + ID[0]).remove()
+                    },500);
+                },500);
+                $.post("/system?action=RepPanel", { }, function(net){
+                    BTCO_POP('修复成功');
+                    window.location.reload()
+                });
             });
-    
-        });
+            $('#' + ID[2]).click(function(){
+                $('#' + ID[0]).slideToggle();
+                setTimeout(function(){
+                    $('#' + ID[0]).remove()
+                },500);
+            });
+        })
     });
 
     $('#BTCO-P4_2').click(function() {
-        $('#BTCO-LF_POP-03').text('重启面板');
-        $('#BTCO-LF_POP-04').text('重启BT面板服务');
-            
-        $('#BTCO-LF_POP-05').text('重启');
-
-        $("#BTCO-LF_POP-01").css({display: "block"});
-        $("#BTCO-LF_POP-02").fadeIn(500);
-        $("#BTCO-LF_POP-05").on('click', function () {
-            alert('正在重启');//临时弹窗，待更新弹出组件
-            $.post("/system?action=ReWeb", {}, function(net){
-                if(net.status){
-                    window.location.reload();
-                }else alert('重启失败了。')//临时弹窗，待更新弹出组件
-            })
-    
-        });
+        BTCO_POP('重启BT面板服务',function(ID){
+            $('#' + ID[0]).slideToggle();
+            $('#' + ID[1]).click(function(){
+                BTCO_POP('正在重启',5000);
+                setTimeout(function(){
+                    $('#' + ID[0]).slideToggle();
+                    setTimeout(function(){
+                        $('#' + ID[0]).remove()
+                    },500);
+                },500);
+                $.post("/system?action=ReWeb", {}, function(net){
+                    if(net.status){
+                        BTCO_POP('重启成功');
+                        window.location.reload();
+                    }else BTCO_POP('正在重启',1500);
+                })
+            });
+            $('#' + ID[2]).click(function(){
+                $('#' + ID[0]).slideToggle();
+                setTimeout(function(){
+                    $('#' + ID[0]).remove()
+                },500);
+            });
+        })
     });
 
     $('#BTCO-P4_3').click(function() {
-        $('#BTCO-LF_POP-03').text('重启服务器');
-        $('#BTCO-LF_POP-04').text('若您的服务器是一个容器，请取消！');
-            
-        $('#BTCO-LF_POP-05').text('重启');
-
-        $("#BTCO-LF_POP-01").css({display: "block"});
-        $("#BTCO-LF_POP-02").fadeIn(500);
-        $("#BTCO-LF_POP-05").on('click', function () {
-            alert('正在重启');//临时弹窗，待更新弹出组件
-            $.post("/system?action=RestartServer", {}, function(net){
-                if(net.status){
-                    window.location.reload();
-                }else alert('重启失败了。')//临时弹窗，待更新弹出组件
-            })
-    
-        });
+        BTCO_POP('若您的服务器是一个容器，请取消！',function(ID){
+            $('#' + ID[0]).slideToggle();
+            $('#' + ID[1]).click(function(){
+                BTCO_POP('正在重启',5000);
+                setTimeout(function(){
+                    $('#' + ID[0]).slideToggle();
+                    setTimeout(function(){
+                        $('#' + ID[0]).remove()
+                    },500);
+                },500);
+                $.post("/system?action=RestartServer", {}, function(net){
+                    if(net.status){
+                        BTCO_POP('重启成功')
+                        window.location.reload();
+                    }else BTCO_POP('重启失败了')
+                })
+            });
+            $('#' + ID[2]).click(function(){
+                $('#' + ID[0]).slideToggle();
+                setTimeout(function(){
+                    $('#' + ID[0]).remove()
+                },500);
+            });
+        })
     });
+
+    //----- BTCO Pjax
+    /*
+    $("#BTCO-href_Config").click(function() {
+        var This = 'config';
+        $("main").empty();
+        $.ajax({
+            url: "../static/other/" + This + ".html",
+            timeout: 60,
+            success: function(html) {
+                $("main").html(html)
+            },
+            error: function(ex) {
+                $("main").html('<div>抱歉，页面请求失败了！</div>')
+            }
+        })
+    });
+    */
+    //----- BTCO Pjax
+
+    $(".BTCO-LF_switch").on("click", function() {
+        $(this).hasClass("BTCO-LF_switch-click") ? $(this).removeClass("BTCO-LF_switch-click") : $(this).addClass("BTCO-LF_switch-click")
+    });
+    
+    //----- BTCO POP
+    function BTCO_POP(Content,callback){
+        var BTCOPOP = "",
+        BoxID = Math.random().toString(36).substr(2),
+        CheckID = Math.random().toString(36).substr(2),
+        CloseID = Math.random().toString(36).substr(2);
+
+        BTCOPOP += "<div id = '" + BoxID + "' class=\"BTCO-LF_POP\" style=\"display: none;\">\n";
+        BTCOPOP += "	<div class=\"BTCO-LF_POP-Main\">\n";
+        BTCOPOP += "		<div class=\"BTCO-LF_POP-M_Box\">\n";
+        BTCOPOP += "			<div class=\"BTCO-LF_POP-M_Icon\">\n";
+        BTCOPOP += "				<svg class=\"icon\" style=\"width: 20px;height: 20px;\" aria-hidden=\"true\"><use xlink:href=\"#btcotishi\"><\/use><\/svg>\n";
+        BTCOPOP += "			<\/div>\n";
+        BTCOPOP += "			<div class=\"BTCO-LF_POP-M_Content\">\n"+ Content +"<\/div>\n";
+        if(typeof callback === 'function'){
+            BTCOPOP += "			<div id = '" + CheckID + "' class=\"BTCO-LF_POP-M_Check\">\n";
+            BTCOPOP += "				<svg class=\"icon\" style=\"width: 20px;height: 20px;\" aria-hidden=\"true\"><use xlink:href=\"#btcocheck\"><\/use><\/svg>\n";
+            BTCOPOP += "			<\/div>\n";
+            BTCOPOP += "			<div id = '" + CloseID + "' class=\"BTCO-LF_POP-M_Close\">\n";
+            BTCOPOP += "				<svg class=\"icon\" style=\"width: 20px;height: 20px;\" aria-hidden=\"true\"><use xlink:href=\"#btcoclose\"><\/use><\/svg>\n";
+            BTCOPOP += "			<\/div>\n";
+        }
+        BTCOPOP += "		<\/div>\n";
+        BTCOPOP += "	<\/div>\n";
+        BTCOPOP += "<\/div>\n";
+        $('main').prepend(BTCOPOP);
+        if(typeof callback === 'function'){
+            callback([BoxID, CheckID, CloseID])
+        }else{
+            if(typeof callback === 'undefined') callback = 1500;
+            $('#' + BoxID).slideToggle();
+            setTimeout(function(){
+                $('#' + BoxID).slideToggle();
+                setTimeout(function(){
+                    $('#' + BoxID).remove()
+                },500);                
+            },callback)
+        }
+    }
+    //----- BTCO POP
     
     GetNetWork();
 
