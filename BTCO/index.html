@@ -190,7 +190,9 @@ _     _____ _ _ ____               _
                         $.get("https://api.github.com/repos/LF112/BTCO",function(rdata){
                             setTimeout(function(){
                                 $(".BTCO-Main_LOGO").slideToggle("slow")
-                                var num=0,t=setInterval(function(){num++;document.getElementById("BTCO-Stars").innerText=num;rdata.stargazers_count==num&&clearInterval(t)},50);
+                                if(Star != 0){
+                                    if(rdata.stargazers_count >= 0) var num=0,t=setInterval(function(){num++;document.getElementById("BTCOGithubStar").innerText=num;rdata.stargazers_count==num&&clearInterval(t)},50);
+                                }else if(rdata.stargazers_count >= 0) var num=0,t=setInterval(function(){num++;document.getElementById("BTCO-Stars").innerText=num;rdata.stargazers_count==num&&clearInterval(t)},50);
                                 $("#BTCO-Main").fadeIn(650);
                                 setTimeout(function(){ $("#BTCO-GitHubBox").slideToggle("slow") },200)
                             },800)
