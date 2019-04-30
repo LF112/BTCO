@@ -547,7 +547,7 @@ main .BTCO-OtherConfig .BTCO-OC_PanelSSL-M{
 main .BTCO-OtherConfig .BTCO-OC_PanelSSL-M .BTCO-OC_PS-M_InputBox{
    position: relative;
    padding: 0 0 5px;
-   width: 160px;
+   width: 155px;
    height: 115px;
    display: inline-block;
    margin: 0 5px;
