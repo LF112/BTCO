@@ -94,35 +94,128 @@ function RunApp(){
         $.post("/ajax?action=UpdatePanel", {}, function(net){
             $('#BTCO-P4_0').text('更新');
 
-            if(net.msg.is_beta == 1){ 
-                var Contents = '当前为测试版，点击按钮切换或更新'
-             }else { 
-                var Contents = '当前为最新版，点击按钮切换或更新'
+            if(net.msg.is_beta == 1){
+                BTCO_POP('当前为测试版，如需更新请点击按钮',function(ID){
+                    $('#' + ID[0]).slideToggle();
+                    $('#' + ID[1]).click(function(){
+                        BTCO_POP('请稍等，正在升级',10000);
+                        $.post("/ajax?action=UpdatePanel", { toUpdate: 'yes' }, function(net){
+                            if(net.status){
+                                $.post("/system?action=ReWeb", { }, function(net){
+                                    if(net.status){
+                                        window.location.reload(true)
+                                    }else BTCO_POP(net.msg,2000);
+                                });
+                            }else BTCO_POP('当前为最新版！',2000);
+                        });
+                        $('#' + ID[0]).slideToggle();
+                        setTimeout(function(){
+                            $('#' + ID[0]).remove()
+                        },500);
+                    });
+                    $('#' + ID[2]).click(function(){
+                        $('#' + ID[0]).slideToggle();
+                        setTimeout(function(){
+                            $('#' + ID[0]).remove()
+                        },500);
+                    });
+                });
+                BTCO_POP('您可在此切换至最新版',function(ID){
+                    $('#' + ID[0]).slideToggle();
+                    $('#' + ID[1]).click(function(){
+                        BTCO_POP('请稍等，正在升级',10000);
+                        $.post("/ajax?action=to_not_beta", { }, function(net){
+                            if(net.status){
+                                $.post("/ajax?action=UpdatePanel", { check: true }, function(net){
+                                    if(net.status){
+                                        $.post("/ajax?action=UpdatePanel", { toUpdate: 'yes' }, function(net){
+                                            if(net.status){
+                                                BTCO_POP(net.msg,2000);
+                                                $.post("/system?action=ReWeb", { }, function(net){
+                                                    if(net.status){
+                                                        window.location.reload(true)
+                                                    }else BTCO_POP(net.msg,2000);
+                                                });
+                                            }else BTCO_POP(net.msg,2000);
+                                        });
+                                    }else BTCO_POP(net.msg,2000);
+                                });
+                            }else BTCO_POP(net.msg,2000);
+                        });
+                        $('#' + ID[0]).slideToggle();
+                        setTimeout(function(){
+                            $('#' + ID[0]).remove()
+                        },500);
+                    });
+                    $('#' + ID[2]).click(function(){
+                        $('#' + ID[0]).slideToggle();
+                        setTimeout(function(){
+                            $('#' + ID[0]).remove()
+                        },500);
+                    });
+                });
+             }else {
+                BTCO_POP('当前为最新版，如需更新请点击按钮',function(ID){
+                    $('#' + ID[0]).slideToggle();
+                    $('#' + ID[1]).click(function(){
+                        BTCO_POP('请稍等，正在升级',10000);
+                        $.post("/ajax?action=UpdatePanel", { toUpdate: 'yes' }, function(net){
+                            if(net.status){
+                                $.post("/system?action=ReWeb", { }, function(net){
+                                    if(net.status){
+                                        window.location.reload(true)
+                                    }else BTCO_POP(net.msg,2000);
+                                });
+                            }else BTCO_POP('当前为最新版！',2000);
+                        });
+                        $('#' + ID[0]).slideToggle();
+                        setTimeout(function(){
+                            $('#' + ID[0]).remove()
+                        },500);
+                    });
+                    $('#' + ID[2]).click(function(){
+                        $('#' + ID[0]).slideToggle();
+                        setTimeout(function(){
+                            $('#' + ID[0]).remove()
+                        },500);
+                    });
+                });
+                BTCO_POP('您可在此切换至测试版',function(ID){
+                    $('#' + ID[0]).slideToggle();
+                    $('#' + ID[1]).click(function(){
+                        BTCO_POP('请稍等，正在升级',10000);
+                        $.post("/ajax?action=apple_beta", { }, function(net){
+                            if(net.status){
+                                $.post("/ajax?action=UpdatePanel", { check: true }, function(net){
+                                    if(net.status){
+                                        $.post("/ajax?action=UpdatePanel", { toUpdate: 'yes' }, function(net){
+                                            if(net.status){
+                                            BTCO_POP(net.msg,2000);
+                                            $.post("/system?action=ReWeb", { }, function(net){
+                                                if(net.status){
+                                                    window.location.reload(true)
+                                                }else BTCO_POP(net.msg,2000);
+                                            });
+                                        }else BTCO_POP(net.msg,2000);
+                                        });
+                                    }else BTCO_POP(net.msg,2000);
+                                });
+                            }else BTCO_POP(net.msg,2000);
+                        });
+                        $('#' + ID[0]).slideToggle();
+                        setTimeout(function(){
+                            $('#' + ID[0]).remove()
+                        },500);
+                    });
+                    $('#' + ID[2]).click(function(){
+                        $('#' + ID[0]).slideToggle();
+                        setTimeout(function(){
+                            $('#' + ID[0]).remove()
+                        },500);
+                    });
+                });
              }
 
-            BTCO_POP(Contents,function(ID){
-                $('#' + ID[0]).slideToggle();
-                $('#' + ID[1]).click(function(){
-                    BTCO_POP('请稍等，正在升级',10000);
-                    $.post("/ajax?action=UpdatePanel", { toUpdate: 'yes' }, function(net){
-                        window.location.reload()
-                    });
-                    $('#' + ID[0]).slideToggle();
-                    setTimeout(function(){
-                        $('#' + ID[0]).remove()
-                    },500);
-                });
-                $('#' + ID[2]).click(function(){
-                    BTCO_POP('请稍等，正在升级',10000);
-                    $.post("/ajax?action=UpdatePanel", { check: true }, function(net){
-                        window.location.reload()
-                    });
-                    $('#' + ID[0]).slideToggle();
-                    setTimeout(function(){
-                        $('#' + ID[0]).remove()
-                    },500);
-                });
-            });
         });
     });
 
@@ -269,7 +362,7 @@ function RunApp(){
     }
     //----- BTCO POP
     
-    GetNetWork();
+    //GetNetWork();
 
     function GetNetWork(){
         $.post("/system?action=GetNetWork", {}, function(net) {
