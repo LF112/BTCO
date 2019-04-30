@@ -1,81 +1,110 @@
-<div id="BTCO-PanelSSL_Box" class="BTCO-OtherConfig" style="margin-top: 0;margin-bottom: 10px;display: none;">
-	<div class="BTCO-OC_PanelSSL-M">
-		<div class="BTCO-OC_PS-M_InputBox">
-			<textarea id="BTCO-PanelSSL_KEY" rows="8" cols="45" aria-required="true" placeholder="在此输入..."></textarea>
-			<div class="BTCO-OC_PS-M_IB-Title">
-				密钥(KEY)
+<div id="BTCO-PanelAPI_Box" class="BTCO-OtherConfig" style="margin-top:0;margin-bottom:10px;display:none">
+		<div class="BTCO-OC_PanelAPI-M">
+			<div class="BTCO-OC_PA-M_InputBox" style="width:auto;height:30px">
+				<textarea id="BTCO-PanelAPI_KEY" rows="8" cols="45" aria-required="true" placeholder="在此复制..." style="height:30px"></textarea>
+				<div class="BTCO-OC_PA-M_IB-Title">
+					接口密钥
+				</div>
 			</div>
-		</div>
-		<div class="BTCO-OC_PS-M_InputBox">
-			<textarea id="BTCO-PanelSSL_PEM" rows="8" cols="45" aria-required="true" placeholder="在此输入..."></textarea>
-			<div class="BTCO-OC_PS-M_IB-Title">
-				证书(PEM格式)
+			<div class="BTCO-OC_PA-M_InputBox" style="width:auto;margin:8px 5px 0">
+				<textarea id="BTCO-PanelAPI_limit_addr" rows="8" cols="45" aria-required="true" placeholder="在此输入..."></textarea>
+				<div class="BTCO-OC_PA-M_IB-Title">
+					IP白名单(每行1个)
+				</div>
 			</div>
-		</div>
-		<div style="padding: 2px 10px 5px;text-align: left;">
-			<div style="width: 100%;height: 1px;background: #c5c5c5;">
-			</div>
-			<div style="font-size: 12px;margin-top: 2px;text-align: left;display: inline-block;">
-				&gt; PEM格式证书 = 域名证书.crt + 根证书(root_bundle).crt
-			</div>
-			<div style="font-size: 12px;margin-top: 2px;text-align: left;display: inline-block;">
-				&gt; 如果浏览器提示证书链不完整,请检查是否正确拼接PEM证书
-			</div>
-			<div style="font-size: 12px;margin-top: 2px;text-align: left;display: inline-block;">
-				&gt; 粘贴您的*.key以及*.pem内容，然后保存即可
+			<div style="padding:2px 10px 5px;text-align:left">
+				<div style="width:100%;height:1px;background:#c5c5c5">
+				</div>
+				<div style="font-size:12px;margin-top:2px;text-align:left;display:inline-block">
+					&gt; 开启API后，必需在IP白名单列表中的IP才能访问面板API接口
+				</div>
+				<div style="font-size:12px;margin-top:2px;text-align:left;display:inline-block">
+					&gt; 接口密钥只要重置时显示1次，之后不再显示，请保管好您的密钥
+				</div>
+				<div style="font-size:12px;margin-top:2px;text-align:left;display:inline-block">
+					&gt; API接口文档在这里：https://www.bt.cn/bbs/thread-20376-1-1.html
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
-<div class="BTCO-OtherConfig_Menu">
-	<ul class="BTCO-OC_M-ul">
-		<li>
-		<div class="BTCO-OC_M-ul_Box">
-			<div class="BTCO-LF_switch" style="width: 50px;">
+	<div id="BTCO-PanelSSL_Box" class="BTCO-OtherConfig" style="margin-top:0;margin-bottom:10px;display:none">
+		<div class="BTCO-OC_PanelSSL-M">
+			<div class="BTCO-OC_PS-M_InputBox">
+				<textarea id="BTCO-PanelSSL_KEY" rows="8" cols="45" aria-required="true" placeholder="在此输入..."></textarea>
+				<div class="BTCO-OC_PS-M_IB-Title">
+					密钥(KEY)
+				</div>
 			</div>
-			<div style="width: 35px;height: 1px;background: #c5c5c5; margin: 4px auto 0;">
+			<div class="BTCO-OC_PS-M_InputBox">
+				<textarea id="BTCO-PanelSSL_PEM" rows="8" cols="45" aria-required="true" placeholder="在此输入..."></textarea>
+				<div class="BTCO-OC_PS-M_IB-Title">
+					证书(PEM格式)
+				</div>
 			</div>
-			<div style="color: #e6e6e6;font-size: 12px;">
-				关闭面板
-			</div>
-		</div>
-		</li>
-		<li>
-		<div class="BTCO-OC_M-ul_Box">
-			<div class="BTCO-LF_switch" style="width: 50px;">
-			</div>
-			<div style="width: 35px;height: 1px;background: #c5c5c5; margin: 4px auto 0;">
-			</div>
-			<div style="color: #e6e6e6;font-size: 12px;">
-				监听IPv6
-			</div>
-		</div>
-		</li>
-		<li>
-		<div class="BTCO-OC_M-ul_Box">
-			<div class="BTCO-LF_switch" style="width: 50px;">
-			</div>
-			<div style="width: 35px;height: 1px;background: #c5c5c5; margin: 4px auto 0;">
-			</div>
-			<div id="BTCO-PanelSSL" style="color: #e6e6e6;font-size: 12px;cursor: pointer;">
-				面板SSL
+			<div style="padding:2px 10px 5px;text-align:left">
+				<div style="width:100%;height:1px;background:#c5c5c5">
+				</div>
+				<div style="font-size:12px;margin-top:2px;text-align:left;display:inline-block">
+					&gt; PEM格式证书 = 域名证书.crt + 根证书(root_bundle).crt
+				</div>
+				<div style="font-size:12px;margin-top:2px;text-align:left;display:inline-block">
+					&gt; 如果浏览器提示证书链不完整,请检查是否正确拼接PEM证书
+				</div>
+				<div style="font-size:12px;margin-top:2px;text-align:left;display:inline-block">
+					&gt; 粘贴您的*.key以及*.pem内容，然后保存即可
+				</div>
 			</div>
 		</div>
-		</li>
-		<li>
-		<div class="BTCO-OC_M-ul_Box">
-			<div class="BTCO-LF_switch" style="width: 50px;">
-			</div>
-			<div style="width: 35px;height: 1px;background: #c5c5c5; margin: 4px auto 0;">
-			</div>
-			<div style="color: #e6e6e6;font-size: 12px;cursor: pointer;">
-				API接口
-			</div>
-		</div>
-		</li>
-	</ul>
-</div>
-<div class="BTCO-OtherConfig">
-	<div class="BTCO-OC_Main">
 	</div>
-</div>
+	<div class="BTCO-OtherConfig_Menu">
+		<ul class="BTCO-OC_M-ul">
+			<li>
+			<div class="BTCO-OC_M-ul_Box">
+				<div class="BTCO-LF_switch" style="width:50px">
+				</div>
+				<div style="width:35px;height:1px;background:#c5c5c5;margin:4px auto 0">
+				</div>
+				<div style="color:#e6e6e6;font-size:12px">
+					关闭面板
+				</div>
+			</div>
+			</li>
+			<li>
+			<div class="BTCO-OC_M-ul_Box">
+				<div class="BTCO-LF_switch" style="width:50px">
+				</div>
+				<div style="width:35px;height:1px;background:#c5c5c5;margin:4px auto 0">
+				</div>
+				<div style="color:#e6e6e6;font-size:12px">
+					监听IPv6
+				</div>
+			</div>
+			</li>
+			<li>
+			<div class="BTCO-OC_M-ul_Box">
+				<div class="BTCO-LF_switch" style="width:50px">
+				</div>
+				<div style="width:35px;height:1px;background:#c5c5c5;margin:4px auto 0">
+				</div>
+				<div id="BTCO-PanelSSL" style="color:#e6e6e6;font-size:12px;cursor:pointer">
+					面板SSL
+				</div>
+			</div>
+			</li>
+			<li>
+			<div class="BTCO-OC_M-ul_Box">
+				<div id="BTCO-PanelAPI_switch" class="BTCO-LF_switch" style="width:50px">
+				</div>
+				<div style="width:35px;height:1px;background:#c5c5c5;margin:4px auto 0">
+				</div>
+				<div id="BTCO-PanelAPI" style="color:#e6e6e6;font-size:12px;cursor:pointer">
+					API接口
+				</div>
+			</div>
+			</li>
+		</ul>
+	</div>
+	<div class="BTCO-OtherConfig">
+		<div class="BTCO-OC_Main">
+		</div>
+	</div>

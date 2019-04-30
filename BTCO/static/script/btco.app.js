@@ -220,7 +220,7 @@ function RunApp(){
     });
 
     $('#BTCO-P4_1').click(function() {
-        BTCO_POP('将尝试校验并修复面板程序，继续吗？',function(ID){
+        BTCO_POP('将尝试校验并修复面板程序',function(ID){
             $('#' + ID[0]).slideToggle();
             $('#' + ID[1]).click(function(){
                 BTCO_POP('正在尝试效验模块',5000);
@@ -370,6 +370,67 @@ function RunApp(){
                             });
                             //----- BTCO PanelSSL
 
+                            //----- BTCO PanelAPI
+                            $("#BTCO-PanelAPI").on("click", function() {
+                                if(!$('#BTCO-PanelAPI_Box').is(":hidden")){
+                                    BTCO_POP('API接口设置未关闭，请先保存或关闭');
+                                    return;
+                                }
+                                $.post("/config?action=get_token", {}, function(net){
+                                    $('#BTCO-PanelAPI_Box').slideToggle();
+                                    $('#BTCO-PanelAPI_KEY').val(net.token);
+                                    $('#BTCO-PanelAPI_limit_addr').val(net.limit_addr);
+                        
+                                    BTCO_POP('点击此处关闭或保存',function(ID){
+                                        $('#' + ID[0]).slideToggle();
+                                        $('#' + ID[1]).click(function(){
+                                            BTCO_POP('正在保存');
+                                            setTimeout(function(){
+                                                $('#' + ID[0]).slideToggle();
+                                                setTimeout(function(){
+                                                    $('#' + ID[0]).remove()
+                                                },500);
+                                            },500);
+                                            $.post("/config?action=set_token", { t_type: 3, limit_addr:$('#BTCO-PanelAPI_limit_addr').val() }, function(net){
+                                                if(net.status){
+                                                    BTCO_POP(net.msg)
+                                                    $('#BTCO-PanelAPI_Box').slideToggle();
+                                                    $('#BTCO-PanelAPI_KEY').val('');
+                                                    $('#BTCO-PanelAPI_limit_addr').val('');
+                                                    $('#' + ID[0]).slideToggle();
+                                                    setTimeout(function(){
+                                                        $('#' + ID[0]).remove()
+                                                    },500);
+                                                }else BTCO_POP(net.msg)
+                                            })
+                                        });
+                                        $('#' + ID[2]).click(function(){
+                                            $('#BTCO-PanelAPI_Box').slideToggle();
+                                            $('#BTCO-PanelAPI_KEY').val('');
+                                            $('#BTCO-PanelAPI_limit_addr').val('');
+                                            $('#' + ID[0]).slideToggle();
+                                            setTimeout(function(){
+                                                $('#' + ID[0]).remove()
+                                            },500);
+                                        });
+                                    })
+                        
+                                });
+                            });    
+                            $.post("/config?action=get_token", {}, function(net){
+                                if(net.open){
+                                    $('#BTCO-PanelAPI_switch').addClass("BTCO-LF_switch-click")
+                                }else $('#BTCO-PanelAPI_switch').removeClass("BTCO-LF_switch-click")
+                            });
+                            $('#BTCO-PanelAPI_switch').click(function(){
+                                $.post("/config?action=set_token", { t_type: 2 }, function(net){
+                                    if(net.status){
+                                        BTCO_POP(net.msg)
+                                    }else BTCO_POP(net.msg)
+                                })
+                            });                    
+                            //----- BTCO PanelAPI
+
                             $(".BTCO-LF_switch").on("click", function() {
                                 $(this).hasClass("BTCO-LF_switch-click") ? $(this).removeClass("BTCO-LF_switch-click") : $(this).addClass("BTCO-LF_switch-click")
                             });
@@ -382,7 +443,7 @@ function RunApp(){
     });
     
     //----- BTCO Pjax
-    
+
     //----- BTCO POP
     function BTCO_POP(Content,callback,Show = false){
         var BTCOPOP = "",

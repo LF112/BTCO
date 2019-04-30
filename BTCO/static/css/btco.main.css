@@ -622,3 +622,43 @@ main .BTCO-OtherConfig .BTCO-OC_PanelSSL-M .BTCO-OC_PS-M_InputBox .BTCO-OC_PS-M_
        transform: rotate(360deg)
    }
 }
+
+main .BTCO-OtherConfig .BTCO-OC_PanelAPI-M{
+   width: 100%;
+   min-height: 195px;
+   border-radius: 2px;
+   background-color: rgba(81, 81, 81, 0.48);
+   box-shadow: 0px 1px 4px rgba(0,0,0,0.3);
+}
+
+main .BTCO-OtherConfig .BTCO-OC_PanelAPI-M .BTCO-OC_PA-M_InputBox{
+   position: relative;
+   padding: 0 0 5px;
+   width: 155px;
+   height: 115px;
+   display: inline-block;
+   margin: 0 5px;
+}
+
+main .BTCO-OtherConfig .BTCO-OC_PanelAPI-M .BTCO-OC_PA-M_InputBox textarea{
+   font-size: 12px;
+   text-align: left;
+   display: inline-block;
+   -webkit-box-sizing: border-box;
+   box-sizing: border-box;
+   background-color: rgb(81, 81, 81);
+   border: 1px solid #515151;
+   border-radius: 2px;
+   color: #e6e6e6;
+   height: 85px;
+   padding: 5px 8px;
+   line-height: normal;
+   margin: 10px 0 0;
+   width: 100%;
+   font-family: "Lato",-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Helvetica Neue",sans-serif;
+}
+main .BTCO-OtherConfig .BTCO-OC_PanelAPI-M .BTCO-OC_PA-M_InputBox .BTCO-OC_PA-M_IB-Title{
+   font-size: 12px;
+   line-height: 1;
+   float: left;
+}
