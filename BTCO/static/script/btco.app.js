@@ -302,71 +302,89 @@ function RunApp(){
     
     $("#BTCO-href_Config").click(function() {
         var This = 'config';
-        $("main").empty();
-        $.get("./static/other/" + This + ".html", function(html) {
-            $("main").html(html)
-            //----- BTCO PanelSSL
-            $("#BTCO-PanelSSL").on("click", function() {
-                if(!$('#BTCO-PanelSSL_Box').is(":hidden")){
-                    BTCO_POP('面板SSL设置未关闭，请先保存或关闭');
-                    return;
-                }
-                $.post("/config?action=GetPanelSSL", {}, function(net){
-                    if(net.rep){
-                        $('#BTCO-PanelSSL_Box').slideToggle();
-                        $('#BTCO-PanelSSL_KEY').val(net.privateKey);
-                        $('#BTCO-PanelSSL_PEM').val(net.certPem);
-                        
-                        BTCO_POP('点击此处关闭或保存',function(ID){
-                            $('#' + ID[0]).slideToggle();
-                            $('#' + ID[1]).click(function(){
-                                BTCO_POP('正在保存');
-                                setTimeout(function(){
-                                    $('#' + ID[0]).slideToggle();
-                                    setTimeout(function(){
-                                        $('#' + ID[0]).remove()
-                                    },500);
-                                },500);
-                                $.post("/config?action=SavePanelSSL", { privateKey: $('#BTCO-PanelSSL_KEY').val(),certPem:$('#BTCO-PanelSSL_PEM').val() }, function(net){
-                                    if(net.status){
-                                        BTCO_POP(net.msg)
+        $("main").slideToggle();
+        setTimeout(function(){ 
+            $("main").empty(); 
+            $("main").css('display','block');
+            $('.BTCO-LF_Pjax').fadeIn(500);
+            BTCO_POP('正在打开设置页，请稍后',function(ID){
+                setTimeout(function(){
+                    $.get("./static/other/" + This + ".html", function(html) {
+                        $('#' + ID[0]).slideToggle();
+                        setTimeout(function(){
+                            $('#' + ID[0]).remove()
+                        },500);
+                        $('.BTCO-LF_Pjax').fadeOut(500);
+                        setTimeout(function(){
+                            $("main").css('display','none');
+                            $("main").html(html)
+                            $("main").slideToggle();
+                            //----- BTCO PanelSSL
+                            $("#BTCO-PanelSSL").on("click", function() {
+                                if(!$('#BTCO-PanelSSL_Box').is(":hidden")){
+                                    BTCO_POP('面板SSL设置未关闭，请先保存或关闭');
+                                    return;
+                                }
+                                $.post("/config?action=GetPanelSSL", {}, function(net){
+                                    if(net.rep){
                                         $('#BTCO-PanelSSL_Box').slideToggle();
-                                        $('#BTCO-PanelSSL_KEY').val('');
-                                        $('#BTCO-PanelSSL_PEM').val('');
-                                        $('#' + ID[0]).slideToggle();
-                                        setTimeout(function(){
-                                            $('#' + ID[0]).remove()
-                                        },500);
-                                    }else BTCO_POP(net.msg)
+                                        $('#BTCO-PanelSSL_KEY').val(net.privateKey);
+                                        $('#BTCO-PanelSSL_PEM').val(net.certPem);
+                                        
+                                        BTCO_POP('点击此处关闭或保存',function(ID){
+                                            $('#' + ID[0]).slideToggle();
+                                            $('#' + ID[1]).click(function(){
+                                                BTCO_POP('正在保存');
+                                                setTimeout(function(){
+                                                    $('#' + ID[0]).slideToggle();
+                                                    setTimeout(function(){
+                                                        $('#' + ID[0]).remove()
+                                                    },500);
+                                                },500);
+                                                $.post("/config?action=SavePanelSSL", { privateKey: $('#BTCO-PanelSSL_KEY').val(),certPem:$('#BTCO-PanelSSL_PEM').val() }, function(net){
+                                                    if(net.status){
+                                                        BTCO_POP(net.msg)
+                                                        $('#BTCO-PanelSSL_Box').slideToggle();
+                                                        $('#BTCO-PanelSSL_KEY').val('');
+                                                        $('#BTCO-PanelSSL_PEM').val('');
+                                                        $('#' + ID[0]).slideToggle();
+                                                        setTimeout(function(){
+                                                            $('#' + ID[0]).remove()
+                                                        },500);
+                                                    }else BTCO_POP(net.msg)
+                                                })
+                                            });
+                                            $('#' + ID[2]).click(function(){
+                                                $('#BTCO-PanelSSL_Box').slideToggle();
+                                                $('#BTCO-PanelSSL_KEY').val('');
+                                                $('#BTCO-PanelSSL_PEM').val('');
+                                                $('#' + ID[0]).slideToggle();
+                                                setTimeout(function(){
+                                                    $('#' + ID[0]).remove()
+                                                },500);
+                                            });
+                                        })
+                
+                                    }else BTCO_POP('获取失败！')
                                 })
                             });
-                            $('#' + ID[2]).click(function(){
-                                $('#BTCO-PanelSSL_Box').slideToggle();
-                                $('#BTCO-PanelSSL_KEY').val('');
-                                $('#BTCO-PanelSSL_PEM').val('');
-                                $('#' + ID[0]).slideToggle();
-                                setTimeout(function(){
-                                    $('#' + ID[0]).remove()
-                                },500);
+                            //----- BTCO PanelSSL
+
+                            $(".BTCO-LF_switch").on("click", function() {
+                                $(this).hasClass("BTCO-LF_switch-click") ? $(this).removeClass("BTCO-LF_switch-click") : $(this).addClass("BTCO-LF_switch-click")
                             });
-                        })
 
-                    }else BTCO_POP('获取失败！')
-                })
-            });
-            //----- BTCO PanelSSL
-
-            $(".BTCO-LF_switch").on("click", function() {
-                $(this).hasClass("BTCO-LF_switch-click") ? $(this).removeClass("BTCO-LF_switch-click") : $(this).addClass("BTCO-LF_switch-click")
-            });
-
-        })
+                        },500);
+                    });
+                },500);
+            },true);
+        },500);
     });
     
     //----- BTCO Pjax
     
     //----- BTCO POP
-    function BTCO_POP(Content,callback){
+    function BTCO_POP(Content,callback,Show = false){
         var BTCOPOP = "",
         BoxID = Math.random().toString(36).substr(2),
         CheckID = Math.random().toString(36).substr(2),
@@ -379,7 +397,7 @@ function RunApp(){
         BTCOPOP += "				<svg class=\"icon\" style=\"width: 20px;height: 20px;\" aria-hidden=\"true\"><use xlink:href=\"#btcotishi\"><\/use><\/svg>\n";
         BTCOPOP += "			<\/div>\n";
         BTCOPOP += "			<div class=\"BTCO-LF_POP-M_Content\">\n"+ Content +"<\/div>\n";
-        if(typeof callback === 'function'){
+        if(typeof callback === 'function' && !Show){
             BTCOPOP += "			<div id = '" + CheckID + "' class=\"BTCO-LF_POP-M_Check\">\n";
             BTCOPOP += "				<svg class=\"icon\" style=\"width: 20px;height: 20px;\" aria-hidden=\"true\"><use xlink:href=\"#btcocheck\"><\/use><\/svg>\n";
             BTCOPOP += "			<\/div>\n";
@@ -391,8 +409,11 @@ function RunApp(){
         BTCOPOP += "	<\/div>\n";
         BTCOPOP += "<\/div>\n";
         $('main').prepend(BTCOPOP);
-        if(typeof callback === 'function'){
+        if(typeof callback === 'function' && !Show){
             callback([BoxID, CheckID, CloseID])
+        }else if(typeof callback === 'function' && Show){
+            $('#' + BoxID).slideToggle();
+            callback([BoxID])
         }else{
             if(typeof callback === 'undefined') callback = 1500;
             $('#' + BoxID).slideToggle();
