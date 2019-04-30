@@ -575,3 +575,50 @@ main .BTCO-OtherConfig .BTCO-OC_PanelSSL-M .BTCO-OC_PS-M_InputBox .BTCO-OC_PS-M_
    line-height: 1;
    float: left;
 }
+
+.BTCO-LF_Pjax{
+   position: absolute;
+   left: 50%;
+   top: 50%;
+   transform: translate(-50%,-50%);
+   z-index: 6666666666666;
+}
+
+.BTCO-LF_Pjax-Loading-Main {
+   display: -ms-flexbox;
+   display: flex;
+   -ms-flex-align: center;
+   align-items: center;
+   margin-bottom: 15px;
+}
+
+.BTCO-LF_Pjax-Loading-Outer,.BTCO-LF_Pjax-Loading-Inner {
+   margin: auto;
+   box-sizing: border-box;
+   border: 0.1em solid transparent;
+   border-radius: 50%;
+   animation: 3s linear infinite;
+   animation-name: BTCO-LF_Pjax-Loading-Spinner
+}
+
+.BTCO-LF_Pjax-Loading-Outer {
+   border-top-color: #0091e4
+}
+
+.BTCO-LF_Pjax-Loading-Inner {
+   width: 100%;
+   height: 100%;
+   border-top-color: #8e8e8e;
+   border-right-color: #8e8e8e;
+   opacity: 0.4
+}
+
+.active{
+   display: block;
+}
+
+@keyframes BTCO-LF_Pjax-Loading-Spinner {
+   100% {
+       transform: rotate(360deg)
+   }
+}
