@@ -19,9 +19,9 @@ window.onload = function(){
 
 function RunApp(){
     $('#BTCO-MenuClick').hover(function (){
-        $('.BTCO-Menu').fadeIn(500); 
+        $('.BTCO-Menu').slideToggle(350);; 
     },function(){
-        $('.BTCO-Menu').fadeOut(500);
+        $('.BTCO-Menu').slideToggle(350);;
     });  
 
     $.post("/system?action=GetDiskInfo", {}, function(net) {
@@ -299,22 +299,68 @@ function RunApp(){
     });
 
     //----- BTCO Pjax
-    /*
+    
     $("#BTCO-href_Config").click(function() {
         var This = 'config';
         $("main").empty();
         $.ajax({
-            url: "../static/other/" + This + ".html",
+            url: "./static/other/" + This + ".html",
             timeout: 60,
             success: function(html) {
                 $("main").html(html)
+                //----- BTCO PanelSSL
+                $("#BTCO-PanelSSL").on("click", function() {
+                    $.post("/config?action=GetPanelSSL", {}, function(net){
+                        if(net.rep){
+                            $('#BTCO-PanelSSL_Box').slideToggle();
+                            $('#BTCO-PanelSSL_KEY').val(net.privateKey);
+                            $('#BTCO-PanelSSL_PEM').val(net.certPem);
+                            
+                            BTCO_POP('点击此处关闭或保存',function(ID){
+                                $('#' + ID[0]).slideToggle();
+                                $('#' + ID[1]).click(function(){
+                                    BTCO_POP('正在保存');
+                                    setTimeout(function(){
+                                        $('#' + ID[0]).slideToggle();
+                                        setTimeout(function(){
+                                            $('#' + ID[0]).remove()
+                                        },500);
+                                    },500);
+                                    $.post("/config?action=SavePanelSSL", { privateKey: $('#BTCO-PanelSSL_KEY').val(),certPem:$('#BTCO-PanelSSL_PEM').val() }, function(net){
+                                        if(net.status){
+                                            BTCO_POP(net.msg)
+                                            $('#BTCO-PanelSSL_Box').slideToggle();
+                                            $('#BTCO-PanelSSL_KEY').val('');
+                                            $('#BTCO-PanelSSL_PEM').val('');
+                                            $('#' + ID[0]).slideToggle();
+                                            setTimeout(function(){
+                                                $('#' + ID[0]).remove()
+                                            },500);
+                                        }else BTCO_POP(net.msg)
+                                    })
+                                });
+                                $('#' + ID[2]).click(function(){
+                                    $('#BTCO-PanelSSL_Box').slideToggle();
+                                    $('#BTCO-PanelSSL_KEY').val('');
+                                    $('#BTCO-PanelSSL_PEM').val('');
+                                    $('#' + ID[0]).slideToggle();
+                                    setTimeout(function(){
+                                        $('#' + ID[0]).remove()
+                                    },500);
+                                });
+                            })
+
+                        }else BTCO_POP('获取失败！')
+                    })
+                });
+                //----- BTCO PanelSSL
             },
             error: function(ex) {
                 $("main").html('<div>抱歉，页面请求失败了！</div>')
             }
         })
     });
-    */
+    
     //----- BTCO Pjax
 
     $(".BTCO-LF_switch").on("click", function() {
@@ -362,7 +408,7 @@ function RunApp(){
     }
     //----- BTCO POP
     
-    //GetNetWork();
+    GetNetWork();
 
     function GetNetWork(){
         $.post("/system?action=GetNetWork", {}, function(net) {
@@ -476,28 +522,6 @@ function RunApp(){
         }]
     });
 }
-
-$('.BTCO-LF_Ghost').on('click', function () {
-    $("#BTCO-LF_POP-02").fadeOut(500);
-    $('#BTCO-LF_POP-03').text('提示');
-    $('#BTCO-LF_POP-04').text('您确定要继续吗');
-    $('#BTCO-LF_POP-05').text('确定');
-    $('#BTCO-LF_POP-06').text('取消');
-    setTimeout(function () {
-        $("#BTCO-LF_POP-01").css({display: "none"});
-    }, 500);
-});
-
-$("#BTCO-LF_POP-06").on('click', function () {
-    $("#BTCO-LF_POP-02").fadeOut(500);
-    $('#BTCO-LF_POP-03').text('提示');
-    $('#BTCO-LF_POP-04').text('您确定要继续吗');
-    $('#BTCO-LF_POP-05').text('确定');
-    $('#BTCO-LF_POP-06').text('取消');
-    setTimeout(function () {
-        $("#BTCO-LF_POP-01").css({display: "none"});
-    }, 500);
-});
 
 // BT
 function Tosize(bytes ,is_unit,fixed, end_unit) //字节转换，到指定单位结束 is_unit：是否显示单位  fixed：小数点位置 end_unit：结束单位

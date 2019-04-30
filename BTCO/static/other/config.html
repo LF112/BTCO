@@ -1,3 +1,32 @@
+<div id="BTCO-PanelSSL_Box" class="BTCO-OtherConfig" style="margin-top: 0;margin-bottom: 10px;display: none;">
+	<div class="BTCO-OC_PanelSSL-M">
+		<div class="BTCO-OC_PS-M_InputBox">
+			<textarea id="BTCO-PanelSSL_KEY" rows="8" cols="45" aria-required="true" placeholder="在此输入..."></textarea>
+			<div class="BTCO-OC_PS-M_IB-Title">
+				密钥(KEY)
+			</div>
+		</div>
+		<div class="BTCO-OC_PS-M_InputBox">
+			<textarea id="BTCO-PanelSSL_PEM" rows="8" cols="45" aria-required="true" placeholder="在此输入..."></textarea>
+			<div class="BTCO-OC_PS-M_IB-Title">
+				证书(PEM格式)
+			</div>
+		</div>
+		<div style="padding: 2px 10px 5px;text-align: left;">
+			<div style="width: 100%;height: 1px;background: #c5c5c5;">
+			</div>
+			<div style="font-size: 12px;margin-top: 2px;text-align: left;display: inline-block;">
+				&gt; PEM格式证书 = 域名证书.crt + 根证书(root_bundle).crt
+			</div>
+			<div style="font-size: 12px;margin-top: 2px;text-align: left;display: inline-block;">
+				&gt; 如果浏览器提示证书链不完整,请检查是否正确拼接PEM证书
+			</div>
+			<div style="font-size: 12px;margin-top: 2px;text-align: left;display: inline-block;">
+				&gt; 粘贴您的*.key以及*.pem内容，然后保存即可
+			</div>
+		</div>
+	</div>
+</div>
 <div class="BTCO-OtherConfig_Menu">
 	<ul class="BTCO-OC_M-ul">
 		<li>
@@ -28,7 +57,7 @@
 			</div>
 			<div style="width: 35px;height: 1px;background: #c5c5c5; margin: 4px auto 0;">
 			</div>
-			<div style="color: #e6e6e6;font-size: 12px;">
+			<div id="BTCO-PanelSSL" style="color: #e6e6e6;font-size: 12px;cursor: pointer;">
 				面板SSL
 			</div>
 		</div>
@@ -39,7 +68,7 @@
 			</div>
 			<div style="width: 35px;height: 1px;background: #c5c5c5; margin: 4px auto 0;">
 			</div>
-			<div style="color: #e6e6e6;font-size: 12px;">
+			<div style="color: #e6e6e6;font-size: 12px;cursor: pointer;">
 				API接口
 			</div>
 		</div>
