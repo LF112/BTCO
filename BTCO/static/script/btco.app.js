@@ -450,6 +450,41 @@ function RunApp(){
                                 $('#BTCO-PanelConfig_WeChatAppUser').val(net.wx);
                                 $('#BTCO-PanelConfig_admin_path').val(net.panel.admin_path);
                                 
+                                $.post("/ssl?action=GetUserInfo", {}, function(net){
+                                    if(net.status){
+                                        $('#BTCO-PanelConfig-InButton').prepend("<div id=\"BTCO-PanelConfig-Button_BTSiteUser\" style=\"position: absolute;cursor: pointer;width: 55px;height: 25px;margin-top: 2px;right: 78px;border-radius: 2px;letter-spacing: 0.05em;text-align: center;font-size: 12px;line-height: 2.2;background: rgba(51, 51, 51, 0.82)!important;\">切换<\/div>\n");
+                                        $('#BTCO-PanelConfig-InButton').prepend("<div id=\"BTCO-PanelConfig-Button_UnBTSiteUser\" style=\"position: absolute;cursor: pointer;width: 55px;height: 25px;margin-top: 2px;right: 15px;border-radius: 2px;letter-spacing: 0.05em;text-align: center;font-size: 12px;line-height: 2.2;background: rgba(51, 51, 51, 0.82)!important;\">解绑<\/div>\n");
+                                        BindBTSiteUser()
+                                        $('#BTCO-PanelConfig-Button_UnBTSiteUser').click(function(){
+                                            BTCO_POP('确定要解绑宝塔账号吗？',function(ID){
+                                                $('#' + ID[0]).slideToggle();
+                                                $('#' + ID[1]).click(function(){
+                                                    BTCO_POP('正在解绑....',2000);
+                                                    $.post("/ssl?action=DelToken", { }, function(net){
+                                                        if(net.status){
+                                                            BTCO_POP(net.msg);
+                                                            $('#' + ID[0]).slideToggle();
+                                                            setTimeout(function(){
+                                                                $('#' + ID[0]).remove()
+                                                                setTimeout(function(){window.location.reload(true)},500)
+                                                            },500);
+                                                        }else BTCO_POP(net.msg);
+                                                    });
+                                                });
+                                                $('#' + ID[2]).click(function(){
+                                                    $('#' + ID[0]).slideToggle();
+                                                    setTimeout(function(){
+                                                        $('#' + ID[0]).remove()
+                                                    },500);
+                                                });
+                                            })
+                                        })
+                                    }else{
+                                        $('#BTCO-PanelConfig-InButton').prepend("<div id=\"BTCO-PanelConfig-Button_BTSiteUser\" style=\"position: absolute;cursor: pointer;width: 55px;height: 25px;margin-top: 2px;right: 15px;border-radius: 2px;letter-spacing: 0.05em;text-align: center;font-size: 12px;line-height: 2.2;background: rgba(51, 51, 51, 0.82)!important;\">绑定<\/div>\n");
+                                        BindBTSiteUser()
+                                    }
+                                })
+                                
                                 //-----
                             });
                             $('#BTCO-PanelSSL_switch').click(function(){
@@ -650,6 +685,49 @@ function RunApp(){
                                     },true);
                                 });
                             });
+                            function BindBTSiteUser(){
+                                $('#BTCO-PanelConfig-Button_BTSiteUser').click(function(){
+                                    if($("#BTCO-PC_B-BTStieUser_set").length > 0){
+                                        BTCO_POP('绑定宝塔账号未关闭，请先保存或关闭');
+                                        return;
+                                    }
+                                    BTCO_InputPOP([['宝塔用户名','BTCO-PC_B-BTStieUser_set'],['宝塔密码','BTCO-PC_B-BTStiePassWord_set']],function(ID){
+                                        BTCO_POP('绑定宝塔账号',function(IDs){
+                                            $('#' + ID[0]).slideToggle();
+                                            $('#' + ID[1]).click(function(){
+                                                BTCO_POP('正在绑定宝塔账号...',2000);
+                                                $.post("/ssl?action=GetToken", { 
+                                                    username: $('#BTCO-PC_B-BTStieUser_set').val(),
+                                                    password: $('#BTCO-PC_B-BTStiePassWord_set').val()
+                                                }, function(net){
+                                                    if(net.status){
+                                                        BTCO_POP(net.msg);
+                                                        $('#BTCO-PC_B-BTStieUser_set').val('');
+                                                        $('#BTCO-PC_B-BTStiePassWord_set').val('');
+                                                        setTimeout(function(){
+                                                            $('#' + ID[0]).slideToggle();
+                                                            $('#' + IDs[0]).slideToggle();
+                                                            setTimeout(function(){
+                                                                $('#' + ID[0]).remove()
+                                                                $('#' + IDs[0]).remove();
+                                                                setTimeout(function(){window.location.reload(true);},500)
+                                                            },500);
+                                                        },1000)
+                                                    }else BTCO_POP(net.msg)
+                                                })
+                                            });
+                                            $('#' + ID[2]).click(function(){
+                                                $('#' + ID[0]).slideToggle();
+                                                $('#' + IDs[0]).slideToggle();
+                                                setTimeout(function(){
+                                                    $('#' + ID[0]).remove()
+                                                    $('#' + IDs[0]).remove();
+                                                },500);
+                                            });
+                                        },true);
+                                    });
+                                });
+                            }
                             //----- BTCO PanelAPI
 
                             $(".BTCO-LF_switch").on("click", function() {
@@ -692,13 +770,16 @@ function RunApp(){
         BTCOPOP += "<\/div>\n";
         $('main').prepend(BTCOPOP);
         if(typeof callback === 'function' && !Show){
+            $('html,body').animate({ scrollTop: 0 }, 500);
             callback([BoxID, CheckID, CloseID])
         }else if(typeof callback === 'function' && Show){
             $('#' + BoxID).slideToggle();
+            $('html,body').animate({ scrollTop: 0 }, 500);
             callback([BoxID])
         }else{
             if(typeof callback === 'undefined') callback = 1500;
             $('#' + BoxID).slideToggle();
+            $('html,body').animate({ scrollTop: 0 }, 500);
             setTimeout(function(){
                 $('#' + BoxID).slideToggle();
                 setTimeout(function(){
@@ -738,6 +819,7 @@ function RunApp(){
         BTCOInputPOP += "	<\/div>\n";
         BTCOInputPOP += "<\/div>\n";
         $('main').prepend(BTCOInputPOP);
+        $('html,body').animate({ scrollTop: 0 }, 500);
         callback([BoxID, CheckID, CloseID])
     }
     //----- BTCO Input POP
