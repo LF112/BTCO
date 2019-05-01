@@ -446,7 +446,7 @@ function RunApp(){
                                 $('#BTCO-PanelConfig_backup_path').val(net.backup_path);
                                 $('#BTCO-PanelConfig_address').val(net.panel.address);
                                 $('#BTCO-PanelConfig_systemdate').val(net.systemdate);
-                                //$('#BTCO-PanelConfig_PanelPassWord').val('********');
+                                $('#BTCO-PanelConfig_PanelPassWord').val('********');
                                 $('#BTCO-PanelConfig_WeChatAppUser').val(net.wx);
                                 $('#BTCO-PanelConfig_admin_path').val(net.panel.admin_path);
                                 
@@ -531,7 +531,7 @@ function RunApp(){
                                 })
                             });
                             $('#BTCO-PanelConfig-Button_admin_path').click(function(){
-                                if($('#BTCO-PC_B-path_set').is(":hidden")){
+                                if($("#BTCO-PC_B-path_set").length > 0){
                                     BTCO_POP('修改安全入口未关闭，请先保存或关闭');
                                     return;
                                 }
@@ -568,6 +568,45 @@ function RunApp(){
                                             });
                                         },true);
                                     });
+                                });
+                            });
+                            $('#BTCO-PanelConfig-Button_PanelUser').click(function(){
+                                if($("#BTCO-PC_B-PanelUser_set").length > 0){
+                                    BTCO_POP('修改面板用户未关闭，请先保存或关闭');
+                                    return;
+                                }
+                                BTCO_InputPOP([['用户名','BTCO-PC_B-PanelUser_set'],['重复用户名','BTCO-PC_B-PanelUser_Reset']],function(ID){
+                                    BTCO_POP('修改面板用户',function(IDs){
+                                        $('#' + ID[0]).slideToggle();
+                                        $('#' + ID[1]).click(function(){
+                                            BTCO_POP('正在修改面板用户...',1000);
+                                            $.post("/config?action=setUsername", { 
+                                                username1: $('#BTCO-PC_B-PanelUser_set').val(),
+                                                username2: $('#BTCO-PC_B-PanelUser_Reset').val()
+                                            }, function(net){
+                                                if(net.status){
+                                                    BTCO_POP(net.msg);
+                                                    $('#BTCO-PC_B-PanelUser_Reset').val('');
+                                                    setTimeout(function(){
+                                                        $('#' + ID[0]).slideToggle();
+                                                        $('#' + IDs[0]).slideToggle();
+                                                        setTimeout(function(){
+                                                            $('#' + ID[0]).remove()
+                                                            $('#' + IDs[0]).remove();
+                                                        },500);
+                                                    },1000)
+                                                }else BTCO_POP(net.msg)
+                                            })
+                                        });
+                                        $('#' + ID[2]).click(function(){
+                                            $('#' + ID[0]).slideToggle();
+                                            $('#' + IDs[0]).slideToggle();
+                                            setTimeout(function(){
+                                                $('#' + ID[0]).remove()
+                                                $('#' + IDs[0]).remove();
+                                            },500);
+                                        });
+                                    },true);
                                 });
                             });
                             //----- BTCO PanelAPI
