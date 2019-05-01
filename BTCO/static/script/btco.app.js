@@ -417,18 +417,58 @@ function RunApp(){
                         
                                 });
                             });    
-                            $.post("/config?action=get_token", {}, function(net){
-                                if(net.open){
+                            $.post("/config?action=get_config", {}, function(net){
+                                if(net.api === 'checked'){
                                     $('#BTCO-PanelAPI_switch').addClass("BTCO-LF_switch-click")
                                 }else $('#BTCO-PanelAPI_switch').removeClass("BTCO-LF_switch-click")
+                                if(net.ipv6 === 'checked'){
+                                    $('#BTCO-PanelIPV6_switch').addClass("BTCO-LF_switch-click")
+                                }else $('#BTCO-PanelIPV6_switch').removeClass("BTCO-LF_switch-click")
+                                if(net.panel[502] === 'checked'){
+                                    $('#BTCO-PanelSSL_switch').addClass("BTCO-LF_switch-click")
+                                }else $('#BTCO-PanelSSL_switch').removeClass("BTCO-LF_switch-click")
                             });
+                            $('#BTCO-PanelSSL_switch').click(function(){
+                                BTCO_POP('正在设置面板SSL...',1000)
+                                $.post("/config?action=SetPanelSSL", { }, function(net){
+                                    if(net.status){
+                                        BTCO_POP(net.msg)
+                                        if(/开启/.test(net.msg)){
+                                            var targetProtocol="https:";
+                                        }else var targetProtocol="http:";
+                                        $.post("/system?action=ReWeb", { }, function(net){
+                                            if(net.status){
+                                                window.location.protocol!=targetProtocol&&(window.location.href=targetProtocol+window.location.href.substring(window.location.protocol.length));
+                                            }else BTCO_POP(net.msg);
+                                        });
+                                    }else BTCO_POP(net.msg)
+                                })
+                            });   
                             $('#BTCO-PanelAPI_switch').click(function(){
+                                BTCO_POP('正在设置面板API...',1000)
                                 $.post("/config?action=set_token", { t_type: 2 }, function(net){
                                     if(net.status){
                                         BTCO_POP(net.msg)
                                     }else BTCO_POP(net.msg)
                                 })
-                            });                    
+                            });         
+                            $('#BTCO-PanelClose_switch').click(function(){
+                                BTCO_POP('正在关闭面板...',1000)
+                                $.post("/config?action=ClosePanel", { }, function(net){
+                                    if(net.status){
+                                        BTCO_POP(net.msg)
+                                        setTimeout(function(){window.location.reload(true);},1500)
+                                    }else BTCO_POP(net.msg)
+                                })
+                            });       
+                            $('#BTCO-PanelIPV6_switch').click(function(){
+                                BTCO_POP('正在设置面板IPV6...',1000)
+                                $.post("/config?action=set_ipv6_status", { }, function(net){
+                                    if(net.status){
+                                        BTCO_POP(net.msg)
+                                    }else BTCO_POP(net.msg)
+                                })
+                            });         
                             //----- BTCO PanelAPI
 
                             $(".BTCO-LF_switch").on("click", function() {
