@@ -427,6 +427,30 @@ function RunApp(){
                                 if(net.panel[502] === 'checked'){
                                     $('#BTCO-PanelSSL_switch').addClass("BTCO-LF_switch-click")
                                 }else $('#BTCO-PanelSSL_switch').removeClass("BTCO-LF_switch-click")
+
+                                //-----
+
+                                $.post("/plugin?action=a&name=btco&s=BT_Config", {}, function(net){
+                                    $('#BTCO-PanelConfig_webname').val(net.BTTitle);
+                                    $('#BTCO-PanelConfig_PanelUser').val(net.BTUser);
+                                });
+                                $.post("/ssl?action=GetUserInfo", {}, function(net){
+                                    $('#BTCO-PanelConfig_BTSiteUser').val(net.data.username);
+                                });
+                                $('#BTCO-PanelConfig_port').val(net.panel.port);
+                                $('#BTCO-PanelConfig_BTtimeout').val(net.session_timeout);
+                                $('#BTCO-PanelConfig_workers').val(net.workers);
+                                $('#BTCO-PanelConfig_domain').val(net.panel.domain);
+                                $('#BTCO-PanelConfig_limitip').val(net.panel.limitip);
+                                $('#BTCO-PanelConfig_sites_path').val(net.sites_path);
+                                $('#BTCO-PanelConfig_backup_path').val(net.backup_path);
+                                $('#BTCO-PanelConfig_address').val(net.panel.address);
+                                $('#BTCO-PanelConfig_systemdate').val(net.systemdate);
+                                //$('#BTCO-PanelConfig_PanelPassWord').val('********');
+                                $('#BTCO-PanelConfig_WeChatAppUser').val(net.wx)
+                                
+
+                                //-----
                             });
                             $('#BTCO-PanelSSL_switch').click(function(){
                                 BTCO_POP('正在设置面板SSL...',1000)
@@ -475,6 +499,25 @@ function RunApp(){
                                     if(net.status){
                                         $('#BTCO-PanelAPI_KEY').val(net.msg);
                                         BTCO_POP('接口密钥已生成，请保管好您的新密钥，此密钥只显示一次!')
+                                    }else BTCO_POP(net.msg)
+                                })
+                            });
+                            $('#BTCO-PanelClose_SaveConfig').click(function(){
+                                BTCO_POP('正在保存面板配置...',1000)
+                                $.post("/config?action=setPanel", {
+                                    webname: $('#BTCO-PanelConfig_webname').val(),
+                                    port: $('#BTCO-PanelConfig_port').val(),
+                                    workers: $('#BTCO-PanelConfig_workers').val(),
+                                    session_timeout: $('#BTCO-PanelConfig_BTtimeout').val(),
+                                    domain: $('#BTCO-PanelConfig_domain').val(),
+                                    limitip: $('#BTCO-PanelConfig_limitip').val(),
+                                    sites_path: $('#BTCO-PanelConfig_sites_path').val(),
+                                    backup_path: $('#BTCO-PanelConfig_backup_path').val(),
+                                    address: $('#BTCO-PanelConfig_address').val(),
+                                    systemdate: $('#BTCO-PanelConfig_systemdate').val(),
+                                }, function(net){
+                                    if(net.status){
+                                        BTCO_POP(net.msg)
                                     }else BTCO_POP(net.msg)
                                 })
                             });

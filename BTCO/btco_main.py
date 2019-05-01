@@ -124,7 +124,12 @@ class btco_main:
         BTIndex['check'] = self.is_pro()
         BTIndex['ip'] = public.GetLocalIp()
         return BTIndex
-
+    
+    def BT_Config(self, get):
+        BTConfig = {}
+        BTConfig['BTTitle'] = public.GetConfigValue('title')
+        BTConfig['BTUser'] = session['username']
+        return BTConfig
 
     #BT 原生扩展 / 一次加载使用
     def GetBootTime(self):
