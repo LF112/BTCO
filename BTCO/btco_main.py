@@ -64,7 +64,7 @@ class btco_main:
                     public.SetConfigValue('btco',True)
                     return public.returnMsg(True, '您已安装过了.')
             # BTCO 强制跳转写入
-            BtcoAdd = '<!--BTCO-->\n   <script> var a=document.location.toString().split("//");navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)&&"/"==a[1].substring(a[1].indexOf("/"))&&(window.location.href="' + public.getPanelAddr() + '/btco' + '"); </script> \n   <!--BTCO-->'
+            BtcoAdd = '<!--BTCO-->\n   <script> var a=document.location.toString().split("//");navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)&&("/"==a[1].substring(a[1].indexOf("/"))?window.location.href="' + public.getPanelAddr() + '/btco' + '":"/config"==a[1].substring(a[1].indexOf("/"))&&(window.location.href="' + public.getPanelAddr() + '/btco/?to=config' + '")); </script> \n   <!--BTCO-->'
             initCoutent = open('/www/server/panel/BTPanel/templates/default/layout.html','r')
             BtcoAddIn = initCoutent.read().split("</head>")
             initCoutent.close()
