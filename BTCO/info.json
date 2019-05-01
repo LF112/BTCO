@@ -2,8 +2,8 @@
     "title": "BTCO",
     "name": "btco",
     "ps": "「宝塔响应式解决方案」 - BTCO",
-    "versions": "0.3",
+    "versions": "1.0",
     "checks": "/www/server/panel/plugin/btco",
     "author":"LF112",
-    "home":"https://lf.tn"
+    "home":"https://btco.lf.tn"
 }
