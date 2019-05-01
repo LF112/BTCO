@@ -447,9 +447,9 @@ function RunApp(){
                                 $('#BTCO-PanelConfig_address').val(net.panel.address);
                                 $('#BTCO-PanelConfig_systemdate').val(net.systemdate);
                                 //$('#BTCO-PanelConfig_PanelPassWord').val('********');
-                                $('#BTCO-PanelConfig_WeChatAppUser').val(net.wx)
+                                $('#BTCO-PanelConfig_WeChatAppUser').val(net.wx);
+                                $('#BTCO-PanelConfig_admin_path').val(net.panel.admin_path);
                                 
-
                                 //-----
                             });
                             $('#BTCO-PanelSSL_switch').click(function(){
@@ -521,6 +521,55 @@ function RunApp(){
                                     }else BTCO_POP(net.msg)
                                 })
                             });
+                            $('#BTCO-PanelConfig-Button_systemdate').click(function(){
+                                BTCO_POP('正在同步服务器时间...',1000)
+                                $.post("/config?action=syncDate", { }, function(net){
+                                    if(net.status){
+                                        BTCO_POP(net.msg);
+                                        setTimeout(function(){window.location.reload(true);},1500)
+                                    }else BTCO_POP(net.msg)
+                                })
+                            });
+                            $('#BTCO-PanelConfig-Button_admin_path').click(function(){
+                                if($('#BTCO-PC_B-path_set').is(":hidden")){
+                                    BTCO_POP('修改安全入口未关闭，请先保存或关闭');
+                                    return;
+                                }
+                                $.post("/config?action=get_config", {}, function(net){
+                                    BTCO_InputPOP([['入口地址','BTCO-PC_B-path_set']],function(ID){
+                                        $('#BTCO-PC_B-path_set').val(net.panel.admin_path);
+                                        BTCO_POP('修改安全入口',function(IDs){
+                                            $('#' + ID[0]).slideToggle();
+                                            $('#' + ID[1]).click(function(){
+                                                BTCO_POP('正在修改安全入口...',1000);
+                                                $.post("/config?action=set_admin_path", { admin_path:$('#BTCO-PC_B-path_set').val() }, function(net){
+                                                    if(net.status){
+                                                        BTCO_POP(net.msg);
+                                                        $('#BTCO-PC_B-path_set').val('');
+                                                        setTimeout(function(){
+                                                            $('#' + ID[0]).slideToggle();
+                                                            $('#' + IDs[0]).slideToggle();
+                                                            setTimeout(function(){
+                                                                $('#' + ID[0]).remove()
+                                                                $('#' + IDs[0]).remove();
+                                                                setTimeout(function(){window.location.reload(true);},500)
+                                                            },500);
+                                                        },1000)
+                                                    }else BTCO_POP(net.msg)
+                                                })
+                                            });
+                                            $('#' + ID[2]).click(function(){
+                                                $('#' + ID[0]).slideToggle();
+                                                $('#' + IDs[0]).slideToggle();
+                                                setTimeout(function(){
+                                                    $('#' + ID[0]).remove()
+                                                    $('#' + IDs[0]).remove();
+                                                },500);
+                                            });
+                                        },true);
+                                    });
+                                });
+                            });
                             //----- BTCO PanelAPI
 
                             $(".BTCO-LF_switch").on("click", function() {
@@ -579,6 +628,39 @@ function RunApp(){
         }
     }
     //----- BTCO POP
+
+    //----- BTCO Input POP
+    function BTCO_InputPOP(Contents,callback){
+        var BTCOInputPOP = "",
+        BoxID = Math.random().toString(36).substr(2),
+        CheckID = Math.random().toString(36).substr(2),
+        CloseID = Math.random().toString(36).substr(2);
+        BTCOInputPOP += "<div id=\"" + BoxID + "\" class=\"BTCO-OtherConfig\" style=\"margin-top:0;margin-bottom:10px;display: none;\">\n";
+        BTCOInputPOP += "	<div class=\"BTCO-OC_BTCOInputPOP-M\">\n";
+        BTCOInputPOP += "		<ul class=\"BTCO-OC_BIP-InputList\">\n";
+        for (var i = 0; i < Contents.length; i++) {
+            BTCOInputPOP += "			<li>\n";
+            BTCOInputPOP += "			<div class=\"BTCO-OC_BIP-IL_Box\">\n";
+            BTCOInputPOP += "				<div style=\"padding: 5px 5px 5px 0;\">\n";
+            BTCOInputPOP += "					<div class=\"BTCO-OC_BIP-IL_Title\">" + Contents[i][0] + "<\/div>\n";
+            BTCOInputPOP += "					<textarea id=\"" + Contents[i][1] + "\" rows=\"8\" cols=\"45\" aria-required=\"true\" placeholder=\"在此输入...\" style=\"float: right;width: 75%;\"><\/textarea>\n";
+            BTCOInputPOP += "					<div style=\"width: 75%;margin-left: 25%;height: 1px;float: left;background: #c5c5c5;\">\n";
+            BTCOInputPOP += "					<\/div>\n";
+            BTCOInputPOP += "				<\/div>\n";
+            BTCOInputPOP += "			<\/div>\n";
+            BTCOInputPOP += "			<\/li>\n";
+        }
+        BTCOInputPOP += "		<\/ul>\n";
+        BTCOInputPOP += "		<div style=\"width:100%;height: 28px;display: inline-block;\">\n";
+        BTCOInputPOP += "			<div id = '" + CheckID + "' class=\"BTCO-OC_BIP-Button\" style=\"right: 80px\">确定<\/div>\n";
+        BTCOInputPOP += "			<div id = '" + CloseID + "' class=\"BTCO-OC_BIP-Button\">取消<\/div>\n";
+        BTCOInputPOP += "		<\/div>\n";
+        BTCOInputPOP += "	<\/div>\n";
+        BTCOInputPOP += "<\/div>\n";
+        $('main').prepend(BTCOInputPOP);
+        callback([BoxID, CheckID, CloseID])
+    }
+    //----- BTCO Input POP
     
     GetNetWork();
 

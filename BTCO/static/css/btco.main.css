@@ -708,3 +708,67 @@ main .BTCO-OtherConfig .BTCO-OC_Main .BTCO-OC_M-ConfigList li .BTCO-OC_M-CL_Box 
    width: 100%;
    font-family: "Lato",-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Helvetica Neue",sans-serif;
 }
+
+main .BTCO-OtherConfig .BTCO-OC_BTCOInputPOP-M{
+   width: 100%;
+   min-height: 80px;
+   border-radius: 2px;
+   background-color: rgba(81, 81, 81, 0.48);
+   box-shadow: 0px 1px 4px rgba(0,0,0,0.3);
+}
+
+main .BTCO-OtherConfig .BTCO-OC_BTCOInputPOP-M .BTCO-OC_BIP-InputList{
+   margin: 0;
+   padding: 0;
+   list-style: none;
+}
+
+main .BTCO-OtherConfig .BTCO-OC_BTCOInputPOP-M .BTCO-OC_BIP-InputList li{
+   margin-bottom: 5px;
+}
+
+main .BTCO-OtherConfig .BTCO-OC_BTCOInputPOP-M .BTCO-OC_BIP-InputList li .BTCO-OC_BIP-IL_Box{
+   width: 100%;
+   display: inline-block;
+}
+
+main .BTCO-OtherConfig .BTCO-OC_BTCOInputPOP-M .BTCO-OC_BIP-InputList li .BTCO-OC_BIP-IL_Box .BTCO-OC_BIP-IL_Title{
+   font-size: 12px;
+   float: left;
+   line-height: 2.5;
+   text-align: center;
+   width: 25%;
+   word-wrap: break-word;
+}
+
+main .BTCO-OtherConfig .BTCO-OC_BTCOInputPOP-M .BTCO-OC_BIP-InputList li .BTCO-OC_BIP-IL_Box textarea{
+   font-size: 12px;
+   text-align: left;
+   display: inline-block;
+   -webkit-box-sizing: border-box;
+   box-sizing: border-box;
+   background-color: rgb(81, 81, 81);
+   border: 1px solid #515151;
+   border-radius: 2px;
+   color: #e6e6e6;
+   height: 30px;
+   padding: 5px 8px;
+   line-height: normal;
+   width: 100%;
+   font-family: "Lato",-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Helvetica Neue",sans-serif;
+}
+
+main .BTCO-OtherConfig .BTCO-OC_BTCOInputPOP-M .BTCO-OC_BIP-Button{
+   position: absolute;
+   cursor: pointer;
+   width: 55px;
+   height: 25px;
+   margin-top: 2px;
+   right: 15px;
+   border-radius: 2px;
+   letter-spacing: 0.05em;
+   text-align: center;
+   font-size: 12px;
+   line-height: 2.2;
+   background: rgba(51, 51, 51, 0.82)!important;
+}
