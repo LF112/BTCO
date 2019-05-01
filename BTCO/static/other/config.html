@@ -109,5 +109,214 @@
 	</div>
 	<div class="BTCO-OtherConfig">
 		<div class="BTCO-OC_Main">
+			<div style="width:100%;height:35px">
+				<div class="BTCO-OC_M-SaveConfig">
+					保存
+				</div>
+				<div style="padding:5px 10px">
+					<div style="font-size:12px;display:flex;line-height:1.5">
+						面板设置
+					</div>
+					<div style="width:75%;height:1px;background:#c5c5c5">
+					</div>
+				</div>
+			</div>
+			<ul class="BTCO-OC_M-ConfigList">
+				<li>
+				<div class="BTCO-OC_M-CL_Box">
+					<div style="padding:0 10px">
+						<div style="font-size:12px;float:left;line-height:2.5;text-align:center;width:25%;word-wrap:break-word">
+							别名
+						</div>
+						<textarea rows="8" cols="45" aria-required="true" placeholder="在此输入..." style="float:right;width:75%"></textarea>
+						<div style="font-size:12px;line-height:2;float:left;margin-left:25%">
+							给面板取个别名
+						</div>
+						<div style="width:75%;margin-left:25%;height:1px;float:left;background:#c5c5c5">
+						</div>
+					</div>
+				</div>
+				</li>
+				<li>
+				<div class="BTCO-OC_M-CL_Box">
+					<div style="padding:0 10px">
+						<div style="font-size:12px;float:left;line-height:2.5;text-align:center;width:25%;word-wrap:break-word">
+							面板端口
+						</div>
+						<textarea rows="8" cols="45" aria-required="true" placeholder="在此输入..." style="float:right;width:75%"></textarea>
+						<div style="font-size:12px;line-height:2;float:left;margin-left:25%">
+							建议端口范围 8888 - 65535
+						</div>
+						<div style="width:75%;margin-left:25%;height:1px;float:left;background:#c5c5c5">
+						</div>
+					</div>
+				</div>
+				</li>
+				<li>
+				<div class="BTCO-OC_M-CL_Box">
+					<div style="padding:0 10px">
+						<div style="font-size:12px;float:left;line-height:2.5;text-align:center;width:25%;word-wrap:break-word">
+							并发线程
+						</div>
+						<textarea rows="8" cols="45" aria-required="true" placeholder="在此输入..." style="float:right;width:75%"></textarea>
+						<div style="font-size:12px;line-height:2;float:left;margin-left:25%">
+							除非每秒有超过10人访问面板，建议值不要超过2，注意：>1时会导致宝塔终端插件异常
+						</div>
+						<div style="width:75%;margin-left:25%;height:1px;float:left;background:#c5c5c5">
+						</div>
+					</div>
+				</div>
+				</li>
+				<li>
+				<div class="BTCO-OC_M-CL_Box">
+					<div style="padding:0 10px">
+						<div style="font-size:12px;float:left;line-height:2.5;text-align:center;width:25%;word-wrap:break-word">
+							超时时间 (s)
+						</div>
+						<textarea rows="8" cols="45" aria-required="true" placeholder="在此输入..." style="float:right;width:75%"></textarea>
+						<div style="font-size:12px;line-height:2;float:left;margin-left:25%">
+							若用户在N秒内没有任何操作，将自动退出面板
+						</div>
+						<div style="width:75%;margin-left:25%;height:1px;float:left;background:#c5c5c5">
+						</div>
+					</div>
+				</div>
+				</li>
+				<li>
+				<div class="BTCO-OC_M-CL_Box">
+					<div style="padding:0 10px">
+						<div style="font-size:12px;float:left;line-height:2.5;text-align:center;width:25%;word-wrap:break-word">
+							域名
+						</div>
+						<textarea rows="8" cols="45" aria-required="true" placeholder="在此输入..." style="float:right;width:75%"></textarea>
+						<div style="font-size:12px;line-height:2;float:left;margin-left:25%">
+							为面板绑定一个访问域名;注意：一旦绑定域名,只能通过域名访问面板!
+						</div>
+						<div style="width:75%;margin-left:25%;height:1px;float:left;background:#c5c5c5">
+						</div>
+					</div>
+				</div>
+				</li>
+				<li>
+				<div class="BTCO-OC_M-CL_Box">
+					<div style="padding:0 10px">
+						<div style="font-size:12px;float:left;line-height:2.5;text-align:center;width:25%;word-wrap:break-word">
+							授权IP
+						</div>
+						<textarea rows="8" cols="45" aria-required="true" placeholder="在此输入..." style="float:right;width:75%"></textarea>
+						<div style="font-size:12px;line-height:2;float:left;margin-left:25%">
+							设置访问授权IP,多个请使用逗号(,)隔开;注意：一旦设置授权IP,只有指定IP的电脑能访问面板!
+						</div>
+						<div style="width:75%;margin-left:25%;height:1px;float:left;background:#c5c5c5">
+						</div>
+					</div>
+				</div>
+				</li>
+				<li>
+				<div class="BTCO-OC_M-CL_Box">
+					<div style="padding:0 10px">
+						<div style="font-size:12px;float:left;line-height:2.5;text-align:center;width:25%;word-wrap:break-word">
+							默认建站目录
+						</div>
+						<textarea rows="8" cols="45" aria-required="true" placeholder="在此输入..." style="float:right;width:75%"></textarea>
+						<div style="font-size:12px;line-height:2;float:left;margin-left:25%">
+							新创建的站点,默认将保存到该目录的下级目录!
+						</div>
+						<div style="width:75%;margin-left:25%;height:1px;float:left;background:#c5c5c5">
+						</div>
+					</div>
+				</div>
+				</li>
+				<li>
+				<div class="BTCO-OC_M-CL_Box">
+					<div style="padding:0 10px">
+						<div style="font-size:12px;float:left;line-height:2.5;text-align:center;width:25%;word-wrap:break-word">
+							默认备份目录
+						</div>
+						<textarea rows="8" cols="45" aria-required="true" placeholder="在此输入..." style="float:right;width:75%"></textarea>
+						<div style="font-size:12px;line-height:2;float:left;margin-left:25%">
+							网站和数据库的备份目录!
+						</div>
+						<div style="width:75%;margin-left:25%;height:1px;float:left;background:#c5c5c5">
+						</div>
+					</div>
+				</div>
+				</li>
+				<li>
+				<div class="BTCO-OC_M-CL_Box">
+					<div style="padding:0 10px">
+						<div style="font-size:12px;float:left;line-height:2.5;text-align:center;width:25%;word-wrap:break-word">
+							服务器IP
+						</div>
+						<textarea rows="8" cols="45" aria-required="true" placeholder="在此输入..." style="float:right;width:75%"></textarea>
+						<div style="font-size:12px;line-height:2;float:left;margin-left:25%">
+							默认为外网IP,若您在本地虚拟机测试,请填写虚拟机内网IP!
+						</div>
+						<div style="width:75%;margin-left:25%;height:1px;float:left;background:#c5c5c5">
+						</div>
+					</div>
+				</div>
+				</li>
+				<li>
+				<div class="BTCO-OC_M-CL_Box">
+					<div style="padding:0 10px">
+						<div style="font-size:12px;float:left;line-height:2.5;text-align:center;width:25%;word-wrap:break-word">
+							服务器时间
+						</div>
+						<textarea rows="8" cols="45" aria-required="true" placeholder="在此输入..." style="float:right;width:75%"></textarea>
+						<div style="width:75%;margin-left:25%;height:1px;float:left;background:#c5c5c5">
+						</div>
+					</div>
+				</div>
+				</li>
+				<li>
+				<div class="BTCO-OC_M-CL_Box">
+					<div style="padding:0 10px">
+						<div style="font-size:12px;float:left;line-height:2.5;text-align:center;width:25%;word-wrap:break-word">
+							面板用户
+						</div>
+						<textarea rows="8" cols="45" aria-required="true" placeholder="在此输入..." style="float:right;width:75%"></textarea>
+						<div style="width:75%;margin-left:25%;height:1px;float:left;background:#c5c5c5">
+						</div>
+					</div>
+				</div>
+				</li>
+				<li>
+				<div class="BTCO-OC_M-CL_Box">
+					<div style="padding:0 10px">
+						<div style="font-size:12px;float:left;line-height:2.5;text-align:center;width:25%;word-wrap:break-word">
+							面板密码
+						</div>
+						<textarea rows="8" cols="45" aria-required="true" placeholder="在此输入..." style="float:right;width:75%"></textarea>
+						<div style="width:75%;margin-left:25%;height:1px;float:left;background:#c5c5c5">
+						</div>
+					</div>
+				</div>
+				</li>
+				<li>
+				<div class="BTCO-OC_M-CL_Box">
+					<div style="padding:0 10px">
+						<div style="font-size:12px;float:left;line-height:2.5;text-align:center;width:25%;word-wrap:break-word">
+							绑定宝塔账号
+						</div>
+						<textarea rows="8" cols="45" aria-required="true" placeholder="在此输入..." style="float:right;width:75%"></textarea>
+						<div style="width:75%;margin-left:25%;height:1px;float:left;background:#c5c5c5">
+						</div>
+					</div>
+				</div>
+				</li>
+				<li>
+				<div class="BTCO-OC_M-CL_Box">
+					<div style="padding:0 10px">
+						<div style="font-size:12px;float:left;line-height:2.5;text-align:center;width:25%;word-wrap:break-word">
+							微信小程序
+						</div>
+						<textarea rows="8" cols="45" aria-required="true" placeholder="在此输入..." style="float:right;width:75%"></textarea>
+						<div style="width:75%;margin-left:25%;height:1px;float:left;background:#c5c5c5">
+						</div>
+					</div>
+				</div>
+				</li>
+			</ul>
 		</div>
 	</div>
