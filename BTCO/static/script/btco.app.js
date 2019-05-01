@@ -383,6 +383,7 @@ function RunApp(){
                                 });
                                 $('#BTCO-PanelConfig_port').val(net.panel.port);
                                 $('#BTCO-PanelConfig_BTtimeout').val(net.session_timeout);
+                                $('#BTCO-PanelConfig_BTtimeout-Conntent').text('若用户在' + net.session_timeout + '秒内没有任何操作，将自动退出面板');
                                 $('#BTCO-PanelConfig_workers').val(net.workers);
                                 $('#BTCO-PanelConfig_domain').val(net.panel.domain);
                                 $('#BTCO-PanelConfig_limitip').val(net.panel.limitip);
