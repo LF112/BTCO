@@ -38,9 +38,15 @@ function RunApp(){
 
     let BtcoSiteCheck = 'index';
     if(/config/.test(getQueryVariable('to'))){
+        //Config
         BtcoSiteCheck = 'config';
         $("main").empty();
         __BTCO_Config();
+    }else if(/firewall/.test(getQueryVariable('to'))){
+        //Firewall
+        BtcoSiteCheck = 'firewall';
+        $("main").empty();
+        __BTCO_Firewall();
     }else{
         //Index
         __BTCO_Index();
@@ -241,6 +247,58 @@ function RunApp(){
     }
 
     //-----BTCO-> Index(Pjax)
+
+    //-----BTCO-> Firewall
+    function __BTCO_Firewall() {
+        $.get("/firewall",function(){}); //更新页面
+        var This = 'firewall';
+        $("main").slideToggle();
+        setTimeout(function(){ 
+            $("main").empty(); 
+            $("main").css('display','block');
+            $('.BTCO-LF_Pjax').fadeIn(500);
+            BTCO_POP('正在打开安全页，请稍后',function(ID){
+                setTimeout(function(){
+                    $.get("./static/other/" + This + ".html", function(html) {
+                        $('#' + ID[0]).slideToggle();
+                        setTimeout(function(){
+                            $('#' + ID[0]).remove()
+                        },500);
+                        $('.BTCO-LF_Pjax').fadeOut(500);
+                        setTimeout(function(){
+                            $("main").css('display','none');
+                            $("main").html(html)
+                            $("main").slideToggle();
+
+                            //----- BTCO Firewall
+
+                            //----- BTCO Firewall
+
+                            //----- 菜单事件
+                            $("#BTCO-href_Index").on('click',function() { 
+                                __BTCO_Index_P();
+                                BtcoSiteCheck = 'index';
+                                $('#BTCO-href_firewall').unbind();
+                                $("#BTCO-href_Config").unbind();
+                                $("#BTCO-href_Index").unbind();
+                             }); //Index
+                            $("#BTCO-href_Config").on('click',function() { 
+                                __BTCO_Config();
+                                BtcoSiteCheck = 'config'
+                                $('#BTCO-href_firewall').unbind();
+                                $("#BTCO-href_Config").unbind();
+                                $("#BTCO-href_Index").unbind();
+                            }); //Config
+                            $('#BTCO-href_firewall').on('click',function () { BTCO_POP('您已经在安全页了！') }); //Firewall
+                            //----- 菜单事件
+
+                        },500);
+                    });
+                },500);
+            },true);
+        },500);
+    }
+    //-----BTCO-> Firewall
     
     //-----BTCO-> Config
     function __BTCO_Config(){
@@ -680,10 +738,18 @@ function RunApp(){
                             $("#BTCO-href_Index").on('click',function() { 
                                 __BTCO_Index_P();
                                 BtcoSiteCheck = 'index';
+                                $('#BTCO-href_firewall').unbind();
                                 $("#BTCO-href_Config").unbind();
                                 $("#BTCO-href_Index").unbind();
-                             }); //Index
+                            }); //Index
                             $("#BTCO-href_Config").on('click',function() { BTCO_POP('您已经在面板设置页了！') }); //Config
+                            $('#BTCO-href_firewall').on('click',function () {
+                                __BTCO_Firewall();
+                                BtcoSiteCheck = 'firewall';
+                                $('#BTCO-href_firewall').unbind();
+                                $("#BTCO-href_Config").unbind();
+                                $("#BTCO-href_Index").unbind();
+                            }); //Firewall
 
                             //----- 菜单事件
 
@@ -790,9 +856,17 @@ function RunApp(){
         $("#BTCO-href_Config").on('click',function() { 
             __BTCO_Config();
             BtcoSiteCheck = 'config'
+            $('#BTCO-href_firewall').unbind();
             $("#BTCO-href_Config").unbind();
             $("#BTCO-href_Index").unbind();
          }); //Config
+         $('#BTCO-href_firewall').on('click',function () {
+            __BTCO_Firewall();
+            BtcoSiteCheck = 'firewall';
+            $('#BTCO-href_firewall').unbind();
+            $("#BTCO-href_Config").unbind();
+            $("#BTCO-href_Index").unbind();
+        }); //Firewall
 
         //----- 菜单事件
 
