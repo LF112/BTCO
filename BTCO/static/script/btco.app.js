@@ -167,7 +167,41 @@ function RunApp(){
     //-----BTCO Input POP
 
 
-    //----- BTCO Pjax
+    //-----BTCO Pjax
+
+    //-----BTCO-> Index(Pjax)
+
+    function __BTCO_Index_P(){
+        $.get("/",function(){}); //更新页面
+        var This = 'index';
+        $("main").slideToggle();
+        setTimeout(function(){ 
+            $("main").empty(); 
+            $("main").css('display','block');
+            $('.BTCO-LF_Pjax').fadeIn(500);
+            BTCO_POP('正在打开首页，请稍后',function(ID){
+                setTimeout(function(){
+                    $.get("./static/other/" + This + ".html", function(html) {
+                        $('#' + ID[0]).slideToggle();
+                        setTimeout(function(){
+                            $('#' + ID[0]).remove()
+                        },500);
+                        $('.BTCO-LF_Pjax').fadeOut(500);
+                        setTimeout(function(){
+                            $("main").css('display','none');
+                            $("main").html(html)
+                            $("main").slideToggle();
+
+                            __BTCO_Index();
+
+                        },500);
+                    });
+                },500);
+            },true);
+        },500);
+    }
+
+    //-----BTCO-> Index(Pjax)
     
     //-----BTCO-> Config
     function __BTCO_Config(){
@@ -601,6 +635,18 @@ function RunApp(){
                             }
                             //----- BTCO PanelAPI
 
+                            //----- 菜单事件
+
+                            $("#BTCO-href_Index").on('click',function() { 
+                                __BTCO_Index_P();
+                                BtcoSiteCheck = 'index';
+                                $("#BTCO-href_Config").unbind();
+                                $("#BTCO-href_Index").unbind();
+                             }); //Index
+                            $("#BTCO-href_Config").on('click',function() { BTCO_POP('您已经在面板设置页了！') }); //Config
+
+                            //----- 菜单事件
+
                             $(".BTCO-LF_switch").on("click", function() {
                                 $(this).hasClass("BTCO-LF_switch-click") ? $(this).removeClass("BTCO-LF_switch-click") : $(this).addClass("BTCO-LF_switch-click")
                             });
@@ -699,7 +745,14 @@ function RunApp(){
 
         //----- 菜单事件
 
-        $("#BTCO-href_Config").click(function() { __BTCO_Config();BtcoSiteCheck = 'config' }); //Config
+        
+        $("#BTCO-href_Index").on('click',function() { BTCO_POP('您已经在面板首页了！') }); //Index
+        $("#BTCO-href_Config").on('click',function() { 
+            __BTCO_Config();
+            BtcoSiteCheck = 'config'
+            $("#BTCO-href_Config").unbind();
+            $("#BTCO-href_Index").unbind();
+         }); //Config
 
         //----- 菜单事件
 
