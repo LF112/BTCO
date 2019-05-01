@@ -194,6 +194,45 @@ function RunApp(){
 
                             __BTCO_Index();
 
+                            $.post("/plugin?action=a&name=btco&s=BT_index", {}, function(net){
+
+                                if(net.check.code == -2 || net.check.code == -1){
+                                    $('#BTCO-BTPanel_Check').text('Free');
+                                    $('#BTCO-BTPanel_Check').css('background-color','#8c8c8c');
+                                }
+                        
+                                if(BtcoSiteCheck === 'index'){
+                                    var Overviewadder = '',
+                                        Addlist = [['网站',net.siteCount],['FTP',net.ftpCount],['数据库',net.databaseCount]];
+                                    for (var i = 0; i < Addlist.length; i++) {
+                                        Overviewadder += "\n";
+                                        Overviewadder += "<li>\n";
+                                        Overviewadder += "	<div class=\"BTCO-PI_Ov-Box_P1\">"+ Addlist[i][1] +"<\/div>\n";
+                                        Overviewadder += "	<div class=\"BTCO-PI_Ov-Box_P2\">"+ Addlist[i][0] +"<\/div>\n";
+                                        Overviewadder += "<\/li>\n";
+                                        if(i + 1 !== Addlist.length) Overviewadder += "<li><div class=\"BTCO-PI_Ov-Box_P3\"><\/div><\/li>\n";
+                                        Overviewadder += "\n";
+                                    }
+                        
+                                    $('#BTCO-P3').append(Overviewadder)
+                        
+                                    if(/Centos/i.test(net.system)){
+                                        $('#BTCO-SysIcon').append('<svg class="icon" aria-hidden="true"><use xlink:href="#btcocentos"></use></svg>')
+                                    }else if(/Deepin/i.test(net.system)){
+                                        $('#BTCO-SysIcon').append('<svg class="icon" aria-hidden="true"><use xlink:href="#btcodeepin"></use></svg>')
+                                    }else if(/Ubuntu/i.test(net.system)){
+                                        $('#BTCO-SysIcon').append('<svg class="icon" aria-hidden="true"><use xlink:href="#btcoubuntu"></use></svg>')
+                                    }else $('#BTCO-SysIcon').append('<svg class="icon" aria-hidden="true"><use xlink:href="#btcofedora"></use></svg>')
+                        
+                                    $('#BTCO-SysInfo').text(net.system);
+                                    $('#BTCO-P3_1').text(net.ip);
+                                }
+                        
+                                $('#BTCO-BTPanel_V').text(net.version);
+                                $("title").html(net.BTTitle);
+                        
+                            });
+
                         },500);
                     });
                 },500);
