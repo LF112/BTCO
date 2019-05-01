@@ -469,6 +469,15 @@ function RunApp(){
                                     }else BTCO_POP(net.msg)
                                 })
                             });         
+                            $('#BTCO-PanelAPI_ReKEY').click(function(){
+                                BTCO_POP('正在重置API接口KEY...',1000)
+                                $.post("/config?action=set_token", { t_type:1 }, function(net){
+                                    if(net.status){
+                                        $('#BTCO-PanelAPI_KEY').val(net.msg);
+                                        BTCO_POP('接口密钥已生成，请保管好您的新密钥，此密钥只显示一次!')
+                                    }else BTCO_POP(net.msg)
+                                })
+                            });
                             //----- BTCO PanelAPI
 
                             $(".BTCO-LF_switch").on("click", function() {
