@@ -361,16 +361,16 @@ function RunApp(){
                         
                                 });
                             });    
+                            if(window.location.protocol.indexOf('https') != -1){
+                                $('#BTCO-PanelSSL_switch').addClass("BTCO-LF_switch-click")
+                            }else $('#BTCO-PanelSSL_switch').removeClass("BTCO-LF_switch-click")
                             $.post("/config?action=get_config", {}, function(net){
                                 if(net.api === 'checked'){
                                     $('#BTCO-PanelAPI_switch').addClass("BTCO-LF_switch-click")
                                 }else $('#BTCO-PanelAPI_switch').removeClass("BTCO-LF_switch-click")
                                 if(net.ipv6 === 'checked'){
                                     $('#BTCO-PanelIPV6_switch').addClass("BTCO-LF_switch-click")
-                                }else $('#BTCO-PanelIPV6_switch').removeClass("BTCO-LF_switch-click")
-                                if(net.panel[502] === 'checked'){
-                                    $('#BTCO-PanelSSL_switch').addClass("BTCO-LF_switch-click")
-                                }else $('#BTCO-PanelSSL_switch').removeClass("BTCO-LF_switch-click")
+                                }else $('#BTCO-PanelIPV6_switch').removeClass("BTCO-LF_switch-click")                          
 
                                 //-----
 
