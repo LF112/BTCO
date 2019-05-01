@@ -29,7 +29,7 @@ _     _____ _ _ ____               _
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1.0,user-scalable=0">
     <meta name="renderer" content="webkit">
-    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
     <title>
         BTCO.
     </title>
@@ -41,6 +41,7 @@ _     _____ _ _ ____               _
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web|Ubuntu:400,700">
 
 </head>
+
 <body>
 
     <header>
@@ -50,21 +51,21 @@ _     _____ _ _ ____               _
                 <div id="BTCO-BTPanel_Check" class="BTCO-BTPro">Pro</div>
                 <div id="BTCO-BTPanel_V" style="font-size: 12px;color: #fff;line-height: 1.3;">0.0.0</div>
             </div>
-            <div class="BTCO-SideMenu"> 
+            <div class="BTCO-SideMenu">
                 <svg id="BTCO-MenuClick" class="icon" aria-hidden="true">
                     <use xlink:href="#btcomenudown"></use>
                 </svg>
                 <ul class="BTCO-Menu" style="display: none;">
-                    <li id = "BTCO-href_Index">首页</li>
+                    <li id="BTCO-href_Index">首页</li>
                     <li onclick='window.location.href="/site"'>网站</li>
                     <li onclick='window.location.href="/ftp"'>FTP</li>
                     <li onclick='window.location.href="/database"'>数据库</li>
                     <li onclick='window.location.href="/control"'>监控</li>
-                    <li id = "BTCO-href_firewall">安全</li>
+                    <li id="BTCO-href_firewall">安全</li>
                     <li onclick='window.location.href="/files"'>文件</li>
                     <li onclick='window.location.href="/crontab"'>计划任务</li>
                     <li onclick='window.location.href="/soft"'>软件商店</li>
-                    <li id = "BTCO-href_Config">面板设置</li>
+                    <li id="BTCO-href_Config">面板设置</li>
                     <li onclick='window.location.href="/login?dologin=True"'>退出</li>
                 </ul>
             </div>
@@ -72,7 +73,7 @@ _     _____ _ _ ____               _
 
     </header>
     <main>
-        
+
         <ul class="BTCO-systemInfoList">
             <li>
                 <div class="BTCO-APP_Main">
@@ -136,7 +137,7 @@ _     _____ _ _ ____               _
                     <span style="color: #dcdcdc;">/</span>
                     <a href="javascript:;" id="BTCO-P4_3">重启服务器</a>
                 </div>
-                <div id="BTCO-P3_1"class="BTCO-PI_IPview">0.0.0.0</div>
+                <div id="BTCO-P3_1" class="BTCO-PI_IPview">0.0.0.0</div>
                 <div class="BTCO-PI_Overview">
                     <div class="BTCO-PI_Ov-Line"></div>
                     <div class="BTCO-PI_Ov-Box">
@@ -155,17 +156,23 @@ _     _____ _ _ ____               _
                                 <div id="BTCO-P5_0" class="BTCO-SF_InfoBox_P1">0</div>
                                 <div class="BTCO-SF_InfoBox_P2">上行</div>
                             </li>
-                            <li><div class="BTCO-SF_InfoBox_P3"></div></li>
+                            <li>
+                                <div class="BTCO-SF_InfoBox_P3"></div>
+                            </li>
                             <li>
                                 <div id="BTCO-P5_1" class="BTCO-SF_InfoBox_P1">0</div>
                                 <div class="BTCO-SF_InfoBox_P2">下行</div>
                             </li>
-                            <li><div class="BTCO-SF_InfoBox_P3"></div></li>
+                            <li>
+                                <div class="BTCO-SF_InfoBox_P3"></div>
+                            </li>
                             <li>
                                 <div id="BTCO-P5_2" class="BTCO-SF_InfoBox_P1">0</div>
                                 <div class="BTCO-SF_InfoBox_P2">总发送</div>
                             </li>
-                            <li><div class="BTCO-SF_InfoBox_P3"></div></li>
+                            <li>
+                                <div class="BTCO-SF_InfoBox_P3"></div>
+                            </li>
                             <li>
                                 <div id="BTCO-P5_3" class="BTCO-SF_InfoBox_P1">0</div>
                                 <div class="BTCO-SF_InfoBox_P2">总接收</div>
@@ -191,4 +198,5 @@ _     _____ _ _ ____               _
     <script src="https://cdn.jsdelivr.net/npm/highcharts@6.1.1/highcharts.min.js"></script>
     <script src="./static/script/btco.app.js"></script>
 </body>
+
 </html>

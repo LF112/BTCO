@@ -18,744 +18,848 @@ _     _____ _ _ ____               _
 +-------------------------------------------------------------------
 */
 
-html,body {
-	-webkit-box-sizing:border-box;
-	box-sizing:border-box;
-	margin:0;
-	padding:0;
-	border:0;
-	background:0 0;
-	word-wrap:break-word;
-	font-family:Titillium Web,-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Helvetica Neue",sans-serif;
-}
+html,
 body {
-	background-color:#303030;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: 0 0;
+    word-wrap: break-word;
+    font-family: Titillium Web, -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", sans-serif;
 }
+
+body {
+    background-color: #303030;
+}
+
 header {
-	position:fixed;
-	top:0;
-	left:0;
-	z-index:1000;
-	width:100%;
-	background:#515151;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    width: 100%;
+    background: #515151;
 }
+
 .BTCO-Header_row {
-	position:relative;
-	z-index:1000;
-	margin:0 auto;
-	padding:0 12px;
-	height:42px;
-	max-width:100%;
-	min-width:60%;
-	-webkit-box-shadow:0 1px 3px rgba(26,26,26,.1);
-	box-shadow:0 1px 3px rgba(26,26,26,.1);
+    position: relative;
+    z-index: 1000;
+    margin: 0 auto;
+    padding: 0 12px;
+    height: 42px;
+    max-width: 100%;
+    min-width: 60%;
+    -webkit-box-shadow: 0 1px 3px rgba(26, 26, 26, .1);
+    box-shadow: 0 1px 3px rgba(26, 26, 26, .1);
 }
+
 .BTCO-Header_row .BTCO-Title {
-	float:none;
-	display:inline-block;
-	margin-left:6px;
-	height:42px;
-	color:#fff;
-	font-size:16px;
-	line-height:42px;
+    float: none;
+    display: inline-block;
+    margin-left: 6px;
+    height: 42px;
+    color: #fff;
+    font-size: 16px;
+    line-height: 42px;
 }
+
 .BTCO-Header_row .BTCO-SideStatus {
-	position:absolute;
-	top:0;
-	left:85px;
-	margin:5px 0;
-	padding:0 12px;
-	border-left:3px solid rgb(57,57,57);
-	border-radius:3px;
+    position: absolute;
+    top: 0;
+    left: 85px;
+    margin: 5px 0;
+    padding: 0 12px;
+    border-left: 3px solid rgb(57, 57, 57);
+    border-radius: 3px;
 }
+
 .BTCO-Header_row .BTCO-SideStatus .BTCO-BTPro {
-	box-sizing:border-box;
-	padding:3px 4px;
-	border-radius:2px;
-	background-color:rgb(57,57,57);
-	box-shadow:inset 0 -1px 0 rgba(27,31,35,.12);
-	color:#fff;
-	text-align:center;
-	letter-spacing:0.05em;
-	font-weight:600;
-	font-size:12px;
-	line-height:1;
+    box-sizing: border-box;
+    padding: 3px 4px;
+    border-radius: 2px;
+    background-color: rgb(57, 57, 57);
+    box-shadow: inset 0 -1px 0 rgba(27, 31, 35, .12);
+    color: #fff;
+    text-align: center;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 1;
 }
+
 .BTCO-Header_row .BTCO-SideMenu {
-	right:0;
-	float:right;
-	margin-right:6px;
-	color:#fff;
-	line-height:42px;
+    right: 0;
+    float: right;
+    margin-right: 6px;
+    color: #fff;
+    line-height: 42px;
 }
+
 .BTCO-Header_row .BTCO-SideMenu .BTCO-Menu {
-	position:absolute;
-	top:20px;
-	right:16px;
-	z-index:25;
-	padding:4px 0;
-	min-width:88px;
-	border-radius:4px;
-	background-color:#515151;
-	box-shadow:0px 1px 4px rgba(0,0,0,0.3);
-	font-size:14px;
+    position: absolute;
+    top: 20px;
+    right: 16px;
+    z-index: 25;
+    padding: 4px 0;
+    min-width: 88px;
+    border-radius: 4px;
+    background-color: #515151;
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.3);
+    font-size: 14px;
 }
+
 .BTCO-Header_row .BTCO-SideMenu .BTCO-Menu li {
-	padding:0 14px;
-	color:#fff;
-	list-style:none;
-	text-align:left;
-	line-height:30px;
-	cursor:pointer;
+    padding: 0 14px;
+    color: #fff;
+    list-style: none;
+    text-align: left;
+    line-height: 30px;
+    cursor: pointer;
 }
+
 .BTCO-Header_row .BTCO-SideMenu .BTCO-Menu li:hover {
-	background-color:rgba(48,48,48,0.38);
+    background-color: rgba(48, 48, 48, 0.38);
 }
+
 .icon {
-	overflow:hidden;
-	width:1em;
-	height:1em;
-	vertical-align:-0.15em;
-	fill:currentColor;
+    overflow: hidden;
+    width: 1em;
+    height: 1em;
+    vertical-align: -0.15em;
+    fill: currentColor;
 }
+
 main {
-	position:relative;
-	margin-top:42px;
-	padding:12px;
-	max-width:100%;
-	min-width:60%;
-	min-height:10em;
-	color:#fff;
-	text-align:center;
+    position: relative;
+    margin-top: 42px;
+    padding: 12px;
+    max-width: 100%;
+    min-width: 60%;
+    min-height: 10em;
+    color: #fff;
+    text-align: center;
 }
+
 main .BTCO-systemInfoList {
-	margin:0;
-	padding:0;
-	list-style:none;
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }
+
 main .BTCO-systemInfoList li {
-	display:inline-block;
+    display: inline-block;
 }
+
 main .BTCO-systemInfoList .BTCO-APP_Main {
-	margin:0 5px;
-	width:145px;
-	height:50px;
-	border-radius:0 2px 2px 0;
-	background-color:rgba(81,81,81,0.48);
-	box-shadow:0px 1px 4px rgba(0,0,0,0.3);
+    margin: 0 5px;
+    width: 145px;
+    height: 50px;
+    border-radius: 0 2px 2px 0;
+    background-color: rgba(81, 81, 81, 0.48);
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.3);
 }
+
 main .BTCO-systemInfoList .BTCO-APP_StatusColor {
-	position:absolute;
-	width:10px;
-	height:45px;
-	background:rgb(85,85,85);
-	box-shadow:0 0 8px rgba(0,0,0,0.22);
+    position: absolute;
+    width: 10px;
+    height: 45px;
+    background: rgb(85, 85, 85);
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.22);
 }
+
 main .BTCO-systemInfoList .BTCO-APP_Content {
-	position:absolute;
-	padding:5px;
-	width:135px;
+    position: absolute;
+    padding: 5px;
+    width: 135px;
 }
+
 main .BTCO-systemInfoList .BTCO-APP_Content .Status {
-	font-size:15px;
-	line-height:1.5;
+    font-size: 15px;
+    line-height: 1.5;
 }
+
 main .BTCO-systemInfoList .BTCO-APP_Content .Content {
-	font-size:12px;
-	line-height:0.8;
+    font-size: 12px;
+    line-height: 0.8;
 }
+
 main .BTCO-systemInfoList .BTCO-APP_ProgressBox {
-	position:relative;
-	float:right;
-	margin-top:28px;
-	padding:2px 5px;
-	border-radius:5px 0 0 0;
-	background-color:rgba(51,51,51,0.82)!important;
-	letter-spacing:0.05em;
-	font-size:13px;
-	line-height:1;
+    position: relative;
+    float: right;
+    margin-top: 28px;
+    padding: 2px 5px;
+    border-radius: 5px 0 0 0;
+    background-color: rgba(51, 51, 51, 0.82)!important;
+    letter-spacing: 0.05em;
+    font-size: 13px;
+    line-height: 1;
 }
+
 main .BTCO-systemInfoList .BTCO-APP_Progress {
-	position:absolute;
-	margin-top:45px;
-	width:145px;
-	height:5px;
-	vertical-align:middle;
+    position: absolute;
+    margin-top: 45px;
+    width: 145px;
+    height: 5px;
+    vertical-align: middle;
 }
+
 main .BTCO-systemInfoList .BTCO-APP_Progress .BTCO-APP_Progress-P1 {
-	position:relative;
-	overflow:hidden;
-	height:5px!important;
-	background-color:rgba(100,100,100,1);
-	vertical-align:middle;
+    position: relative;
+    overflow: hidden;
+    height: 5px!important;
+    background-color: rgba(100, 100, 100, 1);
+    vertical-align: middle;
 }
+
 main .BTCO-systemInfoList .BTCO-APP_Progress .BTCO-APP_Progress-P1 .BTCO-APP_Progress-P2 {
-	position:absolute;
-	top:0;
-	left:0;
-	height:100%;
-	background-color:rgba(0,145,228,0.69);
-	text-align:right;
-	line-height:1;
-	transition:width 2s ease;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background-color: rgba(0, 145, 228, 0.69);
+    text-align: right;
+    line-height: 1;
+    transition: width 2s ease;
 }
+
 main .BTCO-PanelInfo {
-	position:relative;
-	margin-top:10px;
-	max-width:100%;
-	min-width:60%;
+    position: relative;
+    margin-top: 10px;
+    max-width: 100%;
+    min-width: 60%;
 }
+
 main .BTCO-PanelInfo .BTCO-PI_Main {
-	width:100%;
-	height:145px;
-	border-radius:2px;
-	background-color:rgba(81,81,81,0.48);
-	box-shadow:0px 1px 4px rgba(0,0,0,0.3);
+    width: 100%;
+    height: 145px;
+    border-radius: 2px;
+    background-color: rgba(81, 81, 81, 0.48);
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.3);
 }
+
 main .BTCO-PanelInfo .BTCO-PI_Main .BTCO-PI_Sys {
-	position:absolute;
-	border-radius:0 0 6px 0;
-	background-color:rgba(51,51,51,0.82)!important;
+    position: absolute;
+    border-radius: 0 0 6px 0;
+    background-color: rgba(51, 51, 51, 0.82)!important;
 }
+
 main .BTCO-PanelInfo .BTCO-PI_Main .BTCO-PI_Sys .BTCO-PI_Sysinfo {
-	display:inline-block;
-	padding:3px 6px 3px 0;
-	font-size:13px;
+    display: inline-block;
+    padding: 3px 6px 3px 0;
+    font-size: 13px;
 }
+
 main .BTCO-PanelInfo .BTCO-PI_Main .BTCO-PI_Sys .BTCO-PI_SysIcon {
-	float:left;
-	padding:2px 6px;
-	min-width:16px;
-	min-height:23px;
+    float: left;
+    padding: 2px 6px;
+    min-width: 16px;
+    min-height: 23px;
 }
+
 main .BTCO-PanelInfo .BTCO-PI_Main .BTCO-PI_Overview {
-	position:absolute;
-	margin-top:105px;
-	padding:0;
-	width:100%;
-	height:40px;
+    position: absolute;
+    margin-top: 105px;
+    padding: 0;
+    width: 100%;
+    height: 40px;
 }
+
 main .BTCO-PanelInfo .BTCO-PI_Main .BTCO-PI_Overview .BTCO-PI_Ov-Line {
-	width:100%;
-	height:1px;
-	background:#c5c5c5;
-	box-shadow:0px 0px 2px rgba(0,0,0,0.3);
+    width: 100%;
+    height: 1px;
+    background: #c5c5c5;
+    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3);
 }
+
 main .BTCO-PanelInfo .BTCO-PI_Main .BTCO-PI_Overview .BTCO-PI_Ov-Box {
-	margin-top:5px;
-	flex-direction:row;
-	align-items:center;
-	flex-shrink:0;
-	flex-wrap:nowrap;
+    margin-top: 5px;
+    flex-direction: row;
+    align-items: center;
+    flex-shrink: 0;
+    flex-wrap: nowrap;
 }
+
 main .BTCO-PanelInfo .BTCO-PI_Main .BTCO-PI_Overview .BTCO-PI_Ov-Box ul {
-	margin:0;
-	padding:0;
-	list-style:none;
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }
+
 main .BTCO-PanelInfo .BTCO-PI_Main .BTCO-PI_Overview .BTCO-PI_Ov-Box ul li {
-	display:inline-block;
+    display: inline-block;
 }
+
 main .BTCO-PanelInfo .BTCO-PI_Main .BTCO-PI_Overview .BTCO-PI_Ov-Box ul li .BTCO-PI_Ov-Box_P1 {
-	font-size:16px;
-	line-height:1;
+    font-size: 16px;
+    line-height: 1;
 }
+
 main .BTCO-PanelInfo .BTCO-PI_Main .BTCO-PI_Overview .BTCO-PI_Ov-Box ul li .BTCO-PI_Ov-Box_P2 {
-	color:#e6e6e6;
-	font-size:12px;
-	line-height:1.3;
+    color: #e6e6e6;
+    font-size: 12px;
+    line-height: 1.3;
 }
+
 main .BTCO-PanelInfo .BTCO-PI_Main .BTCO-PI_Overview .BTCO-PI_Ov-Box ul li .BTCO-PI_Ov-Box_P3 {
-	margin:0 15px;
-	width:1px;
-	height:22px;
-	background:#c5c5c5;
+    margin: 0 15px;
+    width: 1px;
+    height: 22px;
+    background: #c5c5c5;
 }
+
 main .BTCO-PanelInfo .BTCO-PI_Main .BTCO-PI_IPview {
-	position:absolute;
-	top:50%;
-	left:50%;
-	margin-top:20px;
-	padding:2px 10px;
-	border-radius:3px 3px 0 0;
-	background:rgba(85,85,85,0.82)!important;
-	font-size:14px;
-	transform:translate(-50%,-50%);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: 20px;
+    padding: 2px 10px;
+    border-radius: 3px 3px 0 0;
+    background: rgba(85, 85, 85, 0.82)!important;
+    font-size: 14px;
+    transform: translate(-50%, -50%);
 }
+
 main .BTCO-PanelInfo .BTCO-PI_Main .BTCO-PI_Menu {
-	position:absolute;
-	top:20%;
-	left:50%;
-	margin-top:25px;
-	width:100%;
-	transform:translate(-50%,-50%);
-	flex-direction:row;
-	align-items:center;
-	flex-shrink:0;
-	flex-wrap:nowrap;
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    margin-top: 25px;
+    width: 100%;
+    transform: translate(-50%, -50%);
+    flex-direction: row;
+    align-items: center;
+    flex-shrink: 0;
+    flex-wrap: nowrap;
 }
+
 main .BTCO-PanelInfo .BTCO-PI_Main .BTCO-PI_Menu a {
-	margin:0 5px;
-	padding:3px 8px;
-	border:0;
-	border-radius:2px;
-	background:#393939;
-	color:#fff;
-	text-decoration:none;
-	font-size:12px;
+    margin: 0 5px;
+    padding: 3px 8px;
+    border: 0;
+    border-radius: 2px;
+    background: #393939;
+    color: #fff;
+    text-decoration: none;
+    font-size: 12px;
 }
+
 main .BTCO-ServerFlow {
-	position:relative;
-	margin-top:15px;
-	max-width:100%;
-	min-width:60%;
+    position: relative;
+    margin-top: 15px;
+    max-width: 100%;
+    min-width: 60%;
 }
+
 main .BTCO-ServerFlow .BTCO-SF_Main {
-	width:100%;
-	height:255px;
-	border-radius:2px;
-	background-color:rgba(81,81,81,0.48);
-	box-shadow:0px 1px 4px rgba(0,0,0,0.3);
+    width: 100%;
+    height: 255px;
+    border-radius: 2px;
+    background-color: rgba(81, 81, 81, 0.48);
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.3);
 }
+
 main .BTCO-ServerFlow .BTCO-SF_Main .BTCO-SF_Highcharts {
-	position:absolute;
-	margin-top:65px;
-	width:100%;
-	height:185px;
+    position: absolute;
+    margin-top: 65px;
+    width: 100%;
+    height: 185px;
 }
+
 main .BTCO-ServerFlow .BTCO-SF_Main .BTCO-SF_InfoBox {
-	margin-top:10px;
-	flex-direction:row;
-	align-items:center;
-	flex-shrink:0;
-	flex-wrap:nowrap;
+    margin-top: 10px;
+    flex-direction: row;
+    align-items: center;
+    flex-shrink: 0;
+    flex-wrap: nowrap;
 }
+
 main .BTCO-ServerFlow .BTCO-SF_Main .BTCO-SF_InfoBox ul {
-	margin:0;
-	padding:0;
-	list-style:none;
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }
+
 main .BTCO-ServerFlow .BTCO-SF_Main .BTCO-SF_InfoBox ul li {
-	display:inline-block;
+    display: inline-block;
 }
+
 main .BTCO-ServerFlow .BTCO-SF_Main .BTCO-SF_InfoBox ul li .BTCO-SF_InfoBox_P1 {
-	font-size:16px;
-	line-height:1;
+    font-size: 16px;
+    line-height: 1;
 }
+
 main .BTCO-ServerFlow .BTCO-SF_Main .BTCO-SF_InfoBox ul li .BTCO-SF_InfoBox_P2 {
-	color:#e6e6e6;
-	font-size:12px;
-	line-height:1.3;
+    color: #e6e6e6;
+    font-size: 12px;
+    line-height: 1.3;
 }
+
 main .BTCO-ServerFlow .BTCO-SF_Main .BTCO-SF_InfoBox ul li .BTCO-SF_InfoBox_P3 {
-	margin:0 10px;
-	width:1px;
-	height:22px;
-	background:#c5c5c5;
+    margin: 0 10px;
+    width: 1px;
+    height: 22px;
+    background: #c5c5c5;
 }
+
 .BTCO-LF_POP {
-	position:relative;
-	margin-bottom:10px;
-	max-width:100%;
-	min-width:60%;
+    position: relative;
+    margin-bottom: 10px;
+    max-width: 100%;
+    min-width: 60%;
 }
+
 .BTCO-LF_POP .BTCO-LF_POP-Main {
-	width:100%;
-	min-height:48px;
-	border-radius:2px;
-	background-color:rgba(81,81,81,0.48);
-	box-shadow:0px 1px 4px rgba(0,0,0,0.3);
+    width: 100%;
+    min-height: 48px;
+    border-radius: 2px;
+    background-color: rgba(81, 81, 81, 0.48);
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.3);
 }
+
 .BTCO-LF_POP .BTCO-LF_POP-Main .BTCO-LF_POP-M_Box {
-	display:flex;
-	overflow:hidden;
-	padding:14px 15px 14px 20px;
-	transition:opacity .3s,transform .4s;
-	align-items:center;
+    display: flex;
+    overflow: hidden;
+    padding: 14px 15px 14px 20px;
+    transition: opacity .3s, transform .4s;
+    align-items: center;
 }
+
 .BTCO-LF_POP .BTCO-LF_POP-Main .BTCO-LF_POP-M_Icon {
-	display:flex;
-	margin-right:10px;
+    display: flex;
+    margin-right: 10px;
 }
+
 .BTCO-LF_POP .BTCO-LF_POP-Main .BTCO-LF_POP-M_Content {
-	padding-right:16px;
-	font-size:14px;
-	line-height:1.4;
+    padding-right: 16px;
+    font-size: 14px;
+    line-height: 1.4;
 }
+
 .BTCO-LF_POP .BTCO-LF_POP-Main .BTCO-LF_POP-M_Check {
-	position:absolute;
-	top:50%;
-	right:50px;
-	display:flex;
-	cursor:pointer;
-	transform:translateY(-50%);
+    position: absolute;
+    top: 50%;
+    right: 50px;
+    display: flex;
+    cursor: pointer;
+    transform: translateY(-50%);
 }
+
 .BTCO-LF_POP .BTCO-LF_POP-Main .BTCO-LF_POP-M_Close {
-	position:absolute;
-	top:50%;
-	right:15px;
-	display:flex;
-	cursor:pointer;
-	transform:translateY(-50%);
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    display: flex;
+    cursor: pointer;
+    transform: translateY(-50%);
 }
+
 main .BTCO-OtherConfig {
-	position:relative;
-	margin-top:10px;
-	max-width:100%;
-	min-width:60%;
+    position: relative;
+    margin-top: 10px;
+    max-width: 100%;
+    min-width: 60%;
 }
+
 main .BTCO-OtherConfig .BTCO-OC_Main {
-	width:100%;
-	min-height:300px;
-	border-radius:2px;
-	background-color:rgba(81,81,81,0.48);
-	box-shadow:0px 1px 4px rgba(0,0,0,0.3);
+    width: 100%;
+    min-height: 300px;
+    border-radius: 2px;
+    background-color: rgba(81, 81, 81, 0.48);
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.3);
 }
+
 main .BTCO-OtherConfig_Menu {
-	position:relative;
-	width:100%;
-	max-width:100%;
-	min-width:60%;
-	min-height:60px;
-	border-radius:2px;
-	background-color:rgba(81,81,81,0.48);
-	box-shadow:0px 1px 4px rgba(0,0,0,0.3);
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    min-width: 60%;
+    min-height: 60px;
+    border-radius: 2px;
+    background-color: rgba(81, 81, 81, 0.48);
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.3);
 }
+
 main .BTCO-OtherConfig_Menu .BTCO-OC_M-ul {
-	position:absolute;
-	margin:0;
-	padding:0;
-	width:100%;
-	list-style:none;
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    list-style: none;
 }
+
 main .BTCO-OtherConfig_Menu .BTCO-OC_M-ul li {
-	display:inline-block;
+    display: inline-block;
 }
+
 main .BTCO-OtherConfig_Menu .BTCO-OC_M-ul li .BTCO-OC_M-ul_Box {
-	margin:8px 5px;
-	height:45px;
-	min-width:65px;
-	border-radius:0 2px 2px 0;
-	/* background-color:rgba(81,81,81,0.48);
+    margin: 8px 5px;
+    height: 45px;
+    min-width: 65px;
+    border-radius: 0 2px 2px 0;
+    /* background-color:rgba(81,81,81,0.48);
 	*/
-   /* box-shadow:0px 1px 4px rgba(37,37,37,0.3);
+    /* box-shadow:0px 1px 4px rgba(37,37,37,0.3);
 	*/
 }
+
 .BTCO-LF_switch {
-	position:relative;
-	display:inline-block;
-	box-sizing:border-box;
-	margin:0;
-	height:20px;
-	outline:none;
-	border:1px solid #515151;
-	border-radius:2px;
-	background:#515151;
-	vertical-align:middle;
-	cursor:pointer;
-	transition:border-color .3s,background-color .3s;
+    position: relative;
+    display: inline-block;
+    box-sizing: border-box;
+    margin: 0;
+    height: 20px;
+    outline: none;
+    border: 1px solid #515151;
+    border-radius: 2px;
+    background: #515151;
+    vertical-align: middle;
+    cursor: pointer;
+    transition: border-color .3s, background-color .3s;
 }
+
 .BTCO-LF_switch:after {
-	position:absolute;
-	top:1px;
-	left:1px;
-	width:16px;
-	height:16px;
-	border-radius:2px;
-	background-color:#393939;
-	content:"";
-	transition:all .3s;
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    width: 16px;
+    height: 16px;
+    border-radius: 2px;
+    background-color: #393939;
+    content: "";
+    transition: all .3s;
 }
+
 .BTCO-LF_switch-click {
-	border-color:#303030;
-	background-color:#303030;
+    border-color: #303030;
+    background-color: #303030;
 }
+
 .BTCO-LF_switch-click:after {
-	left:100%;
-	margin-left:-17px;
-	background-color:#515151;
+    left: 100%;
+    margin-left: -17px;
+    background-color: #515151;
 }
+
 main .BTCO-OtherConfig .BTCO-OC_PanelSSL-M {
-	width:100%;
-	min-height:195px;
-	border-radius:2px;
-	background-color:rgba(81,81,81,0.48);
-	box-shadow:0px 1px 4px rgba(0,0,0,0.3);
+    width: 100%;
+    min-height: 195px;
+    border-radius: 2px;
+    background-color: rgba(81, 81, 81, 0.48);
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.3);
 }
+
 main .BTCO-OtherConfig .BTCO-OC_PanelSSL-M .BTCO-OC_PS-M_InputBox {
-	position:relative;
-	display:inline-block;
-	margin:0 5px;
-	padding:0 0 5px;
-	width:155px;
-	height:115px;
+    position: relative;
+    display: inline-block;
+    margin: 0 5px;
+    padding: 0 0 5px;
+    width: 155px;
+    height: 115px;
 }
+
 main .BTCO-OtherConfig .BTCO-OC_PanelSSL-M .BTCO-OC_PS-M_InputBox textarea {
-	display:inline-block;
-	-webkit-box-sizing:border-box;
-	box-sizing:border-box;
-	margin:10px 0 0;
-	padding:5px 8px;
-	width:100%;
-	height:85px;
-	border:1px solid #515151;
-	border-radius:2px;
-	background-color:rgb(81,81,81);
-	color:#e6e6e6;
-	text-align:left;
-	font-size:12px;
-	font-family:"Lato",-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Helvetica Neue",sans-serif;
-	line-height:normal;
+    display: inline-block;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 10px 0 0;
+    padding: 5px 8px;
+    width: 100%;
+    height: 85px;
+    border: 1px solid #515151;
+    border-radius: 2px;
+    background-color: rgb(81, 81, 81);
+    color: #e6e6e6;
+    text-align: left;
+    font-size: 12px;
+    font-family: "Lato", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", sans-serif;
+    line-height: normal;
 }
+
 main .BTCO-OtherConfig .BTCO-OC_PanelSSL-M .BTCO-OC_PS-M_InputBox .BTCO-OC_PS-M_IB-Title {
-	float:left;
-	font-size:12px;
-	line-height:1;
+    float: left;
+    font-size: 12px;
+    line-height: 1;
 }
+
 .BTCO-LF_Pjax {
-	position:absolute;
-	top:50%;
-	left:50%;
-	z-index:6666666666666;
-	transform:translate(-50%,-50%);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 6666666666666;
+    transform: translate(-50%, -50%);
 }
+
 .BTCO-LF_Pjax-Loading-Main {
-	display:-ms-flexbox;
-	display:flex;
-	margin-bottom:15px;
-	-ms-flex-align:center;
-	align-items:center;
+    display: -ms-flexbox;
+    display: flex;
+    margin-bottom: 15px;
+    -ms-flex-align: center;
+    align-items: center;
 }
-.BTCO-LF_Pjax-Loading-Outer,.BTCO-LF_Pjax-Loading-Inner {
-	box-sizing:border-box;
-	margin:auto;
-	border:0.1em solid transparent;
-	border-radius:50%;
-	animation:3s linear infinite;
-	animation-name:BTCO-LF_Pjax-Loading-Spinner;
-}
-.BTCO-LF_Pjax-Loading-Outer {
-	border-top-color:#0091e4;
-}
+
+.BTCO-LF_Pjax-Loading-Outer,
 .BTCO-LF_Pjax-Loading-Inner {
-	width:100%;
-	height:100%;
-	opacity:0.4;
-	border-top-color:#8e8e8e;
-	border-right-color:#8e8e8e;
+    box-sizing: border-box;
+    margin: auto;
+    border: 0.1em solid transparent;
+    border-radius: 50%;
+    animation: 3s linear infinite;
+    animation-name: BTCO-LF_Pjax-Loading-Spinner;
 }
+
+.BTCO-LF_Pjax-Loading-Outer {
+    border-top-color: #0091e4;
+}
+
+.BTCO-LF_Pjax-Loading-Inner {
+    width: 100%;
+    height: 100%;
+    opacity: 0.4;
+    border-top-color: #8e8e8e;
+    border-right-color: #8e8e8e;
+}
+
 .active {
-	display:block;
+    display: block;
 }
+
 @keyframes BTCO-LF_Pjax-Loading-Spinner {
-	100% {
-	transform:rotate(360deg);
+    100% {
+        transform: rotate(360deg);
+    }
 }
-}main .BTCO-OtherConfig .BTCO-OC_PanelAPI-M {
-	width:100%;
-	min-height:195px;
-	border-radius:2px;
-	background-color:rgba(81,81,81,0.48);
-	box-shadow:0px 1px 4px rgba(0,0,0,0.3);
+
+main .BTCO-OtherConfig .BTCO-OC_PanelAPI-M {
+    width: 100%;
+    min-height: 195px;
+    border-radius: 2px;
+    background-color: rgba(81, 81, 81, 0.48);
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.3);
 }
+
 main .BTCO-OtherConfig .BTCO-OC_PanelAPI-M .BTCO-OC_PA-M_InputBox {
-	position:relative;
-	display:inline-block;
-	margin:0 5px;
-	padding:0 0 5px;
-	width:155px;
-	height:115px;
+    position: relative;
+    display: inline-block;
+    margin: 0 5px;
+    padding: 0 0 5px;
+    width: 155px;
+    height: 115px;
 }
+
 main .BTCO-OtherConfig .BTCO-OC_PanelAPI-M .BTCO-OC_PA-M_InputBox textarea {
-	display:inline-block;
-	-webkit-box-sizing:border-box;
-	box-sizing:border-box;
-	margin:10px 0 0;
-	padding:5px 8px;
-	width:100%;
-	height:85px;
-	border:1px solid #515151;
-	border-radius:2px;
-	background-color:rgb(81,81,81);
-	color:#e6e6e6;
-	text-align:left;
-	font-size:12px;
-	font-family:"Lato",-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Helvetica Neue",sans-serif;
-	line-height:normal;
+    display: inline-block;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 10px 0 0;
+    padding: 5px 8px;
+    width: 100%;
+    height: 85px;
+    border: 1px solid #515151;
+    border-radius: 2px;
+    background-color: rgb(81, 81, 81);
+    color: #e6e6e6;
+    text-align: left;
+    font-size: 12px;
+    font-family: "Lato", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", sans-serif;
+    line-height: normal;
 }
+
 main .BTCO-OtherConfig .BTCO-OC_PanelAPI-M .BTCO-OC_PA-M_InputBox .BTCO-OC_PA-M_IB-Title {
-	float:left;
-	font-size:12px;
-	line-height:1;
+    float: left;
+    font-size: 12px;
+    line-height: 1;
 }
+
 main .BTCO-OtherConfig .BTCO-OC_Main .BTCO-OC_M-SaveConfig {
-	position:relative;
-	float:right;
-	width:85px;
-	height:30px;
-	border-radius:0 2px 0 2px;
-	background:rgba(51,51,51,0.82)!important;
-	text-align:center;
-	letter-spacing:0.05em;
-	font-size:14px;
-	line-height:2.2;
-	cursor:pointer;
+    position: relative;
+    float: right;
+    width: 85px;
+    height: 30px;
+    border-radius: 0 2px 0 2px;
+    background: rgba(51, 51, 51, 0.82)!important;
+    text-align: center;
+    letter-spacing: 0.05em;
+    font-size: 14px;
+    line-height: 2.2;
+    cursor: pointer;
 }
+
 main .BTCO-OtherConfig .BTCO-OC_Main .BTCO-OC_M-ConfigList {
-	margin:0;
-	padding:0;
-	list-style:none;
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }
+
 main .BTCO-OtherConfig .BTCO-OC_Main .BTCO-OC_M-ConfigList li {
-	margin-bottom:5px;
+    margin-bottom: 5px;
 }
+
 main .BTCO-OtherConfig .BTCO-OC_Main .BTCO-OC_M-ConfigList li .BTCO-OC_M-CL_Box {
-	display:inline-block;
-	width:100%;
+    display: inline-block;
+    width: 100%;
 }
+
 main .BTCO-OtherConfig .BTCO-OC_Main .BTCO-OC_M-ConfigList li .BTCO-OC_M-CL_Box textarea {
-	display:inline-block;
-	-webkit-box-sizing:border-box;
-	box-sizing:border-box;
-	padding:5px 8px;
-	width:100%;
-	height:30px;
-	border:1px solid #515151;
-	border-radius:2px;
-	background-color:rgb(81,81,81);
-	color:#e6e6e6;
-	text-align:left;
-	font-size:12px;
-	font-family:"Lato",-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Helvetica Neue",sans-serif;
-	line-height:normal;
+    display: inline-block;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 5px 8px;
+    width: 100%;
+    height: 30px;
+    border: 1px solid #515151;
+    border-radius: 2px;
+    background-color: rgb(81, 81, 81);
+    color: #e6e6e6;
+    text-align: left;
+    font-size: 12px;
+    font-family: "Lato", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", sans-serif;
+    line-height: normal;
 }
+
 main .BTCO-OtherConfig .BTCO-OC_BTCOInputPOP-M {
-	width:100%;
-	min-height:80px;
-	border-radius:2px;
-	background-color:rgba(81,81,81,0.48);
-	box-shadow:0px 1px 4px rgba(0,0,0,0.3);
+    width: 100%;
+    min-height: 80px;
+    border-radius: 2px;
+    background-color: rgba(81, 81, 81, 0.48);
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.3);
 }
+
 main .BTCO-OtherConfig .BTCO-OC_BTCOInputPOP-M .BTCO-OC_BIP-InputList {
-	margin:0;
-	padding:0;
-	list-style:none;
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }
+
 main .BTCO-OtherConfig .BTCO-OC_BTCOInputPOP-M .BTCO-OC_BIP-InputList li {
-	margin-bottom:5px;
+    margin-bottom: 5px;
 }
+
 main .BTCO-OtherConfig .BTCO-OC_BTCOInputPOP-M .BTCO-OC_BIP-InputList li .BTCO-OC_BIP-IL_Box {
-	display:inline-block;
-	width:100%;
+    display: inline-block;
+    width: 100%;
 }
+
 main .BTCO-OtherConfig .BTCO-OC_BTCOInputPOP-M .BTCO-OC_BIP-InputList li .BTCO-OC_BIP-IL_Box .BTCO-OC_BIP-IL_Title {
-	float:left;
-	width:25%;
-	text-align:center;
-	word-wrap:break-word;
-	font-size:12px;
-	line-height:2.5;
+    float: left;
+    width: 25%;
+    text-align: center;
+    word-wrap: break-word;
+    font-size: 12px;
+    line-height: 2.5;
 }
+
 main .BTCO-OtherConfig .BTCO-OC_BTCOInputPOP-M .BTCO-OC_BIP-InputList li .BTCO-OC_BIP-IL_Box textarea {
-	display:inline-block;
-	-webkit-box-sizing:border-box;
-	box-sizing:border-box;
-	padding:5px 8px;
-	width:100%;
-	height:30px;
-	border:1px solid #515151;
-	border-radius:2px;
-	background-color:rgb(81,81,81);
-	color:#e6e6e6;
-	text-align:left;
-	font-size:12px;
-	font-family:"Lato",-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Helvetica Neue",sans-serif;
-	line-height:normal;
+    display: inline-block;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 5px 8px;
+    width: 100%;
+    height: 30px;
+    border: 1px solid #515151;
+    border-radius: 2px;
+    background-color: rgb(81, 81, 81);
+    color: #e6e6e6;
+    text-align: left;
+    font-size: 12px;
+    font-family: "Lato", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", sans-serif;
+    line-height: normal;
 }
+
 main .BTCO-OtherConfig .BTCO-OC_BTCOInputPOP-M .BTCO-OC_BIP-Button {
-	position:absolute;
-	right:15px;
-	margin-top:2px;
-	width:55px;
-	height:25px;
-	border-radius:2px;
-	background:rgba(51,51,51,0.82)!important;
-	text-align:center;
-	letter-spacing:0.05em;
-	font-size:12px;
-	line-height:2.2;
-	cursor:pointer;
+    position: absolute;
+    right: 15px;
+    margin-top: 2px;
+    width: 55px;
+    height: 25px;
+    border-radius: 2px;
+    background: rgba(51, 51, 51, 0.82)!important;
+    text-align: center;
+    letter-spacing: 0.05em;
+    font-size: 12px;
+    line-height: 2.2;
+    cursor: pointer;
 }
+
 main .BTCO-OtherFirewall {
-	position:relative;
-	margin-bottom:10px;
-	max-width:100%;
-	min-width:60%;
+    position: relative;
+    margin-bottom: 10px;
+    max-width: 100%;
+    min-width: 60%;
 }
+
 main .BTCO-OtherFirewall .BTCO-OF_M {
-	width:100%;
-	min-height:60px;
-	border-radius:2px;
-	background-color:rgba(81,81,81,0.48);
-	box-shadow:0px 1px 4px rgba(0,0,0,0.3);
+    width: 100%;
+    min-height: 60px;
+    border-radius: 2px;
+    background-color: rgba(81, 81, 81, 0.48);
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.3);
 }
+
 main .BTCO-OtherFirewall .BTCO-OF_M .BTCO-OF_M-Main {
-	position:absolute;
-	margin:0;
-	padding:0;
-	width:100%;
-	list-style:none;
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    list-style: none;
 }
+
 main .BTCO-OtherFirewall .BTCO-OF_M .BTCO-OF_M-Main li {
-	float:left;
-	display:inline-block;
+    float: left;
+    display: inline-block;
 }
+
 main .BTCO-OtherFirewall .BTCO-OF_M .BTCO-OF_M-Main li .BTCO-OF_M-Box {
-	margin:8px 0;
-	height:45px;
-	min-width:65px;
-	border-radius:0 2px 2px 0;
+    margin: 8px 0;
+    height: 45px;
+    min-width: 65px;
+    border-radius: 0 2px 2px 0;
 }
+
 main .BTCO-OtherFirewall .BTCO-OF_M .BTCO-OF_M-mstscPort {
-	position:absolute;
-	width:100%;
-	height:60px;
+    position: absolute;
+    width: 100%;
+    height: 60px;
 }
+
 main .BTCO-OtherFirewall .BTCO-OF_M .BTCO-OF_M-mstscPort .BTCO-OF_M-mP_Title {
-	float:left;
-	width:25%;
-	text-align:center;
-	word-wrap:break-word;
-	font-size:12px;
-	line-height:2.5;
+    float: left;
+    width: 25%;
+    text-align: center;
+    word-wrap: break-word;
+    font-size: 12px;
+    line-height: 2.5;
 }
+
 main .BTCO-OtherFirewall .BTCO-OF_M .BTCO-OF_M-mstscPort textarea {
-	display:inline-block;
-	-webkit-box-sizing:border-box;
-	box-sizing:border-box;
-	padding:5px 8px;
-	width:100%;
-	height:30px;
-	border:1px solid #515151;
-	border-radius:2px;
-	background-color:rgb(81,81,81);
-	color:#e6e6e6;
-	text-align:left;
-	font-size:12px;
-	font-family:"Lato",-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Helvetica Neue",sans-serif;
-	line-height:normal;
+    display: inline-block;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 5px 8px;
+    width: 100%;
+    height: 30px;
+    border: 1px solid #515151;
+    border-radius: 2px;
+    background-color: rgb(81, 81, 81);
+    color: #e6e6e6;
+    text-align: left;
+    font-size: 12px;
+    font-family: "Lato", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", sans-serif;
+    line-height: normal;
 }
+
 main .BTCO-OtherFirewall .BTCO-OF_M .BTCO-OF_M-mstscPort .BTCO-OF_M-mP_Buttom {
-	position:absolute;
-	right:15px;
-	margin-top:3px;
-	width:55px;
-	height:25px;
-	border-radius:2px;
-	background:rgba(51,51,51,0.82)!important;
-	text-align:center;
-	letter-spacing:0.05em;
-	font-size:12px;
-	line-height:2.2;
-	cursor:pointer;
+    position: absolute;
+    right: 15px;
+    margin-top: 3px;
+    width: 55px;
+    height: 25px;
+    border-radius: 2px;
+    background: rgba(51, 51, 51, 0.82)!important;
+    text-align: center;
+    letter-spacing: 0.05em;
+    font-size: 12px;
+    line-height: 2.2;
+    cursor: pointer;
 }
