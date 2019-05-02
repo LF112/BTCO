@@ -69,7 +69,7 @@ header {
     position: absolute;
     top: 0;
     left: 85px;
-    margin: 5px 0;
+    margin: 5px 5px;
     padding: 0 12px;
     border-left: 3px solid rgb(57, 57, 57);
     border-radius: 3px;
@@ -801,7 +801,7 @@ main .BTCO-OtherFirewall .BTCO-OF_M .BTCO-OF_M-Main {
     position: absolute;
     margin: 0;
     padding: 0;
-    width: 100%;
+    width: 135px;
     list-style: none;
 }
 
@@ -818,7 +818,6 @@ main .BTCO-OtherFirewall .BTCO-OF_M .BTCO-OF_M-Main li .BTCO-OF_M-Box {
 }
 
 main .BTCO-OtherFirewall .BTCO-OF_M .BTCO-OF_M-mstscPort {
-    position: absolute;
     width: 100%;
     height: 60px;
 }
@@ -853,6 +852,30 @@ main .BTCO-OtherFirewall .BTCO-OF_M .BTCO-OF_M-mstscPort .BTCO-OF_M-mP_Buttom {
     position: absolute;
     right: 15px;
     margin-top: 3px;
+    width: 55px;
+    height: 25px;
+    border-radius: 2px;
+    background: rgba(51, 51, 51, 0.82)!important;
+    text-align: center;
+    letter-spacing: 0.05em;
+    font-size: 12px;
+    line-height: 2.2;
+    cursor: pointer;
+}
+
+main .BTCO-OtherFirewall .BTCO-OF_M .BTCO-OF_M-Weblogs {
+    padding: 14px 15px 14px 20px;
+    display: inline-flex;
+}
+
+main .BTCO-OtherFirewall .BTCO-OF_M .BTCO-OF_M-Weblogs .BTCO-OF_M-Wl_Title {
+    font-size: 14px;
+    margin-right: 10px;
+    display: inline-block;
+}
+
+main .BTCO-OtherFirewall .BTCO-OF_M .BTCO-OF_M-Weblogs .BTCO-OG_M-Button {
+    right: 15px;
     width: 55px;
     height: 25px;
     border-radius: 2px;

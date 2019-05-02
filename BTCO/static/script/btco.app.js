@@ -284,6 +284,48 @@ function RunApp() {
 
                             //----- BTCO Firewall
 
+                            $.post('/firewall?action=GetSshInfo', {}, function(net) {
+                                $('#BTCO-OF_M-mstscPort').val(net.port);
+                                if (!net.ping) $('#BTCO-ForbiddenPing_switch').addClass("BTCO-LF_switch-click");
+                                if (net.status) $('#BTCO-ServerSSH_switch').addClass("BTCO-LF_switch-click");
+                            });
+
+                            $.post('/files?action=GetDirSize', { path: '/www/wwwlogs' }, function(net) {
+                                $('#BTCO-OF_M-wwwlogs').text(net);
+                            });
+
+                            $('#BTCO-OF_M-CloseLogs').click(function() {
+                                BTCO_POP('正在清理....')
+                                $.post('/files?action=CloseLogs', {}, function(net) {
+                                    BTCO_POP('已清理!');
+                                    $('#BTCO-OF_M-wwwlogs').text(net);
+                                });
+                            });
+
+                            $('#BTCO-OF_M-SetSshPort').click(function() {
+                                BTCO_POP('您确定要更改远程端口吗？', function(ID) {
+                                    $('#' + ID[0]).slideToggle();
+                                    $('#' + ID[1]).click(function() {
+                                        BTCO_POP('正在更改....', 2000);
+                                        $.post("/firewall?action=SetSshPort", { port: $('#BTCO-OF_M-mstscPort').val() }, function(net) {
+                                            if (net.status) {
+                                                BTCO_POP(net.msg);
+                                                $('#' + ID[0]).slideToggle();
+                                                setTimeout(function() {
+                                                    $('#' + ID[0]).remove()
+                                                }, 500);
+                                            } else BTCO_POP(net.msg);
+                                        });
+                                    });
+                                    $('#' + ID[2]).click(function() {
+                                        $('#' + ID[0]).slideToggle();
+                                        setTimeout(function() {
+                                            $('#' + ID[0]).remove()
+                                        }, 500);
+                                    });
+                                });
+                            });
+
                             //----- BTCO Firewall
 
                             //----- 菜单事件
@@ -303,6 +345,109 @@ function RunApp() {
                             }); //Config
                             $('#BTCO-href_firewall').on('click', function() { BTCO_POP('您已经在安全页了！') }); //Firewall
                             //----- 菜单事件
+
+                            //-----BTCO Switch
+                            $(".BTCO-LF_switch").on("click", function() {
+                                var ThisID = $(this);
+                                if ($(this).attr("id") === 'BTCO-ForbiddenPing_switch') {
+                                    if ($(this).hasClass("BTCO-LF_switch-click")) {
+                                        BTCO_POP('您确定要关闭禁PING吗？', function(ID) {
+                                            $('#' + ID[0]).slideToggle();
+                                            $('#' + ID[1]).click(function() {
+                                                BTCO_POP('正在关闭....', 2000);
+                                                $.post("/firewall?action=SetPing", { status: 1 }, function(net) {
+                                                    if (net.status) {
+                                                        BTCO_POP(net.msg);
+                                                        ThisID.removeClass("BTCO-LF_switch-click")
+                                                        $('#' + ID[0]).slideToggle();
+                                                        setTimeout(function() {
+                                                            $('#' + ID[0]).remove()
+                                                        }, 500);
+                                                    } else BTCO_POP(net.msg);
+                                                });
+                                            });
+                                            $('#' + ID[2]).click(function() {
+                                                $('#' + ID[0]).slideToggle();
+                                                setTimeout(function() {
+                                                    $('#' + ID[0]).remove()
+                                                }, 500);
+                                            });
+                                        });
+                                    } else {
+                                        BTCO_POP('您确定要启用禁PING吗？', function(ID) {
+                                            $('#' + ID[0]).slideToggle();
+                                            $('#' + ID[1]).click(function() {
+                                                BTCO_POP('正在启用....', 2000);
+                                                $.post("/firewall?action=SetPing", { status: 0 }, function(net) {
+                                                    if (net.status) {
+                                                        BTCO_POP(net.msg);
+                                                        ThisID.addClass("BTCO-LF_switch-click")
+                                                        $('#' + ID[0]).slideToggle();
+                                                        setTimeout(function() {
+                                                            $('#' + ID[0]).remove()
+                                                        }, 500);
+                                                    } else BTCO_POP(net.msg);
+                                                });
+                                            });
+                                            $('#' + ID[2]).click(function() {
+                                                $('#' + ID[0]).slideToggle();
+                                                setTimeout(function() {
+                                                    $('#' + ID[0]).remove()
+                                                }, 500);
+                                            });
+                                        });
+                                    }
+                                } else if ($(this).attr("id") === 'BTCO-ServerSSH_switch') {
+                                    if ($(this).hasClass("BTCO-LF_switch-click")) {
+                                        BTCO_POP('您确定要关闭SSH吗？', function(ID) {
+                                            $('#' + ID[0]).slideToggle();
+                                            $('#' + ID[1]).click(function() {
+                                                BTCO_POP('正在关闭....', 2000);
+                                                $.post("/firewall?action=SetSshStatus", { status: 1 }, function(net) {
+                                                    if (net.status) {
+                                                        BTCO_POP(net.msg);
+                                                        ThisID.removeClass("BTCO-LF_switch-click")
+                                                        $('#' + ID[0]).slideToggle();
+                                                        setTimeout(function() {
+                                                            $('#' + ID[0]).remove()
+                                                        }, 500);
+                                                    } else BTCO_POP(net.msg);
+                                                });
+                                            });
+                                            $('#' + ID[2]).click(function() {
+                                                $('#' + ID[0]).slideToggle();
+                                                setTimeout(function() {
+                                                    $('#' + ID[0]).remove()
+                                                }, 500);
+                                            });
+                                        });
+                                    } else {
+                                        BTCO_POP('您确定要启用SSH吗？', function(ID) {
+                                            $('#' + ID[0]).slideToggle();
+                                            $('#' + ID[1]).click(function() {
+                                                BTCO_POP('正在启用....', 2000);
+                                                $.post("/firewall?action=SetSshStatus", { status: 0 }, function(net) {
+                                                    if (net.status) {
+                                                        BTCO_POP(net.msg);
+                                                        ThisID.addClass("BTCO-LF_switch-click")
+                                                        $('#' + ID[0]).slideToggle();
+                                                        setTimeout(function() {
+                                                            $('#' + ID[0]).remove()
+                                                        }, 500);
+                                                    } else BTCO_POP(net.msg);
+                                                });
+                                            });
+                                            $('#' + ID[2]).click(function() {
+                                                $('#' + ID[0]).slideToggle();
+                                                setTimeout(function() {
+                                                    $('#' + ID[0]).remove()
+                                                }, 500);
+                                            });
+                                        });
+                                    }
+                                }
+                            });
+                            //-----BTCO Switch
 
                         }, 500);
                     });
@@ -777,9 +922,11 @@ function RunApp() {
 
                             //----- 菜单事件
 
+                            //-----BTCO Switch
                             $(".BTCO-LF_switch").on("click", function() {
                                 $(this).hasClass("BTCO-LF_switch-click") ? $(this).removeClass("BTCO-LF_switch-click") : $(this).addClass("BTCO-LF_switch-click")
                             });
+                            //-----BTCO Switch
 
                         }, 500);
                     });
