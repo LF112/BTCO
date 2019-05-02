@@ -295,10 +295,21 @@ function RunApp() {
                             });
 
                             $('#BTCO-OF_M-CloseLogs').click(function() {
-                                BTCO_POP('正在清理....')
-                                $.post('/files?action=CloseLogs', {}, function(net) {
-                                    BTCO_POP('已清理!');
-                                    $('#BTCO-OF_M-wwwlogs').text(net);
+                                BTCO_POP('您确定要清理Web日志吗？', function(ID) {
+                                    $('#' + ID[0]).slideToggle();
+                                    $('#' + ID[1]).click(function() {
+                                        BTCO_POP('正在清理....')
+                                        $.post("/files?action=CloseLogs", {}, function(net) {
+                                            BTCO_POP('已清理!');
+                                            $('#BTCO-OF_M-wwwlogs').text(net);
+                                        });
+                                    });
+                                    $('#' + ID[2]).click(function() {
+                                        $('#' + ID[0]).slideToggle();
+                                        setTimeout(function() {
+                                            $('#' + ID[0]).remove()
+                                        }, 500);
+                                    });
                                 });
                             });
 
