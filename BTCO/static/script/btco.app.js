@@ -894,6 +894,28 @@ function RunApp() {
 
         //----- 菜单事件
 
+        $('#BTCO-P2-Check').click(function() {
+            BTCO_POP('真的要释放内存吗？', function(ID) {
+                $('#' + ID[0]).slideToggle();
+                $('#' + ID[1]).click(function() {
+                    BTCO_POP('请稍等，正在释放...', 5000);
+                    $.post("/system?action=ReMemory", { toUpdate: 'yes' }, function(net) {
+                        BTCO_POP('释放成功！', 2000)
+                    });
+                    $('#' + ID[0]).slideToggle();
+                    setTimeout(function() {
+                        $('#' + ID[0]).remove()
+                    }, 500);
+                });
+                $('#' + ID[2]).click(function() {
+                    $('#' + ID[0]).slideToggle();
+                    setTimeout(function() {
+                        $('#' + ID[0]).remove()
+                    }, 500);
+                });
+            });
+        });
+
         $('#BTCO-P4_0').click(function() {
             $(this).text('稍等');
             $.post("/ajax?action=UpdatePanel", {}, function(net) {
