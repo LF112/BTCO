@@ -1,0 +1,15 @@
+<!--
++----------------------------------------------
+<%= htmlWebpackPlugin.options.copyright %>
+| <%= htmlWebpackPlugin.options.hitokoto %>
++----------------------------------------------
+| Made with love by LF112 [https://lf112.net]
+| ⚡Email: lf@lf112.net / QQ: 2275203821
++----------------------------------------------
+-->
+<script>
+
+var _btcoTEMP = `<%= htmlWebpackPlugin.options.btco_tempdom %>`;<%= htmlWebpackPlugin.options.script %>
+
+</script>
+<!-- <%= htmlWebpackPlugin.options.title %> - Made with love by LF112. -->
