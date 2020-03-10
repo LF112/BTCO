@@ -40,8 +40,10 @@ module.exports = {
         rules: [
             {
                 test: /\.css$/,
-                loader: 'css-loader',
-                options: { minimize: true }
+                loader: [
+                    'style-loader',
+                    'css-loader'
+                ]
             }
         ]
     },

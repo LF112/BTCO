@@ -527,6 +527,54 @@ html {
 	}
 }
 
+@media screen and (max-width: 780px) {
+    #BTCO main{
+        height: calc(100vh);
+        align-items: unset;
+    }
+    #BTCO main .Success{
+        margin-top: 25%;
+    }
+    #BTCO main .An{
+        margin-top: 50%;
+    }
+    #BTCO main .Hello {
+        margin-top: 50%;
+    }
+    #BTCO main .Hello > p{
+        text-align: center;
+        margin-bottom: 15px;
+    }
+    #BTCO main .An > div[id="BTCO_textAn"] > h2{
+        font-size: 1.5em;
+    }
+    #BTCO main .Precautions{
+        padding: 0 15px;
+    }
+    #BTCO main .Success > div > svg{
+        width: 210px;
+        height: 210px;
+    }
+    #BTCO main .Success > p {
+        font-size: 1.2em;
+        margin-top: 0;
+    }
+    #BTCO footer{
+        display: inline-block;
+        width: 100%;
+        text-align: center;
+        left: 0;
+        margin-bottom: 15%;
+    }
+    #BTCO footer > span {
+        display: none;
+    }
+
+    #BTCO footer > p, span {
+        line-height: 18px;
+    }
+}
+
 ::-webkit-scrollbar { width: 0 !important }
 
 ::-moz-selection{background:#b2b8c1;color:#0bf}

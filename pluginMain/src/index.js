@@ -37,12 +37,18 @@ const BTCO = {
         //> DOM 插入检测
         if (document.getElementById(DOMID) == null) {
 
+            if (_.isMobile()) document.body.innerHTML = '' // 暴力解决移动端适配滚动条问题
+
             //> 插入DOM
             let btcoMain = document.createElement('div')
             btcoMain.setAttribute('id', 'BTCO')
             btcoMain.setAttribute('dom-hash', Math.random().toString(36).slice(-8)) // 写入伪 hash
             btcoMain.innerHTML = _btcoTEMP
-            document.body.insertBefore(btcoMain, document.body.firstChild)  // 插入所有元素最上方
+
+            if (_.isMobile())
+                document.body.appendChild(btcoMain)
+            else
+                document.body.insertBefore(btcoMain, document.body.firstChild)  // 插入所有元素最上方
 
             //> 插入meta
             let meta = document.createElement('meta')
@@ -122,7 +128,7 @@ const BTCO = {
         BTCO.loadMask(() => {
             _.$('#BTCO_Success').style.display = 'unset'
             setTimeout(() => _.$('#BTCO_Success').style.opacity = 1, 1)
-            setTimeout(() => window.location.reload(), 2000)
+            //setTimeout(() => window.location.reload(), 2000)
         }, false)
     },
     failureInstall: (text = '启用失败') => {
@@ -180,7 +186,7 @@ const BTCO = {
                             BTCO.successInstall()
                         else BTCO.failureInstall(rdata.msg)  // 启用失败
                     })
-                else setTimeout(() => BTCO.failureInstall(), 1000) // Dev模式 等待一秒直接成功 | BTCO.failureInstall()
+                else setTimeout(() => BTCO.successInstall(), 1000) // Dev模式 等待一秒直接成功 | BTCO.failureInstall()
             }, true, '正在启用 BTCO 到您的面板')
         }
     }
@@ -199,7 +205,7 @@ const BTCO = {
         }, end)
     },
     LE: (type, arr = []) => {   // layui 弹窗组件定义
-        if (process.env.NODE_ENV !== 'development')
+        if (process.env.NODE_ENV !== 'development' && !_.isMobile())
             if (type === 'msg') {
                 parent.layer.closeAll()
                 layer.msg(arr[0], {
@@ -282,7 +288,7 @@ const BTCO = {
         else return false
     },
     isMobile: () => {
-        if (/mobile/i.test(window.navigator.userAgent))
+        if (/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i.test(window.navigator.userAgent))
             return true
         else return false
     }
@@ -330,6 +336,11 @@ BTCO.init('BTCO', check => {
             _.$('#BTCO-deliveryRecord').innerHTML += '<div>' + pDom + '</div>'
         })
 
+        if (_.isMobile()) {
+            _.$('#BTCO').style.width = '100vw'
+            _.$('#BTCO').style.left = 0
+        }
+
         setTimeout(() => {
             _.$('#BTCO').style.opacity = 1  // 展示 BTCO 主要容器
 
@@ -346,7 +357,8 @@ BTCO.init('BTCO', check => {
                     })
                 else
                     BTCO.loadMask(() => {
-                        BTCO.Hello()
+                        //BTCO.Hello()
+                        BTCO.newUSE()
                     }, false)
                 //> 此处可为 除 init 外的任意事件
 
@@ -360,4 +372,4 @@ BTCO.init('BTCO', check => {
 if (_.isDev()) {
     // 禁用侧边边距
     _.$('#BTCO').style.width = '100vw'
-} else _.$('#memuAsoft').firstChild.nextElementSibling.innerHTML = 'BTCO'   // 更变宝塔面板侧栏文本
+} else if (!_.isMobile()) _.$('#memuAsoft').firstChild.nextElementSibling.innerHTML = 'BTCO'   // 更变宝塔面板侧栏文本
