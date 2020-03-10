@@ -10,7 +10,7 @@
 # | BTCO - 宝塔响应式解决方案 [ https://github.com/LF112/BTCO ]
 # +-------------------------------------------------------------------
 # | Author: LF112 <lf@lf112.net>
-# | (｢･ω･)｢ Do you believe in destiny and fate? 
+# | Made with love by LF112 [https://lf112.net]
 # +-------------------------------------------------------------------
 
 import sys, os, re
@@ -30,10 +30,6 @@ class btco_main:
 
     # 实例化BTCO
     def __init__(self):
-    #    if os.path.exists(self.__SitePath):
-    #        if not os.path.isfile(self.__SitePath + self.__BtcoNick):
-    #            public.ExecShell('cp -rf  %s' % self.__BtcoPath + '/Main/' + self.__BtcoNick +' '+ self.__SitePath)
-        # 已向宝塔申请开发动态路由，转移文件已取消。
         pass
 
     def _check(self,args):
@@ -66,7 +62,7 @@ class btco_main:
                     public.SetConfigValue('btco',True)
                     return public.returnMsg(True, '您已安装过了.')
             # BTCO 强制跳转写入
-            BtcoAdd = '<!--BTCO-->\n   <script> var a=document.location.toString().split("//");navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)&&("/"==a[1].substring(a[1].indexOf("/"))?window.location.href="/btco' + '":"/config"==a[1].substring(a[1].indexOf("/"))&&(window.location.href="/btco/?to=config' + '")); </script> \n   <!--BTCO-->'
+            BtcoAdd = '<!--BTCO-->\n   <script> var a=document.location.toString().split("//");navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)&&("/"==a[1].substring(a[1].indexOf("/"))?window.location.href="/btco/index.html' + '":"/config"==a[1].substring(a[1].indexOf("/"))&&(window.location.href="/btco/index.html?to=config' + '")); </script> \n   <!--BTCO-->'
             initCoutent = open('/www/server/panel/BTPanel/templates/default/layout.html','r')
             BtcoAddIn = initCoutent.read().split("</head>")
             initCoutent.close()
@@ -106,10 +102,6 @@ class btco_main:
         if public.GetConfigValue('btco'):
             return public.returnMsg(True,'已安装')
         return public.returnMsg(False,'未安装')
-
-    # 发出丢人的声音
-    def BTCO(self, get):
-        return public.returnMsg(True, 'Rua!')
 
     # BTCO 前端请求扩展
     # ----------------

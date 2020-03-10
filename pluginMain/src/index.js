@@ -128,7 +128,7 @@ const BTCO = {
         BTCO.loadMask(() => {
             _.$('#BTCO_Success').style.display = 'unset'
             setTimeout(() => _.$('#BTCO_Success').style.opacity = 1, 1)
-            //setTimeout(() => window.location.reload(), 2000)
+            setTimeout(() => window.location.reload(), 2000)
         }, false)
     },
     failureInstall: (text = '启用失败') => {
