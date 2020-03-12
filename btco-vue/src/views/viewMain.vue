@@ -2,7 +2,10 @@
     <main>
         <div class="Container">
             <div>
-                <div class="wrapperMain">
+                <div
+                    class="wrapperMain"
+                    id="mainBTCO"
+                >
                     <router-view />
                 </div>
             </div>

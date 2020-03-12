@@ -10,22 +10,28 @@
             </div>
 
             <div class="dropDownMenu">
-                <el-dropdown>
+                <el-dropdown
+                    trigger="click"
+                    @command="handleRouter"
+                >
                     <span class="el-dropdown-link">
                         {{ thisRouter }}<i class="el-icon-arrow-down el-icon--right"></i>
                     </span>
                     <el-dropdown-menu slot="dropdown">
-                        <el-dropdown-item disabled>首页</el-dropdown-item>
-                        <el-dropdown-item>网站</el-dropdown-item>
-                        <el-dropdown-item>FTP</el-dropdown-item>
-                        <el-dropdown-item>数据库</el-dropdown-item>
-                        <el-dropdown-item>监控</el-dropdown-item>
-                        <el-dropdown-item>安全</el-dropdown-item>
-                        <el-dropdown-item>文件</el-dropdown-item>
-                        <el-dropdown-item>计划任务</el-dropdown-item>
-                        <el-dropdown-item>软件商店</el-dropdown-item>
-                        <el-dropdown-item>面板设置</el-dropdown-item>
-                        <el-dropdown-item divided>登出</el-dropdown-item>
+                        <el-dropdown-item command="首页">首页</el-dropdown-item>
+                        <el-dropdown-item command="网站">网站</el-dropdown-item>
+                        <el-dropdown-item command="FTP">FTP</el-dropdown-item>
+                        <el-dropdown-item command="数据库">数据库</el-dropdown-item>
+                        <el-dropdown-item command="监控">监控</el-dropdown-item>
+                        <el-dropdown-item command="安全">安全</el-dropdown-item>
+                        <el-dropdown-item command="文件">文件</el-dropdown-item>
+                        <el-dropdown-item command="计划任务">计划任务</el-dropdown-item>
+                        <el-dropdown-item command="软件商店">软件商店</el-dropdown-item>
+                        <el-dropdown-item command="面板设置">面板设置</el-dropdown-item>
+                        <el-dropdown-item
+                            divided
+                            command="exit"
+                        >登出</el-dropdown-item>
                     </el-dropdown-menu>
                 </el-dropdown>
             </div>
@@ -36,6 +42,15 @@
 <script>
 import { mapGetters } from 'vuex'
 export default {
+    methods: {
+        handleRouter(to) {
+            if (to !== 'exit' && to !== this.$route.name)
+                this.$router.push({ name: to })
+            else {
+                // 登出
+            }
+        }
+    },
     computed: {
         ...mapGetters('Global', ['thisRouter'])
     }

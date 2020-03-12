@@ -25,7 +25,7 @@
 footer {
     position: relative;
     width: 100%;
-    padding: 8px 18px;
+    padding: 0 18px 8px;
     > div {
         display: flex;
         align-items: center;
