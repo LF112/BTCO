@@ -66,6 +66,20 @@ export default {
             const that = this
             if (!this.isDev)
                 this.$http.get('/system?action=GetNetWork').then(R => {
+                    if (!that.init) {
+                        that.$store.commit('thisIndex/changeVersion', R.data.version)
+                        that.init = true
+                    }
+
+                    // NETWORK
+                    that.$store.commit('thisIndex/updateNetwork', 
+                        R.up,
+                        R.down,
+                        that._.Tool.Tosize(R.downTotal),
+                        that._.Tool.Tosize(R.upTotal)
+                    )
+
+                    // 状态模块
                     let arr = {}
 
                     // CPU
@@ -90,7 +104,7 @@ export default {
                 this.upload({
                     cpu: { count: 32, is: 58 },
                     load: { index: 2 },
-                    ram: { is: 43, used: 233, total: 1120 }
+                    ram: { is: 43, used: 233, total: 1024 }
                 })
             }
         },
@@ -137,6 +151,7 @@ export default {
         }
     },
     beforeDestroy() {
+        clearInterval(this.Heartbeat)
         this.Heartbeat = null
     },
     data () {
@@ -158,7 +173,8 @@ export default {
                     percentage: '0%'
                 }
             ],
-            Heartbeat: ''
+            Heartbeat: '',
+            init: false
         }
     },
     computed: {

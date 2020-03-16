@@ -108,6 +108,7 @@ class btco_main:
     # ----------------
     # 获取 / 
     def BT_index(self, get):
+        v_info = sys.version_info
         BTIndex = {}
         BTIndex['siteCount'] = public.M('sites').count()
         BTIndex['ftpCount'] = public.M('ftps').count()
@@ -116,6 +117,7 @@ class btco_main:
         BTIndex['time'] = self.GetBootTime()
         BTIndex['version'] = session['version']
         BTIndex['system'] = self.GetSystemVersion()
+        BTIndex['py'] = str(v_info.major) + '.' + str(v_info.minor) + '.' + str(v_info.micro)
         BTIndex['check'] = self.is_pro()
         BTIndex['ip'] = public.GetLocalIp()
         return BTIndex

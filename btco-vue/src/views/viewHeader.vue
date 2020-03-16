@@ -5,8 +5,11 @@
                 <div>BTPanel</div>
             </div>
             <div class="defaultProfile">
-                <div class="IsPro">FREE</div>
-                <div class="version">V0.0.0</div>
+                <div
+                    class="IsPro"
+                    :style="{'background-color': (isPro ? '#393939' : '#8c8c8c')}"
+                >{{ isPro ? 'PRO' : 'FREE' }}</div>
+                <div class="version">{{ version }}</div>
             </div>
 
             <div class="dropDownMenu">
@@ -52,7 +55,8 @@ export default {
         }
     },
     computed: {
-        ...mapGetters('Global', ['thisRouter'])
+        ...mapGetters('Global', ['thisRouter']),
+        ...mapGetters('thisIndex', ['version', 'isPro'])
     }
 }
 </script>

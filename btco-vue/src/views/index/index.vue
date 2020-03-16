@@ -1,14 +1,20 @@
 <template>
     <article class="indexCo">
         <magnetInfo />
+        <overView />
+        <thisView />
     </article>
 </template>
 
 <script>
 import magnetInfo from '@/components/this/index/magnetInfo'
+import overView from '@/components/this/index/overView'
+import thisView from '@/components/this/index/thisView'
 export default {
     components: {
-        magnetInfo
+        magnetInfo,
+        overView,
+        thisView
     }
 }
 </script>
