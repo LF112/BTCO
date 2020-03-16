@@ -21,6 +21,7 @@ if sys.version_info[0] == 2:
 os.chdir('/www/server/panel')
 sys.path.append("class/")
 import public, json, math
+from flask import session
 if __name__ != '__main__':  
     import panelAuth
     from BTPanel import comm,redirect,session
@@ -42,7 +43,7 @@ class btco_main:
         return True
 
     def index(self,args):
-        return True
+        return {'BTCO_BTTOKEN': session['request_token_head']}
 
     # BTCO 安装
     def BtcoInstall(self, get):
