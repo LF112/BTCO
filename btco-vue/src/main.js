@@ -3,6 +3,7 @@ import {
     Icon,
     Button,
     Divider,
+    Dialog,
     Dropdown, DropdownMenu, DropdownItem
 } from 'element-ui'
 import App from './App.vue'
@@ -10,6 +11,7 @@ import router from './router'
 import store from './store'
 import '@/components/ICON'
 import btcoPOP from '@/components/btcoPOP'
+import varGlobal from '@/components/Global.vue'
 import VueResource from 'vue-resource'
 
 Vue.config.productionTip = false
@@ -17,12 +19,14 @@ Vue.config.productionTip = false
 Vue.use(Icon)
 Vue.use(Button)
 Vue.use(Divider)
+Vue.use(Dialog)
 Vue.use(Dropdown)
 Vue.use(DropdownMenu)
 Vue.use(DropdownItem)
 
 Vue.use(VueResource)
 Vue.use(btcoPOP)
+Vue.prototype._ = varGlobal
 
 new Vue({
     router,

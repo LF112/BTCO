@@ -39,7 +39,7 @@ var COPY = (src, dist, callback) => {
 module.exports = {
     publicPath: process.env.NODE_ENV === 'production' ? '././' : '/',
     assetsDir: '././static/',
-    productionSourceMap: true,
+    productionSourceMap: false,
     chainWebpack(config) {
         config.module
             .rule('svg')
