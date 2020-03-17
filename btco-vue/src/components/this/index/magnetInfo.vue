@@ -4,6 +4,7 @@
             <li
                 v-for="(is, index) in magnetArr"
                 :key="index"
+                @click="click(is.name)"
             >
                 <div class="head">
                     <div
@@ -41,6 +42,19 @@ export default {
 
     },
     methods: {
+        click( is ) {
+            const that = this
+            if (is == '内存使用率') this.$copop.infoUse('真的要释放内存吗？', v => {
+                if (v) {
+                    that.$copop.info('请稍等，正在释放...', 3000)
+                    if (!this.isDev)
+                        that.$http.post('/system?action=ReMemory', { toUpdate: 'yes' }).then(R => {
+                            that.$copop.success('释放成功！', 2000)
+                        })
+                    else setTimeout(()=> that.$copop.success('释放成功！', 2000), 2000)
+                }
+            })
+        },
         diskGet() {
             const that = this
             if (!this.isDev)
@@ -98,7 +112,21 @@ export default {
                     arr.ram.is = (R.data.mem.memRealUsed * 100 / R.data.mem.memTotal).toFixed(1)
 
                     that.upload(arr)
-                }, response => this.$copop.warn('BT_INDEX 获取失败！'))
+                }, response => {
+                    if (!this.failHB) {
+                        clearInterval(this.Heartbeat)
+                        this.Heartbeat = null
+                        this.failHB = true
+                        this.$copop.warnUse('BT_INDEX 获取失败！重试?', v => {
+                            if (v) {
+                                that.$copop.info('正在等待重新连接···', 2000)
+                                this.failHB = false
+                                that.Heartbeat = setInterval(() => that.netWork() , 2000)
+                            }
+                            else that.$copop.warn('将不会更新状态面板 ×')
+                        })
+                    }
+                })
             else {
                 this.$copop.info('Dev 模式', 1500)
                 this.upload({
@@ -174,7 +202,8 @@ export default {
                 }
             ],
             Heartbeat: '',
-            init: false
+            init: false,
+            failHB: false
         }
     },
     computed: {
