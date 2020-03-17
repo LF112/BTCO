@@ -12,7 +12,7 @@
                 <el-divider direction="vertical"></el-divider>
                 <a @click="reloadPanel()">重启面板</a>
                 <el-divider direction="vertical"></el-divider>
-                <a>重启服务器</a>
+                <a @click="reloadServer()">重启服务器</a>
             </div>
             <div class="INFO">
                 <div>
@@ -62,6 +62,76 @@ export default {
                 }
             })
         },
+        reloadServer() {    // 重启服务器
+            const that = this
+            this.$copop.warnUse('现在重启服务器？', v => {
+                if (v) {
+                    if (!that.isDev) {
+                        that.$store.commit('Global/changeReloadServerStatus', true)
+                        that.stopWebService(v => {
+                            if (!v) console.log('[BTCO] 停止 WEB 服务未成功')
+                            that.stopSqlService(v => {
+                                if (!v) console.log('[BTCO] 停止 SQL 服务未成功')
+                                that.$copop.warn('正在重启服务器····', 2000)
+                                that.$http.post('/system?action=RestartServer', {}).then(R => {
+                                    that.$copop.success('已执行重启，正在等待响应····', 2000)
+                                    that.$copop.info('服务器启动完成时将自动刷新页面···')
+                                    this.checkReloadServer()
+                                })
+                            })
+                        })
+                    } else this.$copop.info('Dev 模式下不支持重启服务器', 1500)
+                }
+            })
+        },
+        stopSqlService( callback ) {
+            const that = this
+            that.$copop.warn('正在关闭 SQL 服务····', 2000)
+            if (!this.isDev)
+                that.$http.post('/system?action=ServiceAdmin', {
+                    name: 'mysqld',
+                    type: 'stop'
+                }).then(R => {
+                    that.$copop.success('已关闭 SQL 服务 √', 2000)
+                    callback(true)
+                }, response => {
+                    that.$copop.warn('[SQL ×] 可能未安装服务')
+                    callback(false)
+                })
+            else this.$copop.info('Dev 模式下不支持停止 SQL 服务', 1500)
+        },
+        stopWebService( callback ) {
+            const that = this
+            this.$copop.warn('正在关闭 WEB 服务····', 2000)
+            if (!this.isDev)
+                that.$http.post('/system?action=ServiceAdmin', {
+                    name: that.isWebServer,
+                    type: 'stop'
+                }).then(R => {
+                    that.$copop.success('已关闭 WEB 服务 √', 2000)
+                    callback(true)
+                }, response => {
+                    that.$copop.warn('[WEB ×] 可能未安装服务')
+                    callback(false)
+                })
+            else this.$copop.info('Dev 模式下不支持停止 WEB 服务', 1500)
+        },
+        checkReloadServer() {   // 检查重启
+            const that = this
+            if(!this.isDev)
+                this.$http.get('/system?action=GetSystemTotal').then(R => {
+                    clearInterval(that.reloadServerHeartbeat)
+                    that.reloadServerHeartbeat = null
+                    that.$copop.success('重启成功！', 2000)
+                    setTimeout(() => window.location.reload(), 1500)
+                }, response => {
+                    that.$copop.info('尚未启动，正在等待···', 1500)
+                    that.checkReloadServer()
+                    console.log('[BTCO] 服务器尚未启动...')
+                })
+            else this.$copop.info('Dev 模式下不支持轮询重启检查', 1500)
+        },
+
         network() {
             const that = this
             if (!this.isDev)
@@ -78,6 +148,7 @@ export default {
                     that.$store.commit('thisIndex/changeIsIP', R.data.ip)
                     that.$store.commit('thisIndex/changeRunTime', R.data.time)
                     that.$store.commit('thisIndex/changeIsPY', R.data.py)
+                    that.$store.commit('thisIndex/changeIsWebServer', R.data.webserver)
 
                     document.title = R.data.BTTitle + ' | BTCO'
 
@@ -107,7 +178,7 @@ export default {
         ...mapGetters('Global', ['isDev']),
         ...mapGetters('thisIndex', [
             'thatWEB', 'thatFTP', 'thatDATABASE',
-            'isIP', 'isSYS'
+            'isIP', 'isSYS', 'isWebServer'
         ])
     }
 }

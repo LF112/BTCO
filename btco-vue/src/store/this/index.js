@@ -8,6 +8,7 @@ const state = {
         sys: 'BTCO Core 2.0',
         core: 'btco'    // SVG NAME
     },
+    isWebServer: '',    // 重启服务器时需要
 
     thatWEB: 0,
     thatFTP: 0,
@@ -26,6 +27,7 @@ const getters = {
     isSYS: () => state.isSYS,
     isPY: () => state.isPY,
     runTime: () => state.runTime,
+    isWebServer: () => state.isWebServer,
 
     thatWEB: () => state.thatWEB,
     thatFTP: () => state.thatFTP,
@@ -55,6 +57,9 @@ const mutations = {
     },
     changeRunTime(state, time) {
         state.runTime = time
+    },
+    changeIsWebServer(state, webServer) {
+        state.isWebServer = webServer
     },
     updateNetwork(state, up, down, downTotal, upTotal) {
         state.network = up

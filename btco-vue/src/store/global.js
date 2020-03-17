@@ -1,11 +1,13 @@
 const state = {
     thisRouter: '',
     isDev: false,
+    reloadServerStatus: false
 }
 
 const getters = {
     thisRouter: () => state.thisRouter,
-    isDev: () => state.isDev
+    isDev: () => state.isDev,
+    reloadServerStatus: () => state.reloadServerStatus
 }
 
 const mutations = {
@@ -14,6 +16,9 @@ const mutations = {
     },
     changeIsDev(state, status) {
         state.isDev = status
+    },
+    changeReloadServerStatus(state, status) {
+        state.reloadServerStatus = status
     }
 }
 
