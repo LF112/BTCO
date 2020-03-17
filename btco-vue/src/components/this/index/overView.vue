@@ -8,7 +8,7 @@
             <div class="buttomNav">
                 <a>更新</a>
                 <el-divider direction="vertical"></el-divider>
-                <a>修复</a>
+                <a @click="checkFixPanel()">修复</a>
                 <el-divider direction="vertical"></el-divider>
                 <a @click="reloadPanel()">重启面板</a>
                 <el-divider direction="vertical"></el-divider>
@@ -48,6 +48,53 @@ export default {
         if (!this.isDev) this.network()
     },
     methods: {
+        checkFixPanel() {
+            const that = this
+            this.$copop.infoUse('现在尝试校验并修复面板程序？', v => {
+                if (v) {
+                    that.$copop.info('正在校验····')
+                    if (!that.isDev)
+                        that.$http.get('/system?action=RepPanel').then(R => {
+                            that.$copop.success('成功！请重新启用 BTCO！')
+                            //-> 此处可添加 重新启用 BTCO 请求
+                            that.$http.get('/system?action=ReWeb').then(R => {
+                                that.$copop.success('服务已重启！')
+                                that.reloadBTCO()
+                            }, response => {
+                                that.$copop.warn('服务重启请求失败或出现异常！')
+                                setTimeout(() => window.location.reload(), 3000)
+                            })
+                        }, response => {
+                            that.$copop.success('请求失败或出现异常！')
+                            setTimeout(() => window.location.reload(), 3000)
+                        })
+                    else that.$copop.success('成功！请重新启用 BTCO！')
+                }
+            })
+        },
+        reloadBTCO() {
+            const that = this
+            if (!this.isDev) {
+                that.$copop.info('正在禁用 BTCO ···')
+                this.$http.post('/plugin?action=a&s=BtcoRemove&name=btco', {}).then(R => {
+                    if (R.data.status) {
+                        that.$copop.info('正在启用 BTCO ···')
+                        that.$http.post('/plugin?action=a&s=BtcoInstall&name=btco', {}).then(R => {
+                            if (R.data.status) {
+                                that.$copop.success('启用 BTCO 成功，正在刷新···')
+                                setTimeout(() => window.location.reload(), 2000)
+                            } else {
+                                that.$copop.warn('启用 BTCO 失败')
+                                setTimeout(() => window.location.reload(), 2000)
+                            }
+                        })
+                    } else {
+                        that.$copop.warn('禁用 BTCO 失败')
+                        setTimeout(() => window.location.reload(), 2000)
+                    }
+                })
+            } else this.$copop.warn('Dev 模式下无需重新启用 BTCO')
+        },
         reloadPanel() {
             const that = this
             this.$copop.warnUse('现在重启面板服务？', v => {
