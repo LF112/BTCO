@@ -10,7 +10,7 @@
                 <el-divider direction="vertical"></el-divider>
                 <a>修复</a>
                 <el-divider direction="vertical"></el-divider>
-                <a>重启面板</a>
+                <a @click="reloadPanel()">重启面板</a>
                 <el-divider direction="vertical"></el-divider>
                 <a>重启服务器</a>
             </div>
@@ -48,6 +48,20 @@ export default {
         if (!this.isDev) this.network()
     },
     methods: {
+        reloadPanel() {
+            const that = this
+            this.$copop.warnUse('现在重启面板服务？', v => {
+                if (v) {
+                    that.$copop.info('正在重启面板服务······')
+                    if (!that.isDev)
+                        that.$http.get('/system?action=ReWeb').then(R => {
+                            that.$copop.success('服务已重启！')
+                        })
+                    else setTimeout(() => that.$copop.success('服务已重启！'),1000)
+                    setTimeout(() => window.location.reload(), 3000)
+                }
+            })
+        },
         network() {
             const that = this
             if (!this.isDev)

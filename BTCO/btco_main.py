@@ -117,6 +117,7 @@ class btco_main:
         BTIndex['time'] = self.GetBootTime()
         BTIndex['version'] = session['version']
         BTIndex['system'] = self.GetSystemVersion()
+        BTIndex['webserver'] = session['webserver']
         BTIndex['py'] = str(v_info.major) + '.' + str(v_info.minor) + '.' + str(v_info.micro)
         BTIndex['check'] = self.is_pro()
         BTIndex['ip'] = public.GetLocalIp()
