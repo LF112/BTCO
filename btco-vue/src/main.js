@@ -3,7 +3,7 @@ import {
     Icon,
     Button,
     Divider,
-    Dialog,
+    Badge,
     Dropdown, DropdownMenu, DropdownItem
 } from 'element-ui'
 import App from './App.vue'
@@ -19,7 +19,7 @@ Vue.config.productionTip = false
 Vue.use(Icon)
 Vue.use(Button)
 Vue.use(Divider)
-Vue.use(Dialog)
+Vue.use(Badge)
 Vue.use(Dropdown)
 Vue.use(DropdownMenu)
 Vue.use(DropdownItem)

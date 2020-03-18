@@ -2,6 +2,11 @@
     <div class="thisView">
         <div>
             <div class="overview">
+                <isIcon
+                    i="beta"
+                    class="other"
+                    v-if="isTEST"
+                ></isIcon>
                 <div class="PY">
                     <isIcon i="python"></isIcon>
                     <div>{{ isPY }}</div>
@@ -19,7 +24,7 @@
 import { mapGetters } from 'vuex'
 export default {
     computed: {
-        ...mapGetters('thisIndex', ['runTime', 'isPY'])
+        ...mapGetters('thisIndex', ['runTime', 'isPY', 'isTEST'])
     }
 }
 </script>
@@ -41,6 +46,8 @@ export default {
             height: 100%;
             padding: 0 6px;
             text-align: center;
+            display: flex;
+            align-items: center;
             .PY {
                 height: 100%;
                 display: flex;
@@ -56,6 +63,11 @@ export default {
                     line-height: 1;
                     font-weight: lighter;
                 }
+            }
+            .other {
+                width: 22px;
+                height: 22px;
+                margin-right: 3px;
             }
         }
         .run {

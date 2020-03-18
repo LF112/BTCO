@@ -6,7 +6,11 @@
                 <p>{{ isSYS.sys }}</p>
             </div>
             <div class="buttomNav">
-                <a>更新</a>
+                <el-badge
+                    is-dot
+                    hidden
+                    ref="uploadDot"
+                ><a @click="clickPanelUpload()">更新</a></el-badge>
                 <el-divider direction="vertical"></el-divider>
                 <a @click="checkFixPanel()">修复</a>
                 <el-divider direction="vertical"></el-divider>
@@ -37,17 +41,47 @@
                     </div>
                 </div>
             </div>
+            <uploadView />
         </div>
     </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
+import uploadView from './uploadView'
 export default {
     mounted() {
         if (!this.isDev) this.network()
+        this.checkPanelUpload()
+        try {
+            this.$refs.uploadDot.$el.childNodes[1].style.marginTop = '5px'
+            this.$refs.uploadDot.$el.childNodes[1].style.marginRight = '8px'
+        } catch (e) {}
     },
     methods: {
+        clickPanelUpload() {
+            const that = this
+            if (!this.isDev) {
+                this.$copop.info('正在获取更新···', 3000)
+                this.checkPanelUpload(v => {
+                    v.show = true
+                    that.$store.commit('thisIndex/changeOpenUV', v)
+                })
+            } else this.$store.commit('thisIndex/changeOpenUV', {
+                show: true,
+                upload: false,
+                default: {
+                    version: '0.0.0',
+                    time: '2020/01/01',
+                    UPLOG: 'DEFAULT NONE'
+                },
+                beta: {
+                    version: '0.1.0',
+                    time: '2020/01/02',
+                    UPLOG: 'BETA NONE'
+                }
+            })
+        },
         checkFixPanel() {
             const that = this
             this.$copop.infoUse('现在尝试校验并修复面板程序？', v => {
@@ -219,14 +253,62 @@ export default {
             else {
                 // Dev
             }
+        },
+        checkPanelUpload( callback ) {    // 检查面板更新并更新相关元素状态
+            const that = this
+            if(!this.isDev)
+                this.$http.get('/ajax?action=UpdatePanel').then(R => {
+
+                    that.$store.commit('thisIndex/changeVersion', (R.data.msg.is_beta == 1 ? 'T' : 'V') + R.data.msg.version)
+                    that.$store.commit('thisIndex/changeIsTEST', (R.data.msg.is_beta == 1 ? true : false))
+                    if (!R.data.status) {
+                        if (callback !== undefined)
+                            callback({
+                                upload: false,
+                                default: {
+                                    version: R.data.msg.version,
+                                    time: R.data.msg.uptime,
+                                    UPLOG: R.data.msg.updateMsg,
+                                },
+                                beta: {
+                                    version: R.data.msg.beta.version,
+                                    time: R.data.msg.beta.uptime,
+                                    UPLOG: R.data.msg.beta.updateMsg
+                                }
+                            })
+                    } else {
+                        // 有更新
+                        that.$refs.uploadDot.$el.childNodes[1].style.display = ''
+                        if (callback !== undefined)
+                            callback({
+                                upload: true,
+                                default: {
+                                    version: R.data.msg.version,
+                                    time: R.data.msg.uptime,
+                                    UPLOG: R.data.msg.updateMsg,
+                                },
+                                beta: {
+                                    version: R.data.msg.beta.version,
+                                    time: R.data.msg.beta.uptime,
+                                    UPLOG: R.data.msg.beta.updateMsg
+                                }
+                            })
+                    }
+
+                },  response => {
+                    that.$copop.warn('检查更新失败···', 1500)
+                })
         }
     },
     computed: {
         ...mapGetters('Global', ['isDev']),
         ...mapGetters('thisIndex', [
             'thatWEB', 'thatFTP', 'thatDATABASE',
-            'isIP', 'isSYS', 'isWebServer'
+            'isIP', 'isSYS', 'isWebServer', 'version'
         ])
+    },
+    components: {
+        uploadView
     }
 }
 </script>
@@ -272,7 +354,7 @@ export default {
             display: flex;
             align-items: center;
             justify-content: center;
-            > a {
+            a {
                 margin: 0 5px;
                 padding: 3px 8px;
                 border: 0;

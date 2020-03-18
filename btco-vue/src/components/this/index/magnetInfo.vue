@@ -81,7 +81,7 @@ export default {
             if (!this.isDev)
                 this.$http.get('/system?action=GetNetWork').then(R => {
                     if (!that.init) {
-                        that.$store.commit('thisIndex/changeVersion', R.data.version)
+                        //that.$store.commit('thisIndex/changeVersion', R.data.version)
                         that.init = true
                     }
 

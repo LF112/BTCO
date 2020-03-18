@@ -3,7 +3,8 @@ const state = {
     isPro: false,
     isIP: '0.0.0.0',
     isPY: '0.0',
-    runTime: '1024天12小时33分钟',
+    isTEST: false,
+    runTime: '0天0小时0分钟',
     isSYS: {
         sys: 'BTCO Core 2.0',
         core: 'btco'    // SVG NAME
@@ -17,7 +18,22 @@ const state = {
     networkUP: '',
     networkDown: '',
     downTotal: '',
-    upTotal: ''
+    upTotal: '',
+
+    openUV: {
+        show: false,
+        upload: false,
+        default: {
+            version: '0.0.0',
+            time: '2020/01/01',
+            UPLOG: 'NONE'
+        },
+        beta: {
+            version: '0.1.0',
+            time: '2020/01/02',
+            UPLOG: 'NONE'
+        }
+    }
 }
 
 const getters = {
@@ -26,6 +42,7 @@ const getters = {
     isIP: () => state.isIP,
     isSYS: () => state.isSYS,
     isPY: () => state.isPY,
+    isTEST: () => state.isTEST,
     runTime: () => state.runTime,
     isWebServer: () => state.isWebServer,
 
@@ -36,7 +53,9 @@ const getters = {
     networkUP: () => state.networkUP,
     networkDown: () => state.networkDown,
     downTotal: () => state.downTotal,
-    upTotal: () => state.upTotal
+    upTotal: () => state.upTotal,
+
+    openUV: () => state.openUV
 }
 
 const mutations = {
@@ -55,6 +74,9 @@ const mutations = {
     changeIsPY(state, version) {
         state.isPY = version
     },
+    changeIsTEST(state, status) {
+        state.isTEST = status
+    },
     changeRunTime(state, time) {
         state.runTime = time
     },
@@ -71,6 +93,9 @@ const mutations = {
         state.thatWEB = web
         state.thatFTP = ftp
         state.thatDATABASE = database
+    },
+    changeOpenUV(state, arr) {
+        state.openUV = arr
     }
 }
 
