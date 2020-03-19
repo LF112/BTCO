@@ -44,9 +44,10 @@
                         @click="close()"
                     >取消</el-button>
                     <el-button
-                        v-if="openUV.upload"
+                        v-if="openUV.upload && !changeStatus"
                         size="mini"
                         type="success"
+                        @click="uploadPanel()"
                     >升级</el-button>
                 </div>
             </div>
@@ -66,13 +67,86 @@ export default {
             this.$store.commit('thisIndex/changeOpenUV', this.openUV)
         },
         changeVersion( i ) {
+            const that = this
             if (i)
                 if (this.changeStatus){ // 正式版
+                    this.close()
+                    this.$copop.warnUse('现在切换正式版？', v => {
+                        // 宝塔奇妙的算法，绝了
+                        if (v && !that.isDev) {
+                            that.$copop.info('正在发起切换······')
+                            that.$http.get('/ajax?action=to_not_beta').then(R => {
+                                if(R.data.status) {
+                                    
+                                    that.$copop.info('正在检查···')
+                                    // CHECK 升级 / 更新 面板
+                                    that.changePanelV('切换正式版')
 
+                                } else that.$copop.warn(R.data.msg, 2000)
+                            }, response => that.$copop.warn('发起失败！请检查网络或修复面板', 2000))
+                        } else if (that.isDev) that.$copop.warn('Dev 模式不支持切换', 2000)
+                    })
                 } else this.changeStatus = true
             else if (this.changeStatus){ // 测试版
+                this.close()
+                this.$copop.warn('请不要在正式商用网站及生产环境切换测试版', 2500)
+                this.$copop.warnUse('现在切换测试版？', v => {
+                    if(v && !that.isDev) {
+                        // BATE 预申请
+                        that.$copop.info('正在申请测试版······')
+                        that.$http.get('/ajax?action=apple_beta').then(R => {
+                            if (R.data.status) {
 
+                                that.$copop.info('正在检查···')
+                                // CHECK 升级 / 更新 面板
+                                that.changePanelV('切换测试版')
+
+                            } else that.$copop.warn(R.data.msg, 2000)
+                        }, response => that.$copop.warn('申请失败！请检查网络或修复面板', 2000))
+                    } else if (that.isDev) that.$copop.warn('Dev 模式不支持切换', 2000)
+                })
             } else this.changeStatus = true
+        },
+        changePanelV( name ) {
+            const that = this
+            if (!this.isDev)
+                this.$http.post('/ajax?action=UpdatePanel', { check: true }, { emulateJSON: true }).then(R => {
+                    that.$copop.info('正在' + name + '，请耐心等待···')
+                    that.$http.post('/ajax?action=UpdatePanel', { toUpdate: 'yes' }, { emulateJSON: true }).then(V => {
+                        if (V.data.status) {
+
+                            that.$copop.success(V.data.msg + '，正在重启面板···')
+                            that.$http.get('/system?action=ReWeb').then(R => {
+                                that.$copop.success('服务已重启！')
+                                setTimeout(() => window.location.reload(), 1500)
+                            })
+
+                        } else that.$copop.warn(V.data.msg, 2000)
+                    }, response => that.$copop.warn(name + '失败！请检查网络或修复面板', 2000))
+
+                }, response => that.$copop.warn('检查失败！请检查网络或修复面板', 2000))
+            else that.$copop.warn('Dev 模式不支持切换面板版本', 2000)
+        },
+        uploadPanel() {
+            const that = this
+            this.close()
+            this.$copop.warnUse('现在更新面板？', v => {
+                if(v && !that.isDev) {
+                    that.$copop.info('正在更新面板，请耐心等待···')
+                    that.$http.post('/ajax?action=UpdatePanel', { toUpdate: 'yes' }, { emulateJSON: true }).then(V => {
+                        if (V.data.status) {
+
+                            that.$copop.success(V.data.msg + '，正在重启面板···')
+                            that.$http.get('/system?action=ReWeb').then(R => {
+                                that.$copop.success('服务已重启！')
+                                setTimeout(() => window.location.reload(), 1500)
+                            })
+
+                        } else that.$copop.warn(V.data.msg, 2000)
+                    }, response => that.$copop.warn(name + '失败！请检查网络或修复面板', 2000))
+
+                } else if (that.isDev) that.$copop.warn('Dev 模式不支持更新面板', 2000)
+            })
         }
     },
     watch: {

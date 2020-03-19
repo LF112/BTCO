@@ -67,9 +67,9 @@ export default {
                     v.show = true
                     that.$store.commit('thisIndex/changeOpenUV', v)
                 })
-            } else this.$store.commit('thisIndex/changeOpenUV', {
+            } else this.$store.commit('thisIndex/changeOpenUV', {   // Dev
                 show: true,
-                upload: false,
+                upload: true,
                 default: {
                     version: '0.0.0',
                     time: '2020/01/01',
