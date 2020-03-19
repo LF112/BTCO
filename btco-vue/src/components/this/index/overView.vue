@@ -86,7 +86,7 @@ export default {
             const that = this
             this.$copop.infoUse('现在尝试校验并修复面板程序？', v => {
                 if (v) {
-                    that.$copop.info('正在校验····')
+                    that.$copop.load('正在校验····')
                     if (!that.isDev)
                         that.$http.get('/system?action=RepPanel').then(R => {
                             that.$copop.success('成功！请重新启用 BTCO！')
@@ -109,10 +109,10 @@ export default {
         reloadBTCO() {
             const that = this
             if (!this.isDev) {
-                that.$copop.info('正在禁用 BTCO ···')
+                that.$copop.load('正在禁用 BTCO ···')
                 this.$http.post('/plugin?action=a&s=BtcoRemove&name=btco', {}).then(R => {
                     if (R.data.status) {
-                        that.$copop.info('正在启用 BTCO ···')
+                        that.$copop.load('正在启用 BTCO ···')
                         that.$http.post('/plugin?action=a&s=BtcoInstall&name=btco', {}).then(R => {
                             if (R.data.status) {
                                 that.$copop.success('启用 BTCO 成功，正在刷新···')
@@ -133,7 +133,7 @@ export default {
             const that = this
             this.$copop.warnUse('现在重启面板服务？', v => {
                 if (v) {
-                    that.$copop.info('正在重启面板服务······')
+                    that.$copop.load('正在重启面板服务······')
                     if (!that.isDev)
                         that.$http.get('/system?action=ReWeb').then(R => {
                             that.$copop.success('服务已重启！')
@@ -153,7 +153,7 @@ export default {
                             if (!v) console.log('[BTCO] 停止 WEB 服务未成功')
                             that.stopSqlService(v => {
                                 if (!v) console.log('[BTCO] 停止 SQL 服务未成功')
-                                that.$copop.warn('正在重启服务器····', 2000)
+                                that.$copop.load('正在重启服务器····', 2000)
                                 that.$http.post('/system?action=RestartServer', {}).then(R => {
                                     that.$copop.success('已执行重启，正在等待响应····', 2000)
                                     that.$copop.info('服务器启动完成时将自动刷新页面···')

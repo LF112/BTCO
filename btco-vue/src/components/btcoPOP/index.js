@@ -35,6 +35,12 @@ BTCOPOP.install = (Vue) => {
         infoUse(MSG, callback) {
             this.that(MSG, 0, callback, '#909399', 'el-icon-warning-outline')
         },
+        load(MSG, timeout) {
+            this.that(MSG, timeout, null, '#53a8ff', 'el-icon-loading')
+        },
+        loadUse(MSG, callback) {
+            this.that(MSG, 0, callback, '#53a8ff', 'el-icon-loading')
+        },
         warn(MSG, timeout) {
             this.that(MSG, timeout, null, '#f56c6c')
         },

@@ -111,7 +111,7 @@ export default {
             const that = this
             if (!this.isDev)
                 this.$http.post('/ajax?action=UpdatePanel', { check: true }, { emulateJSON: true }).then(R => {
-                    that.$copop.info('正在' + name + '，请耐心等待···')
+                    that.$copop.load('正在' + name + '，请耐心等待···')
                     that.$http.post('/ajax?action=UpdatePanel', { toUpdate: 'yes' }, { emulateJSON: true }).then(V => {
                         if (V.data.status) {
 
@@ -132,7 +132,7 @@ export default {
             this.close()
             this.$copop.warnUse('现在更新面板？', v => {
                 if(v && !that.isDev) {
-                    that.$copop.info('正在更新面板，请耐心等待···')
+                    that.$copop.load('正在更新面板，请耐心等待···')
                     that.$http.post('/ajax?action=UpdatePanel', { toUpdate: 'yes' }, { emulateJSON: true }).then(V => {
                         if (V.data.status) {
 
