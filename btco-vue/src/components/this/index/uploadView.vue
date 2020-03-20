@@ -142,7 +142,7 @@ export default {
                                 setTimeout(() => window.location.reload(), 1500)
                             })
 
-                        } else that.$copop.warn(V.data.msg, 2000)
+                        } else that.$copop.warn('升级失败，请尝试刷新网页')
                     }, response => that.$copop.warn(name + '失败！请检查网络或修复面板', 2000))
 
                 } else if (that.isDev) that.$copop.warn('Dev 模式不支持更新面板', 2000)

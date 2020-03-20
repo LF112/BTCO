@@ -3,6 +3,7 @@
         <magnetInfo />
         <overView />
         <thisView />
+        <networkDiagram />
     </article>
 </template>
 
@@ -10,11 +11,13 @@
 import magnetInfo from '@/components/this/index/magnetInfo'
 import overView from '@/components/this/index/overView'
 import thisView from '@/components/this/index/thisView'
+import networkDiagram from '@/components/this/index/networkDiagram'
 export default {
     components: {
         magnetInfo,
         overView,
-        thisView
+        thisView,
+        networkDiagram
     }
 }
 </script>

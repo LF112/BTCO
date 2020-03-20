@@ -15,10 +15,10 @@ const state = {
     thatFTP: 0,
     thatDATABASE: 0,
 
-    networkUP: '',
-    networkDown: '',
-    downTotal: '',
-    upTotal: '',
+    networkUP: 0,
+    networkDown: 0,
+    downTotal: 0,
+    upTotal: 0,
 
     openUV: {
         show: false,
@@ -83,11 +83,11 @@ const mutations = {
     changeIsWebServer(state, webServer) {
         state.isWebServer = webServer
     },
-    updateNetwork(state, up, down, downTotal, upTotal) {
-        state.network = up
-        state.network = down
-        state.network = downTotal
-        state.network = upTotal
+    updateNetwork(state, arr) {
+        state.networkUP = arr.networkUP
+        state.networkDown = arr.networkDown
+        state.downTotal = arr.downTotal
+        state.upTotal = arr.upTotal
     },
     updateOverview(state, web, ftp, database) {
         state.thatWEB = web

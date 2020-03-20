@@ -79,19 +79,23 @@ export default {
         netWork() {
             const that = this
             if (!this.isDev)
-                this.$http.get('/system?action=GetNetWork').then(R => {
+                this.$http.get('/system?action=GetNetWork').then(async R => {
                     if (!that.init) {
                         //that.$store.commit('thisIndex/changeVersion', R.data.version)
                         that.init = true
                     }
+                    if (that.isLoad) {
+                        that.$copop.success('连接成功', 2000)
+                        that.isLoad = false
+                    }
 
                     // NETWORK
-                    that.$store.commit('thisIndex/updateNetwork', 
-                        R.up,
-                        R.down,
-                        that._.Tool.Tosize(R.downTotal),
-                        that._.Tool.Tosize(R.upTotal)
-                    )
+                    that.$store.commit('thisIndex/updateNetwork', {
+                        networkUP: R.data.up,
+                        networkDown: R.data.down,
+                        downTotal: that._.Tool.Tosize(R.data.downTotal),
+                        upTotal: that._.Tool.Tosize(R.data.upTotal)
+                    })
 
                     // 状态模块
                     let arr = {}
@@ -119,7 +123,8 @@ export default {
                         this.failHB = true
                         this.$copop.warnUse('BT_INDEX 获取失败！重试?', v => {
                             if (v) {
-                                that.$copop.info('正在等待重新连接···', 2000)
+                                that.$copop.load('正在等待重新连接···', 2000)
+                                that.isLoad = true
                                 this.failHB = false
                                 that.Heartbeat = setInterval(() => that.netWork() , 2000)
                             }
@@ -203,7 +208,8 @@ export default {
             ],
             Heartbeat: '',
             init: false,
-            failHB: false
+            failHB: false,
+            isLoad: false
         }
     },
     computed: {
