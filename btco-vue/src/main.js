@@ -1,7 +1,10 @@
 import Vue from 'vue'
 import {
     Icon,
+    Input,
     Button,
+    Select,
+    Option,
     Divider,
     Badge,
     Dropdown, DropdownMenu, DropdownItem
@@ -17,7 +20,10 @@ import VueResource from 'vue-resource'
 Vue.config.productionTip = false
 
 Vue.use(Icon)
+Vue.use(Input)
 Vue.use(Button)
+Vue.use(Select)
+Vue.use(Option)
 Vue.use(Divider)
 Vue.use(Badge)
 Vue.use(Dropdown)
