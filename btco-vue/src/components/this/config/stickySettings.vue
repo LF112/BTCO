@@ -33,7 +33,7 @@ export default {
         }
 
         // DEBUG
-        if(this.isDev) this.$store.commit('thisConfig/changeShowAPI', true)
+        //if(this.isDev) this.$store.commit('thisConfig/changeShowAPI', true)
     },
     data() {
         return {
@@ -86,29 +86,49 @@ export default {
             }, response => that.$copop.warn('请求失败，请检查网络或修复面板', 2000))
         },
         panelSSL(v) {
+            const that = this
             if (!this.isDev) {
-                this.$copop.load('正在检查···', 2000)
-                const that = this
-                let ssl = {}
-                this.$http.post('/config?action=get_cert_source', {}).then(R => {
+                if (v) {
+                    this.$copop.load('正在检查···', 2000)
+                    let ssl = {}
+                    this.$http.post('/config?action=get_cert_source', {}).then(R => {
 
-                    ssl.cert_type = R.data.cert_type
-                    ssl.email = R.data.email
-                    ssl.domain = R.data.domain
-                    that.$copop.load('正在获取证书······', 2000)
-                    that.$http.post('/config?action=GetPanelSSL', {}).then(R => {
-                        
-                        that.$copop.success('已载入~', 1500)
-                        ssl.ssl = {
-                            privateKey: R.data.privateKey,
-                            certPem: R.data.certPem
+                        ssl.cert_type = R.data.cert_type
+                        ssl.email = R.data.email
+                        ssl.domain = R.data.domain
+                        that.$copop.load('正在获取证书······', 2000)
+                        that.$http.post('/config?action=GetPanelSSL', {}).then(R => {
+                            
+                            that.$copop.success('已载入~', 1500)
+                            ssl.ssl = {
+                                privateKey: R.data.privateKey,
+                                certPem: R.data.certPem
+                            }
+                            that.$store.commit('thisConfig/updateIsSSL', ssl)
+                            that.$store.commit('thisConfig/changeShowSslChange', true)
+
+                        }, response => this.$copop.warn('获取失败，请检查网络或修复面板', 2000))
+
+                    },  response => this.$copop.warn('检查失败，请检查网络或修复面板', 2000))
+                } else {
+                    this.$copop.infoUse('现在关闭面板 SSL ?', v => {
+                        if (v) {
+                            that.$copop.load('正在关闭面板SSL···')
+                            that.$http.post('/config?action=SetPanelSSL', {}, { emulateJSON: true }).then(R => {
+
+                                that.$copop.success('已关闭面板SSL，正在重启面板', 2000)
+                                that.$copop.load('正在重启面板服务···')
+                                that.$http.get('/system?action=ReWeb').then(R => {
+                                    that.$copop.success('服务已重启！')
+                                })
+                                setTimeout(() => 
+                                    window.location.href = 'http://' + window.location.host + window.location.pathname
+                                , 3000)
+
+                            }, response => this.$copop.warn('关闭失败，请检查网络或修复面板', 2000))
                         }
-                        that.$store.commit('thisConfig/updateIsSSL', ssl)
-                        that.$store.commit('thisConfig/changeShowSslChange', true)
-
-                    }, response => this.$copop.warn('获取失败，请检查网络或修复面板', 2000))
-
-                },  response => this.$copop.warn('检查失败，请检查网络或修复面板', 2000))
+                    })
+                }
             } else this.$copop.info('Dev 模式无法使用SSL', 1500)
         },
         panelAPI(v) {
