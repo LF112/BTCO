@@ -1,14 +1,17 @@
 <template>
     <div class="configCo">
         <stickySettings />
+        <stickySettingOther />
     </div>
 </template>
 
 <script>
 import stickySettings from '@/components/this/config/stickySettings'
+import stickySettingOther from '@/components/this/config/stickySettingOther'
 export default {
     components: {
-        stickySettings
+        stickySettings,
+        stickySettingOther
     }
 }
 </script>
