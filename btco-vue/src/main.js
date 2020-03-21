@@ -16,6 +16,7 @@ import '@/components/ICON'
 import btcoPOP from '@/components/btcoPOP'
 import varGlobal from '@/components/Global.vue'
 import VueResource from 'vue-resource'
+import VueClipboard from 'vue-clipboard2'
 
 Vue.config.productionTip = false
 
@@ -31,6 +32,7 @@ Vue.use(DropdownMenu)
 Vue.use(DropdownItem)
 
 Vue.use(VueResource)
+Vue.use(VueClipboard)
 Vue.use(btcoPOP)
 Vue.prototype._ = varGlobal
 

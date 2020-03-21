@@ -17,12 +17,14 @@
             </div>
         </div>
         <panelSsl />
+        <panelApi />
     </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
 import panelSsl from './panelSsl'
+import panelApi from './panelApi'
 export default {
     mounted() {
         if(window.location.protocol.indexOf('https') !== -1) {
@@ -31,7 +33,7 @@ export default {
         }
 
         // DEBUG
-        if(this.isDev) this.$store.commit('thisConfig/changeShowSslChange', true)
+        if(this.isDev) this.$store.commit('thisConfig/changeShowAPI', true)
     },
     data() {
         return {
@@ -121,6 +123,7 @@ export default {
                         limit_addr: R.data.limit_addr,
                         open: R.data.open
                     })
+                    that.$store.commit('thisConfig/changeShowAPI', true)
 
                 }, response => this.$copop.warn('获取失败，请检查网络或修复面板', 2000))
             } else this.$copop.info('Dev 模式无法使用API', 1500)
@@ -130,7 +133,8 @@ export default {
         ...mapGetters('Global', ['isDev'])
     },
     components: {
-        panelSsl
+        panelSsl,
+        panelApi
     }
 }
 </script>
