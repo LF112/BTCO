@@ -49,13 +49,13 @@ export default {
         handleRouter(to) {
             if (to !== 'exit' && to !== this.$route.name)
                 this.$router.push({ name: to })
-            else {
-                // 登出
-            }
+            else this.$copop.warnUse('现在登出面板吗？', v => {
+                if (v && !this.isDev) window.location.href = '/login?dologin=True'
+            })
         }
     },
     computed: {
-        ...mapGetters('Global', ['thisRouter']),
+        ...mapGetters('Global', ['thisRouter', 'isDev']),
         ...mapGetters('thisIndex', ['version', 'isPro'])
     }
 }

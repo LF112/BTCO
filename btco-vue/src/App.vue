@@ -32,6 +32,14 @@ export default {
                 })
             })
 
+        // 站点标题
+        const that = this
+        if (process.env.NODE_ENV === 'production')
+            this.$http.get('/plugin?action=a&name=btco&s=BT_Config').then(R => {
+                that.$store.commit('Global/updateIsSiteNickname', R.data.BTTitle)
+                document.title = R.data.BTTitle + ' | BTCO'
+            }, response => console.log('[BTCO] 站点信息获取失败'))
+
     },
     components: {
         viewMain,
