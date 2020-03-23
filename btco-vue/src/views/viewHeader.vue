@@ -49,6 +49,8 @@ export default {
         handleRouter(to) {
             if (to !== 'exit' && to !== this.$route.name)
                 this.$router.push({ name: to })
+            else if (to == this.$route.name) 
+                this.$copop.success(to + '已载入', 1500)
             else this.$copop.warnUse('现在登出面板吗？', v => {
                 if (v && !this.isDev) window.location.href = '/login?dologin=True'
             })

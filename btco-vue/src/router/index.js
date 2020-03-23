@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import NProgress from 'nprogress'
+import 'nprogress/nprogress.css'
 
 Vue.use(VueRouter)
 
@@ -58,7 +60,21 @@ const router = new VueRouter({
     ]
 })
 
+NProgress.configure({
+    easing: 'ease',
+    speed: 500,
+    showSpinner: false,
+    trickleSpeed: 200,
+    minimum: 0.3
+})
+
+router.beforeEach((to, from, next) => {
+    NProgress.start()
+    next()
+})
+
 router.afterEach((to, from) => {
+    NProgress.done()
     router.app.$store.commit('Global/updateThisRouter', to.name)
 })
 

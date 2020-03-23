@@ -131,6 +131,11 @@ export default {
             }
         }
     },
+    beforeDestroy() {
+        // Dev 模式下销毁时清理
+        clearInterval(this.DevHeartbeat)
+        this.DevHeartbeat = null
+    },
     components: {
         highcharts: Chart,
         DevHeartbeat: null
