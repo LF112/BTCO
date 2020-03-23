@@ -37,7 +37,8 @@ export default {
     },
     watch: {
         'Is.sticky.ipv6': function (v) { this.sticky[1].open = v },  // IPV6
-        'Is.sticky.api': function (v) { this.sticky[3].open = v }   // API
+        'Is.sticky.api': function (v) { this.sticky[3].open = v },   // API
+        'isAPI.open': function (v) { this.sticky[3].open = v }
     },
     data() {
         return {
@@ -45,13 +46,12 @@ export default {
                 { name: '关闭面板', fun: 'closePanel', tip: '关闭面板会导致您无法访问面板', open: false },
                 { name: '监听IPv6', fun: 'listenIPv6', open: false },
                 { name: '面板SSL', fun: 'panelSSL', tip: '危险！此功能不了解请勿操作!', open: false },
-                { name: 'API', fun: 'panelAPI', open: false }
+                { name: 'API', fun: 'panelAPI', open: false, direct: true }
             ]
         }
     },
     methods: {
         isSwitch(v, fun, tip, direct, i) {
-            console.log(this.Is)
             const that = this, 
                 clickState = v.target.classList.contains('switch-click'),
                 thisTitle = v.currentTarget.parentElement.querySelector('.title').innerText
@@ -137,7 +137,7 @@ export default {
                 }
             } else this.$copop.info('Dev 模式无法使用SSL', 1500)
         },
-        panelAPI(v) {
+        panelAPI(i) {
             if (!this.isDev) {
                 const that = this
                 this.$copop.load('正在检查···', 2000)
@@ -157,7 +157,7 @@ export default {
     },
     computed: {
         ...mapGetters('Global', ['isDev']),
-        ...mapGetters('thisConfig', ['Is'])
+        ...mapGetters('thisConfig', ['Is', 'isAPI'])
     },
     components: {
         panelSsl,

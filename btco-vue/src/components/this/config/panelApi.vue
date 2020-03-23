@@ -124,14 +124,14 @@ export default {
         changeApiOpen() {
             const that = this
             if (!this.isDev){
-                this.$copop.load('正在' + (this.isAPI.open ? '启用' : '禁用') + '···', 1500)
+                this.$copop.load('正在' + (this.isAPI.open ? '禁用' : '启用') + '···', 1500)
                 this.$http.post('/config?action=set_token', { t_type: 2 }, { emulateJSON: true }).then(R => {
 
                     that.isAPI.open = (that.isAPI.open ? false : true)
                     that.$store.commit('thisConfig/updateIsAPI', that.isAPI)
                     that.$copop.success(R.data.msg, 2000)
 
-                }, response => this.$copop.warn((this.isAPI.open ? '启用' : '禁用') + '失败，请检查网络或修复面板', 2500))
+                }, response => this.$copop.warn((this.isAPI.open ? '禁用' : '启用') + '失败，请检查网络或修复面板', 2500))
             } else this.$copop.warn('Dev 模式无法操作 API')
         }
     },

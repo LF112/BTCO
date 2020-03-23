@@ -25,7 +25,8 @@ import { mapGetters } from 'vuex'
 import twoVerify from './twoVerify'
 export default {
     mounted() {
-        if (this.isDev) this.$store.commit('thisConfig/changeShowTwoVerify', true)
+        // DEBUG
+        //if (this.isDev) this.$store.commit('thisConfig/changeShowTwoVerify', true)
     },
     data() {
         return {
