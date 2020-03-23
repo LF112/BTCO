@@ -9,7 +9,7 @@
                 <div>
                     <div
                         :class="'switch' + (isItem.open ? ' switch-click' : '')"
-                        @click="isSwitch($event, isItem.fun, isItem.tip)"
+                        @click="isSwitch($event, isItem.fun, isItem.tip, isItem.direct, index)"
                     ></div>
                     <el-divider></el-divider>
                     <div class="title">{{ isItem.name }}</div>
@@ -35,6 +35,10 @@ export default {
         // DEBUG
         //if(this.isDev) this.$store.commit('thisConfig/changeShowAPI', true)
     },
+    watch: {
+        'Is.sticky.ipv6': function (v) { this.sticky[1].open = v },  // IPV6
+        'Is.sticky.api': function (v) { this.sticky[3].open = v }   // API
+    },
     data() {
         return {
             sticky: [
@@ -46,12 +50,14 @@ export default {
         }
     },
     methods: {
-        isSwitch(v, fun, tip) {
+        isSwitch(v, fun, tip, direct, i) {
+            console.log(this.Is)
             const that = this, 
                 clickState = v.target.classList.contains('switch-click'),
                 thisTitle = v.currentTarget.parentElement.querySelector('.title').innerText
             if(tip !== undefined) this.$copop.warn(tip, 2500)
-            this.$copop.infoUse((clickState ? '禁用' : '启用') + thisTitle + '吗?', is => {
+            if(direct !== undefined) this[fun](i)
+            else this.$copop.infoUse((clickState ? '禁用' : '启用') + thisTitle + '吗?', is => {
                 if (is) {
                     if (!clickState) {
                         v.target.classList.add('switch-click')
@@ -150,7 +156,8 @@ export default {
         }
     },
     computed: {
-        ...mapGetters('Global', ['isDev'])
+        ...mapGetters('Global', ['isDev']),
+        ...mapGetters('thisConfig', ['Is'])
     },
     components: {
         panelSsl,

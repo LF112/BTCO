@@ -15,6 +15,24 @@ const state = {
         token: '',  // 获不获取无所谓...
         limit_addr: '',
         open: false
+    },
+
+    showTwoVerify: false,
+    Is: {
+        sticky: {
+            ipv6: false,
+            api: false,
+            debug: false,
+            local: false
+        }
+    },
+    IsTwoVerify: {
+        status: false,
+        info: {
+            key: '****',
+            username: 'BTCO'
+        },
+        qrcode: 'unknow'
     }
 }
 
@@ -23,7 +41,10 @@ const getters = {
     showSslChange: () => state.showSslChange,
     isSSL: () => state.isSSL,
     showAPI: () => state.showAPI,
-    isAPI: () => state.isAPI
+    isAPI: () => state.isAPI,
+    showTwoVerify: () => state.showTwoVerify,
+    Is: () => state.Is,
+    IsTwoVerify: () => state.IsTwoVerify
 }
 
 const mutations = {
@@ -41,6 +62,15 @@ const mutations = {
     },
     updateIsAPI(state, api) {
         state.isAPI = api
+    },
+    changeShowTwoVerify(state, status) {
+        state.showTwoVerify = status
+    },
+    updateIsTwoVerify(state, arr) {
+        state.IsTwoVerify = arr
+    },
+    updateIs(state, arr) {
+        state.Is = arr
     }
 }
 

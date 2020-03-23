@@ -9,33 +9,46 @@
                 <div>
                     <div
                         :class="'switch' + (isItem.open ? ' switch-click' : '')"
-                        @click="isSwitch($event, isItem.fun, isItem.tip)"
+                        @click="isSwitch($event, isItem.fun, isItem.tip, isItem.direct, index)"
                     ></div>
                     <el-divider></el-divider>
                     <div class="title">{{ isItem.name }}</div>
                 </div>
             </div>
+            <twoVerify />
         </div>
     </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
+import twoVerify from './twoVerify'
 export default {
+    mounted() {
+        if (this.isDev) this.$store.commit('thisConfig/changeShowTwoVerify', true)
+    },
     data() {
         return {
             sticky: [
-                { name: '开发者模式', fun: 'devMode', tip: '此功能普通用户请勿开启！', open: false }
+                { name: '开发者模式', fun: 'devMode', tip: '此功能普通用户请勿开启！', open: false },
+                { name: '离线模式', fun: 'localSelect', open: false },
+                { name: '两步验证', fun: 'twoVerify', open: false, direct: true }
             ]
         }
     },
+    watch: {
+        'Is.sticky.debug': function (v) { this.sticky[0].open = v },  // devMode
+        'Is.sticky.local': function (v) { this.sticky[1].open = v },  // localSelect
+        'IsTwoVerify.status': function (v) { this.sticky[2].open = v }    // twoVerify
+    },
     methods: {
-        isSwitch(v, fun, tip) {
+        isSwitch(v, fun, tip, direct, i) {
             const that = this, 
                 clickState = v.target.classList.contains('switch-click'),
                 thisTitle = v.currentTarget.parentElement.querySelector('.title').innerText
             if(tip !== undefined) this.$copop.warn(tip, 2500)
-            this.$copop.infoUse((clickState ? '禁用' : '启用') + thisTitle + '吗?', is => {
+            if(direct !== undefined) this[fun](i)
+            else this.$copop.infoUse((clickState ? '禁用' : '启用') + thisTitle + '吗?', is => {
                 if (is) {
                     if (!clickState) {
                         v.target.classList.add('switch-click')
@@ -57,13 +70,51 @@ export default {
             this.$http.post('/config?action=set_debug', {}, { emulateJSON: true }).then(R => {
                 that.$copop.success('已' + (v ? '启用' : '禁用') + '成功!', 1500)
             }, response => this.$copop.warn((v ? '启用' : '禁用') + '失败，请检查网络或修复面板', 2000))
+        },
+        localSelect(v) {
+            const that = this
+            this.$copop.load('正在' + (v ? '启用' : '禁用') + '离线模式···', 2000)
+            this.$http.post('/config?action=set_local', {}, { emulateJSON: true }).then(R => {
+                that.$copop.success('已' + (v ? '启用' : '禁用') + '成功!', 1500)
+            }, response => this.$copop.warn((v ? '启用' : '禁用') + '失败，请检查网络或修复面板', 2000))
+        },
+        twoVerify(i) {
+            if (!this.isDev) {
+                const that = this
+                this.$copop.load('正在检查两步认证···', 2000)
+                this.$http.post('/config?action=check_two_step', {}).then(R => {
+
+                    if (R.data.status) {
+                        that.$copop.load('正在获取关键信息···', 2000)
+                        that.$http.post('/config?action=get_key', {}).then(U => {
+                            that.$copop.load('正在获取二维码···', 2000)
+                            that.$http.post('/config?action=get_qrcode_data', {}).then(A => {
+
+                                that.$copop.success('获取成功', 1500)
+                                that.$store.commit('thisConfig/updateIsTwoVerify', {
+                                    status: R.data.status,
+                                    info: {
+                                        key: U.data.key,
+                                        username: U.data.username
+                                    },
+                                    qrcode: A.data
+                                })
+                                that.$store.commit('thisConfig/changeShowTwoVerify', true)
+
+                            }, response => that.$copop.warn('二维码获取失败，请检查网络或修复面板'))
+                        }, response => that.$copop.warn('关键信息获取失败，请检查网络或修复面板'))
+                    } else that.$store.commit('thisConfig/changeShowTwoVerify', true)
+
+                }, response => that.$copop.warn('检查两步认证失败，请检查网络或修复面板'))
+            } else this.$copop.info('Dev 模式无法操作两步验证', 2000) 
         }
     },
     computed: {
-        ...mapGetters('Global', ['isDev'])
+        ...mapGetters('Global', ['isDev']),
+        ...mapGetters('thisConfig', ['Is', 'IsTwoVerify'])
     },
     components: {
-
+        twoVerify
     }
 }
 </script>
