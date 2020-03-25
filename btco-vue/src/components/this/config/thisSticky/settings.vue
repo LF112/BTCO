@@ -23,8 +23,8 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import panelSsl from './panelSsl'
-import panelApi from './panelApi'
+import panelSsl from './panel/ssl'
+import panelApi from './panel/api'
 export default {
     mounted() {
         if(window.location.protocol.indexOf('https') !== -1) {

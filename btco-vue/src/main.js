@@ -7,6 +7,7 @@ import {
     Option,
     Divider,
     Badge,
+    InputNumber,
     Dropdown, DropdownMenu, DropdownItem
 } from 'element-ui'
 import App from './App.vue'
@@ -27,6 +28,7 @@ Vue.use(Select)
 Vue.use(Option)
 Vue.use(Divider)
 Vue.use(Badge)
+Vue.use(InputNumber)
 Vue.use(Dropdown)
 Vue.use(DropdownMenu)
 Vue.use(DropdownItem)
@@ -35,6 +37,7 @@ Vue.use(VueResource)
 Vue.use(VueClipboard)
 Vue.use(btcoPOP)
 Vue.prototype._ = varGlobal
+Vue.prototype.Call = new Vue()
 
 new Vue({
     router,

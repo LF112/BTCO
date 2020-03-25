@@ -2,22 +2,36 @@
     <div class="configCo">
         <stickySettings />
         <stickySettingOther />
+        <thisFrom />
+        <serverTime />
+        <sessionTimeout />
+        <panelPort />
+        <panelAuthPath />
     </div>
 </template>
 
 <script>
-import stickySettings from '@/components/this/config/stickySettings'
-import stickySettingOther from '@/components/this/config/stickySettingOther'
+import stickySettings from '@/components/this/config/thisSticky/settings'
+import stickySettingOther from '@/components/this/config/thisSticky/settingOther'
+import thisFrom from '@/components/this/config/thisFrom/index'
+import sessionTimeout from '@/components/this/config/thisFrom/number/timeout'
+import serverTime from '@/components/this/config/thisFrom/serverTime'
+import panelPort from '@/components/this/config/thisFrom/number/port'
+import panelAuthPath from '@/components/this/config/thisFrom/other/authPath'
 import { mapGetters } from 'vuex'
 export default {
     mounted() {
         this.configGet()
+        this.Call.$on('reloadGetConfig', v => {
+            this.reload = true
+            this.configGet()
+        })
     },
     methods: {
         configGet() {
             const that = this
             if (!this.isDev) 
-                this.$http.get('/config').then(() => {  // 此处宝塔官方没回复我解决方案，我的解决方案请求一遍 /config
+                this.$http.get('/config').then(() => {  // 'get_config 响应取决于前置请求'
                     that.$http.post('/config?action=get_config', {}).then(R => {
                         if (that.reload) {
                             that.$copop.success('重载成功~', 1500)
@@ -31,6 +45,14 @@ export default {
                                 local: (R.data.is_local == 'checked' ? true : false)
                             }
                         })
+                        that.$store.commit('thisConfig/updatePanelIs', ['panelDomain', R.data.panel.domain])
+                        that.$store.commit('thisConfig/updatePanelIs', ['panelLimitip', R.data.panel.limitip])
+                        that.$store.commit('thisConfig/updatePanelIs', ['panelSitesPath', R.data.sites_path])
+                        that.$store.commit('thisConfig/updatePanelIs', ['panelBackupPath', R.data.backup_path])
+                        that.$store.commit('thisConfig/updatePanelIs', ['panelIp', R.data.panel.address])
+                        that.$store.commit('thisConfig/updatePanelIs', ['serverTime', R.data.systemdate])
+                        that.$store.commit('thisConfig/updatePanelIs', ['panelPort', R.data.panel.port])
+                        that.$store.commit('thisConfig/updatePanelIs', ['panelAuthPath', R.data.panel.admin_path])
                     }, response => this.$copop.warnUse('配置信息获取失败，重试？', v => {
                         if (v) {
                             that.$copop.load('正在获取···', 2500)
@@ -61,7 +83,12 @@ export default {
     },
     components: {
         stickySettings,
-        stickySettingOther
+        stickySettingOther,
+        thisFrom,
+        sessionTimeout,
+        serverTime,
+        panelPort,
+        panelAuthPath
     }
 }
 </script>

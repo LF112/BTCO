@@ -38,6 +38,9 @@ export default {
         if (this.timeout > 0)
             setTimeout(() => this.hide(), this.timeout)
         setTimeout(() => this.$refs.popis.style.height = '48px', 1)
+
+        if((document.body.scrollTop || document.documentElement.scrollTop) != 0)
+            document.body.scrollTop = document.documentElement.scrollTop = 0
     },
     methods: {
         hide() {

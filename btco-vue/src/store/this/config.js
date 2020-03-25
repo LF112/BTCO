@@ -26,6 +26,17 @@ const state = {
             local: false
         }
     },
+
+    panelDomain: '',
+    panelLimitip: '',
+    panelSitesPath: '',
+    panelBackupPath: '',
+    panelIp: '',
+    panelTimeout: 86400,
+    serverTime: '',
+    panelPort: 8888,
+    panelAuthPath: '',
+
     IsTwoVerify: {
         status: false,
         info: {
@@ -44,7 +55,17 @@ const getters = {
     isAPI: () => state.isAPI,
     showTwoVerify: () => state.showTwoVerify,
     Is: () => state.Is,
-    IsTwoVerify: () => state.IsTwoVerify
+    IsTwoVerify: () => state.IsTwoVerify,
+
+    panelDomain: () => state.panelDomain,
+    panelLimitip: () => state.panelLimitip,
+    panelSitesPath: () => state.panelSitesPath,
+    panelBackupPath: () => state.panelBackupPath,
+    panelIp: () => state.panelIp,
+    panelTimeout: () => state.panelTimeout,
+    serverTime: () => state.serverTime,
+    panelPort: () => state.panelPort,
+    panelAuthPath: () => state.panelAuthPath
 }
 
 const mutations = {
@@ -71,6 +92,9 @@ const mutations = {
     },
     updateIs(state, arr) {
         state.Is = arr
+    },
+    updatePanelIs(state, arr) {
+        state[arr[0]] = arr[1]
     }
 }
 
