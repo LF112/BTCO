@@ -20,7 +20,7 @@
                 <el-input
                     placeholder="为面板绑定一个访问域名"
                     size="small"
-                    prefix-icon="el-icon-s-home"
+                    prefix-icon="el-icon-monitor"
                     v-model="domainIa"
                     clearable
                 ></el-input>
