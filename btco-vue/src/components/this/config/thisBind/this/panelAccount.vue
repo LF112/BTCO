@@ -41,7 +41,7 @@
                             size="small"
                             placeholder="在此键入，长度不能小于八位"
                             v-model="passwordInput"
-                            clearable
+                            show-password
                         >
                         </el-input>
                     </div>
@@ -51,7 +51,7 @@
                             size="small"
                             placeholder="在此键入，再输入一次"
                             v-model="repeatPasswordInput"
-                            clearable
+                            show-password
                         >
                         </el-input>
                     </div>

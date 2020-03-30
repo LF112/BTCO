@@ -76,8 +76,10 @@ export default {
                         })
                     }, response => this.$copop.warn('两步验证获取失败，请检查网络并刷新页面', 2000))
                     that.$http.get('/ssl?action=GetUserInfo').then(R => {
-                        that.$store.commit('thisConfig/updatePanelIs', ['IsBtAccount', R.data.data.username])
-                    })
+                        if (R.data.status)
+                            that.$store.commit('thisConfig/updatePanelIs', ['IsBtAccount', R.data.data.username])
+                        else that.$store.commit('thisConfig/updatePanelIs', ['IsBtAccount', '未绑定'])
+                    }, response => this.$copop.warn('宝塔账号获取失败，请检查网络并刷新页面', 2000))
                 }, response => this.$copop.warn('配置更新失败，请检查网络并刷新页面', 2000))
         }
     },
