@@ -34,6 +34,17 @@ var COPY = (src, dist, callback) => {
         if (err) fs.mkdirSync(dist)
         _copy(null, src, dist)
     })
+}, RMDIR = (path) => {
+    let files = []
+    if (fs.existsSync(path)) {
+        files = fs.readdirSync(path)
+        files.forEach(function (file, index) {
+            let curPath = path + '/' + file
+            if (fs.statSync(curPath).isDirectory())
+                RMDIR(curPath)
+            else fs.unlinkSync(curPath)
+        })
+    }
 }
 
 module.exports = {
@@ -64,8 +75,10 @@ module.exports = {
                 apply: (compiler) => {
                     compiler.hooks.done.tap('btco', compilation => {
                         console.log('[BTCO] 正在转移文件...')
-
                         const PATH = path.resolve(__dirname, '..') + '/btco-vue'
+
+                        RMDIR(path.resolve(__dirname, '..') + '/BTCO/static')
+
                         fs.mkdirSync(PATH + '/dist/templates')
                         fs.rename(PATH + '/dist/index.html', PATH + '/dist/templates/index.html', (err) => {
                             if (err) console.log('[BTCO] index.html 转移失败！')

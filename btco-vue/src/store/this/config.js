@@ -44,7 +44,16 @@ const state = {
             username: 'BTCO'
         },
         qrcode: 'unknow'
-    }
+    },
+
+    showPanelAccount: false,
+    IsPanelAccount: '',
+    showBtAccount: false,
+    IsBtAccount: '',
+    showWechatApp: false,
+    IsWechatApp: '',
+    showBasicAuth: false,
+    IsBasicAuth: ''
 }
 
 const getters = {
@@ -65,7 +74,15 @@ const getters = {
     panelTimeout: () => state.panelTimeout,
     serverTime: () => state.serverTime,
     panelPort: () => state.panelPort,
-    panelAuthPath: () => state.panelAuthPath
+    panelAuthPath: () => state.panelAuthPath,
+    showPanelAccount: () => state.showPanelAccount,
+    IsPanelAccount: () => state.IsPanelAccount,
+    showBtAccount: () => state.showBtAccount,
+    IsBtAccount: () => state.IsBtAccount,
+    showWechatApp: () => state.showWechatApp,
+    IsWechatApp: () => state.IsWechatApp,
+    showBasicAuth: () => state.showBasicAuth,
+    IsBasicAuth: () => state.IsBasicAuth
 }
 
 const mutations = {
@@ -95,6 +112,18 @@ const mutations = {
     },
     updatePanelIs(state, arr) {
         state[arr[0]] = arr[1]
+    },
+    changeShowPanelAccount(state, status) {
+        state.showPanelAccount = status
+    },
+    changeShowBtAccount(state, status) {
+        state.showBtAccount = status
+    },
+    changeShowWechatApp(state, status) {
+        state.showWechatApp = status
+    },
+    changeShowBasicAuth(state, status) {
+        state.showBasicAuth = status
     }
 }
 

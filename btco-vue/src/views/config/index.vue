@@ -2,6 +2,7 @@
     <div class="configCo">
         <stickySettings />
         <stickySettingOther />
+        <thisBind />
         <thisFrom />
         <serverTime />
         <sessionTimeout />
@@ -13,6 +14,7 @@
 <script>
 import stickySettings from '@/components/this/config/thisSticky/settings'
 import stickySettingOther from '@/components/this/config/thisSticky/settingOther'
+import thisBind from '@/components/this/config/thisBind/index'
 import thisFrom from '@/components/this/config/thisFrom/index'
 import sessionTimeout from '@/components/this/config/thisFrom/number/timeout'
 import serverTime from '@/components/this/config/thisFrom/serverTime'
@@ -53,6 +55,9 @@ export default {
                         that.$store.commit('thisConfig/updatePanelIs', ['serverTime', R.data.systemdate])
                         that.$store.commit('thisConfig/updatePanelIs', ['panelPort', R.data.panel.port])
                         that.$store.commit('thisConfig/updatePanelIs', ['panelAuthPath', R.data.panel.admin_path])
+
+                        that.$store.commit('thisConfig/updatePanelIs', ['IsWechatApp', (R.data.wx === '当前未绑定微信号' ? '未绑定' : R.data.wx)])
+                        that.$store.commit('thisConfig/updatePanelIs', ['IsBasicAuth', R.data.basic_auth.value])
                     }, response => this.$copop.warnUse('配置信息获取失败，重试？', v => {
                         if (v) {
                             that.$copop.load('正在获取···', 2500)
@@ -70,6 +75,9 @@ export default {
                             qrcode: 'unknow'
                         })
                     }, response => this.$copop.warn('两步验证获取失败，请检查网络并刷新页面', 2000))
+                    that.$http.get('/ssl?action=GetUserInfo').then(R => {
+                        that.$store.commit('thisConfig/updatePanelIs', ['IsBtAccount', R.data.data.username])
+                    })
                 }, response => this.$copop.warn('配置更新失败，请检查网络并刷新页面', 2000))
         }
     },
@@ -84,6 +92,7 @@ export default {
     components: {
         stickySettings,
         stickySettingOther,
+        thisBind,
         thisFrom,
         sessionTimeout,
         serverTime,
