@@ -285,10 +285,10 @@ export default {
             .button {
                 position: relative;
                 width: 100%;
-                padding: 0 8px 8px 0;
+                padding: 0 8px 8px;
                 display: flex;
                 align-items: center;
-                justify-content: flex-end;
+                justify-content: center;
                 .el-button + .el-button {
                     margin-left: 8px;
                 }

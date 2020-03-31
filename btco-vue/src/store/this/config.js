@@ -53,7 +53,12 @@ const state = {
     showWechatApp: false,
     IsWechatApp: '',
     showBasicAuth: false,
-    IsBasicAuth: ''
+    IsBasicAuth: {
+        user: '',
+        password: '',
+        open: false,
+        value: ''
+    }
 }
 
 const getters = {

@@ -82,7 +82,7 @@ export default {
             this.accountArr[2].user = v
         },
         IsBasicAuth(v) {
-            this.accountArr[3].user = v
+            this.accountArr[3].user = v.value
         }
     },
     components: {

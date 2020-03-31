@@ -57,7 +57,12 @@ export default {
                         that.$store.commit('thisConfig/updatePanelIs', ['panelAuthPath', R.data.panel.admin_path])
 
                         that.$store.commit('thisConfig/updatePanelIs', ['IsWechatApp', (R.data.wx === '当前未绑定微信号' ? '未绑定' : R.data.wx)])
-                        that.$store.commit('thisConfig/updatePanelIs', ['IsBasicAuth', R.data.basic_auth.value])
+                        that.$store.commit('thisConfig/updatePanelIs', ['IsBasicAuth', {
+                            user: R.data.basic_auth.basic_user,
+                            password: R.data.basic_auth.basic_pwd,
+                            open: R.data.basic_auth.open,
+                            value: R.data.basic_auth.value
+                        }])
                     }, response => this.$copop.warnUse('配置信息获取失败，重试？', v => {
                         if (v) {
                             that.$copop.load('正在获取···', 2500)
