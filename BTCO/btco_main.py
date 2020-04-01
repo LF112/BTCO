@@ -127,6 +127,9 @@ class btco_main:
         BTConfig = {}
         BTConfig['BTTitle'] = public.GetConfigValue('title')
         BTConfig['BTUser'] = session['username']
+        BTConfig['BTVersion'] = public.version()
+        BTConfig['BTBeta'] = session['updateInfo']['is_beta']
+        BTConfig['BTPRO'] = self.is_pro()
         return BTConfig
 
     #BT 原生扩展 / 一次加载使用

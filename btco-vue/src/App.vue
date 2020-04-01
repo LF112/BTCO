@@ -38,6 +38,10 @@ export default {
             this.$http.get('/plugin?action=a&name=btco&s=BT_Config').then(R => {
                 that.$store.commit('Global/updateIsSiteNickname', R.data.BTTitle)
                 that.$store.commit('thisConfig/updatePanelIs', ['IsPanelAccount', R.data.BTUser])
+                that.$store.commit('thisIndex/changeVersion', (R.data.BTBeta == 1 ? 'T' : 'V') + R.data.BTVersion)
+                if (R.data.BTPRO.code == -2 || R.data.BTPRO.code == -1)
+                    that.$store.commit('thisIndex/changeIsPro', false)
+                else that.$store.commit('thisIndex/changeIsPro', true)
                 document.title = R.data.BTTitle + ' | BTCO'
             }, response => console.log('[BTCO] 站点信息获取失败'))
 
