@@ -1,0 +1,581 @@
+*,
+body,
+html {
+    box-sizing: border-box!important;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: 0 0;
+    word-wrap: break-word;
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+    font-family: Titillium Web, -apple-system, system-ui, BlinkMacSystemFont,
+        Segoe UI, Roboto, PingFang SC, Hiragino Sans GB, Microsoft YaHei,
+        Helvetica Neue, sans-serif;
+}
+
+#BTCO, * {
+    transition: all 0.5s cubic-bezier(0.22, 0.58, 0.12, 0.98);
+}
+
+#BTCO {
+    position: fixed;
+    width: calc(100vw - 180px);
+    height: 100vh;
+    background: #21252b;
+    opacity: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 1000;
+    box-shadow: -1px 0 5px 1px rgba(43, 43, 43, 0.5)
+}
+
+#BTCO > div[co="main"] {
+    position: relative;
+    height: calc(100vh);
+    display: flex;
+    justify-content: center;
+}
+
+#BTCO main {
+    position: relative;
+    width: 100vw;
+    height: calc(100vh - 50px);
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#BTCO main .An {
+    position: relative;
+    display: none;
+}
+
+#BTCO main .An > div[id="BTCO_textAn"] > h2 {
+    color: #fff;
+    font-size: 4em;
+    font-weight: lighter;
+    line-height: 1;
+    opacity: 0;
+    display: none;
+}
+
+#BTCO main .Precautions {
+    position: relative;
+    display: none;
+    opacity: 0;
+    width: 100%;
+    height: 80%;
+    align-items: center;
+    justify-content: center;
+}
+
+#BTCO main .Precautions > div {
+    position: relative;
+    min-width: 60%;
+    height: 60%;
+    padding: 5px;
+}
+
+#BTCO main .Precautions > div > p{
+    color: #fdfdfd;
+    font-size: 18px;
+    line-height: 25px;
+    height: 25px;
+    margin-bottom: 10px;
+    padding-left: 8px;
+    border-left: 4px solid #696d74;
+}
+
+#BTCO main .Precautions > div .Band {
+    position: relative;
+    width: 100%;
+    height: calc(100% - 35px);
+    border-radius: 4px;
+    background: #282c34;
+}
+
+#BTCO main .Precautions > div .Band .btcoLOGO {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+}
+
+#BTCO main .Precautions > div .Band .btcoLOGO > h1 {
+    position: relative;
+    clear: both;
+    margin: 0;
+    color: hsla(202, 23%, 57%, 0.19);
+    text-transform: uppercase;
+    letter-spacing: .15em;
+    font-weight: bolder;
+    font-size: 6em;
+    font-family: unset;
+    line-height: 1.8;
+}
+
+#BTCO main .Precautions > div .Band .deliveryRecord {
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    position: relative;
+    z-index: 100;
+    overflow: auto;
+}
+
+#BTCO main .Precautions > div .Band .deliveryRecord > div {
+    padding: 4px 10px;
+    border-left: 4px solid #185784;
+    background: hsla(0, 0%, 30%, 0.35);
+    width: auto;
+    display: table;
+    margin-bottom: 10px;
+}
+
+#BTCO main .Precautions > div .Band .deliveryRecord > div > p {
+    color: #fff;
+    font-size: 13px;
+}
+
+#BTCO main .Precautions > div .Button {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+#BTCO main .Precautions > div .Button > p {
+    color: #696d74;
+    margin-right: 10px;
+    font-size: 12px;
+    font-weight: lighter;
+    line-height: 1;
+}
+
+#BTCO main .Button > a {
+    display: inline-block;
+    line-height: 1;
+    white-space: nowrap;
+    cursor: pointer;
+    color: #3fc775;
+    border: 1px solid #3fc775;
+    background: #21252b;
+    text-align: center;
+    outline: none;
+    margin: 0;
+    transition: .1s;
+    font-weight: 500;
+    padding: 9px 15px;
+    font-size: 12px;
+    border-radius: 3px;
+}
+
+#BTCO main .Button > a:hover {
+    background-color: #3fc775;
+    border-color: #3fc775;
+    color: #ffffff;
+}
+
+#BTCO main .Hello {
+    position: relative;
+    display: none;
+    opacity: 0;
+    
+}
+
+#BTCO main .Hello > p {
+    font-size: 3em;
+    color: #fff;
+}
+
+#BTCO main .Hello .Button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#BTCO main .Hello .Button > a {
+    margin: 0 5px
+}
+
+#BTCO main .Success {
+    position: relative;
+    display: none;
+    opacity: 0;
+}
+
+#BTCO main .Success > div {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#BTCO main .Success > div > svg {
+    width: 300px;
+    height: 300px;
+}
+
+#BTCO main .Success > p {
+    color: #fff;
+    font-size: 2em;
+    margin-top: 15px;
+}
+
+#BTCO footer {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    display: flex;
+    align-items: center
+}
+
+#BTCO footer .logo {
+    padding-right: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#BTCO footer .logo > svg {
+    width: 28px;
+    height: 28px;
+}
+
+#BTCO footer > p, span {
+    line-height: 28px;
+    font-size: 12px;
+    color: hsla(0,0%,100%,.19);
+    font-weight: lighter;
+}
+
+#BTCO footer > span {
+    padding: 0 8px;
+    font-weight: lighter;
+}
+
+#BTCO footer .LF {
+    font-family: fontOne;
+    color: hsla(0,0%,100%,.26);
+    font-weight: 700;
+}
+
+#BTCO #BTCO_evanyou {
+    position: absolute;
+    width: 100vw;
+    height: calc(100vh - 50px);
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+#BTCO .TIP {
+    position: fixed;
+    z-index: 1000;
+    display: none;
+    opacity: 0;
+    min-width: 210px;
+    max-width: 500px;
+    min-height: 50px;
+    border-radius: 5px;
+    background: hsla(216, 13%, 15%, 0.84);
+    border: 1px solid #4b4e53;
+}
+
+#BTCO .TIP > div {
+    width: 100%;
+    min-height: 50px;
+    padding: 5px 10px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center
+}
+
+#BTCO .TIP > div > p {
+    color: #fff;
+    font-size: 12px;
+    line-height: 18px;
+    min-height: 18px;
+}
+
+#BTCO .loadMask {
+    width: 500px;
+    height: 500px;
+    position: relative;
+}
+
+#BTCO .loadMask > div {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#BTCO .loadMask > div > p {
+    color: #fff;
+    font-size: 17px;
+    font-weight: lighter;
+    line-height: 1;
+}
+
+#BTCO .Loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#BTCO .Loader .Loading-Main {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+#BTCO .Loader .Loading-Outer,
+#BTCO .Loading-Inner {
+    box-sizing: border-box;
+    margin: auto;
+    border: 0.1em solid transparent;
+    border-radius: 50%;
+    animation: 2s linear infinite;
+    animation-name: Loading-Spinner;
+}
+
+#BTCO .Loader .Loading-Outer {
+    border-top-color: #0091e4;
+}
+
+#BTCO .Loader .Loading-Inner {
+    width: 100%;
+    height: 100%;
+    opacity: 0.4;
+    border-top-color: hsla(0,0%,100%,.19);
+    border-right-color: hsla(0,0%,100%,.19);
+}
+
+@keyframes Loading-Spinner {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+#BTCO .Gog:before {
+	left: -1px!important;
+	text-shadow: 4px 0 #303030!important;
+	animation: glitch-loop-1 .8s infinite ease-in-out alternate-reverse
+}
+
+#BTCO .Gog:after {
+	left: 1px!important;
+	text-shadow: -5px 0 #4b4e53!important;
+	animation: glitch-loop-2 .8s infinite ease-in-out alternate-reverse
+}
+
+#BTCO .glitch {
+	position: relative;
+	color: #fff;
+	mix-blend-mode: lighten
+}
+
+#BTCO .glitch:after, #BTCO .glitch:before {
+	position: absolute;
+	top: 0;
+	clip: rect(0,0,0,0);
+	width: 100%;
+	background: rgba(0,0,0,0);
+	content: attr(data-text)
+}
+
+#BTCO .glitch:before {
+	left: -1px;
+	text-shadow: 1px 0 #4b4e53
+}
+
+#BTCO .glitch:after {
+	left: 1px;
+	text-shadow: -1px 0 #303030
+}
+
+#BTCO .glitch:hover:before {
+	text-shadow: 4px 0 #4b4e53;
+	animation: glitch-loop-1 .8s infinite ease-in-out alternate-reverse
+}
+
+#BTCO .glitch:hover:after {
+	text-shadow: -5px 0 #303030;
+	animation: glitch-loop-2 .8s infinite ease-in-out alternate-reverse
+}
+
+@-webkit-keyframes glitch-loop-1 {
+	0% {
+		clip: rect(36px,9999px,9px,0)
+	}
+
+	25% {
+		clip: rect(25px,9999px,99px,0)
+	}
+
+	50% {
+		clip: rect(50px,9999px,102px,0)
+	}
+
+	75% {
+		clip: rect(30px,9999px,92px,0)
+	}
+
+	100% {
+		clip: rect(91px,9999px,98px,0)
+	}
+}
+
+@keyframes glitch-loop-1 {
+	0% {
+		clip: rect(36px,9999px,9px,0)
+	}
+
+	25% {
+		clip: rect(25px,9999px,99px,0)
+	}
+
+	50% {
+		clip: rect(50px,9999px,102px,0)
+	}
+
+	75% {
+		clip: rect(30px,9999px,92px,0)
+	}
+
+	100% {
+		clip: rect(91px,9999px,98px,0)
+	}
+}
+
+@-webkit-keyframes glitch-loop-2 {
+	0% {
+		top: -1px;
+		left: 1px;
+		clip: rect(65px,9999px,119px,0)
+	}
+
+	25% {
+		top: -6px;
+		left: 4px;
+		clip: rect(79px,9999px,19px,0)
+	}
+
+	50% {
+		top: -3px;
+		left: 2px;
+		clip: rect(68px,9999px,11px,0)
+	}
+
+	75% {
+		top: 0;
+		left: -4px;
+		clip: rect(95px,9999px,53px,0)
+	}
+
+	100% {
+		top: -1px;
+		left: -1px;
+		clip: rect(31px,9999px,149px,0)
+	}
+}
+
+@keyframes glitch-loop-2 {
+	0% {
+		top: -1px;
+		left: 1px;
+		clip: rect(65px,9999px,119px,0)
+	}
+
+	25% {
+		top: -6px;
+		left: 4px;
+		clip: rect(79px,9999px,19px,0)
+	}
+
+	50% {
+		top: -3px;
+		left: 2px;
+		clip: rect(68px,9999px,11px,0)
+	}
+
+	75% {
+		top: 0;
+		left: -4px;
+		clip: rect(95px,9999px,53px,0)
+	}
+
+	100% {
+		top: -1px;
+		left: -1px;
+		clip: rect(31px,9999px,149px,0)
+	}
+}
+
+@media screen and (max-width: 780px) {
+    #BTCO main{
+        height: calc(100vh);
+        align-items: unset;
+    }
+    #BTCO main .Success{
+        margin-top: 25%;
+    }
+    #BTCO main .An{
+        margin-top: 50%;
+    }
+    #BTCO main .Hello {
+        margin-top: 50%;
+    }
+    #BTCO main .Hello > p{
+        text-align: center;
+        margin-bottom: 15px;
+    }
+    #BTCO main .An > div[id="BTCO_textAn"] > h2{
+        font-size: 1.5em;
+    }
+    #BTCO main .Precautions{
+        padding: 0 15px;
+    }
+    #BTCO main .Success > div > svg{
+        width: 210px;
+        height: 210px;
+    }
+    #BTCO main .Success > p {
+        font-size: 1.2em;
+        margin-top: 0;
+    }
+    #BTCO footer{
+        display: inline-block;
+        width: 100%;
+        text-align: center;
+        left: 0;
+        margin-bottom: 15%;
+    }
+    #BTCO footer > span {
+        display: none;
+    }
+
+    #BTCO footer > p, span {
+        line-height: 18px;
+    }
+}
+
+::-webkit-scrollbar { width: 0 !important }
+
+::-moz-selection{background:#b2b8c1;color:#0bf}
+::selection{background:#b2b8c1;color:#0bf}

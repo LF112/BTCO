@@ -10,7 +10,7 @@
 # | BTCO - 宝塔响应式解决方案 [ https://github.com/LF112/BTCO ]
 # +-------------------------------------------------------------------
 # | Author: LF112 <lf@lf112.net>
-# | (｢･ω･)｢ Do you believe in destiny and fate? 
+# | Made with love by LF112 [https://lf112.net]
 # +-------------------------------------------------------------------
 
 import sys, os, re
@@ -21,6 +21,7 @@ if sys.version_info[0] == 2:
 os.chdir('/www/server/panel')
 sys.path.append("class/")
 import public, json, math
+from flask import session
 if __name__ != '__main__':  
     import panelAuth
     from BTPanel import comm,redirect,session
@@ -30,10 +31,6 @@ class btco_main:
 
     # 实例化BTCO
     def __init__(self):
-    #    if os.path.exists(self.__SitePath):
-    #        if not os.path.isfile(self.__SitePath + self.__BtcoNick):
-    #            public.ExecShell('cp -rf  %s' % self.__BtcoPath + '/Main/' + self.__BtcoNick +' '+ self.__SitePath)
-        # 已向宝塔申请开发动态路由，转移文件已取消。
         pass
 
     def _check(self,args):
@@ -46,7 +43,7 @@ class btco_main:
         return True
 
     def index(self,args):
-        return True
+        return {'BTCO_BTTOKEN': session['request_token_head']}
 
     # BTCO 安装
     def BtcoInstall(self, get):
@@ -66,7 +63,7 @@ class btco_main:
                     public.SetConfigValue('btco',True)
                     return public.returnMsg(True, '您已安装过了.')
             # BTCO 强制跳转写入
-            BtcoAdd = '<!--BTCO-->\n   <script> var a=document.location.toString().split("//");navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)&&("/"==a[1].substring(a[1].indexOf("/"))?window.location.href="/btco' + '":"/config"==a[1].substring(a[1].indexOf("/"))&&(window.location.href="/btco/?to=config' + '")); </script> \n   <!--BTCO-->'
+            BtcoAdd = '<!--BTCO-->\n   <script> var a=document.location.toString().split("//");navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)&&("/"==a[1].substring(a[1].indexOf("/"))?window.location.href="/btco/index.html' + '":"/config"==a[1].substring(a[1].indexOf("/"))&&(window.location.href="/btco/index.html#/config' + '")); </script> \n   <!--BTCO-->'
             initCoutent = open('/www/server/panel/BTPanel/templates/default/layout.html','r')
             BtcoAddIn = initCoutent.read().split("</head>")
             initCoutent.close()
@@ -107,14 +104,11 @@ class btco_main:
             return public.returnMsg(True,'已安装')
         return public.returnMsg(False,'未安装')
 
-    # 发出丢人的声音
-    def BTCO(self, get):
-        return public.returnMsg(True, 'Rua!')
-
     # BTCO 前端请求扩展
     # ----------------
     # 获取 / 
     def BT_index(self, get):
+        v_info = sys.version_info
         BTIndex = {}
         BTIndex['siteCount'] = public.M('sites').count()
         BTIndex['ftpCount'] = public.M('ftps').count()
@@ -123,6 +117,8 @@ class btco_main:
         BTIndex['time'] = self.GetBootTime()
         BTIndex['version'] = session['version']
         BTIndex['system'] = self.GetSystemVersion()
+        BTIndex['webserver'] = session['webserver']
+        BTIndex['py'] = str(v_info.major) + '.' + str(v_info.minor) + '.' + str(v_info.micro)
         BTIndex['check'] = self.is_pro()
         BTIndex['ip'] = public.GetLocalIp()
         return BTIndex
@@ -131,6 +127,9 @@ class btco_main:
         BTConfig = {}
         BTConfig['BTTitle'] = public.GetConfigValue('title')
         BTConfig['BTUser'] = session['username']
+        BTConfig['BTVersion'] = public.version()
+        BTConfig['BTBeta'] = session['updateInfo']['is_beta']
+        BTConfig['BTPRO'] = self.is_pro()
         return BTConfig
 
     #BT 原生扩展 / 一次加载使用
