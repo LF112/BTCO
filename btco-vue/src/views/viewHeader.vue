@@ -48,7 +48,23 @@ export default {
     methods: {
         handleRouter(to) {
             if (to !== 'exit' && to !== this.$route.name)
-                this.$router.push({ name: to })
+                if (to == '网站')
+                    window.location.href = '/site'
+                else if (to == 'FTP')
+                    window.location.href = '/ftp'
+                else if (to == '数据库')
+                    window.location.href = '/database'
+                else if (to == '监控')
+                    window.location.href = '/control'
+                else if (to == '安全')
+                    window.location.href = '/firewall'
+                else if (to == '文件')
+                    window.location.href = '/files'
+                else if (to == '计划任务')
+                    window.location.href = '/crontab'
+                else if (to == '软件商店')
+                    window.location.href = '/soft'
+                else this.$router.push({ name: to })
             else if (to == this.$route.name) 
                 this.$copop.success(to + '已载入', 1500)
             else this.$copop.warnUse('现在登出面板吗？', v => {
