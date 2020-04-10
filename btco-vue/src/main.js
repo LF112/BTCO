@@ -18,6 +18,7 @@ import btcoPOP from '@/components/btcoPOP'
 import varGlobal from '@/components/Global.vue'
 import VueResource from 'vue-resource'
 import VueClipboard from 'vue-clipboard2'
+import VeLine from 'v-charts/lib/line.common'
 
 Vue.config.productionTip = false
 
@@ -32,6 +33,8 @@ Vue.use(InputNumber)
 Vue.use(Dropdown)
 Vue.use(DropdownMenu)
 Vue.use(DropdownItem)
+
+Vue.component(VeLine.name, VeLine)
 
 Vue.use(VueResource)
 Vue.use(VueClipboard)
