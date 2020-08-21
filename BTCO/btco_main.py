@@ -61,9 +61,10 @@ class btco_main:
                 if len(self.BtcoIns) != 0:
                     initobj.close()
                     public.SetConfigValue('btco',True)
-                    return public.returnMsg(True, '您已安装过了.')
+                    public.SetConfigValue('btco_init',True)
+                    return public.returnMsg(True, '您已安装过了。')
             # BTCO 强制跳转写入
-            BtcoAdd = '<!--BTCO-->\n   <script> var a=document.location.toString().split("//");navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)&&("/"==a[1].substring(a[1].indexOf("/"))?window.location.href="/btco/index.html' + '":"/config"==a[1].substring(a[1].indexOf("/"))&&(window.location.href="/btco/index.html#/config' + '")); </script> \n   <!--BTCO-->'
+            BtcoAdd = '<!--BTCO-->\n   <script> if(navigator.userAgent.match(/mobile/i)){let a=document.location.toString().split("//"),urlArr=["/","/config"],thisUrl=urlArr.indexOf(a[1].substring(a[1].indexOf("/")));if(thisUrl>-1)window.location.href="/btco/index.html#"+urlArr[thisUrl]} </script> \n   <!--BTCO-->'
             initCoutent = open('/www/server/panel/BTPanel/templates/default/layout.html','r')
             BtcoAddIn = initCoutent.read().split("</head>")
             initCoutent.close()
@@ -72,6 +73,7 @@ class btco_main:
             BtcoAddin.close()
             public.restart_panel()
             public.SetConfigValue('btco',True)
+            public.SetConfigValue('btco_init',True)
             return public.returnMsg(True, '安装成功，感谢支持.')
         elif public.GetConfigValue('btco'):
             return public.returnMsg(True,'您已安装过了.')
@@ -100,9 +102,13 @@ class btco_main:
 
     #BTCO 安装检测
     def BtcoInstallCheck(self, get):
+        if public.GetConfigValue('btco_init'):
+            isInit = True
+        else:
+            isInit = False
         if public.GetConfigValue('btco'):
-            return public.returnMsg(True,'已安装')
-        return public.returnMsg(False,'未安装')
+            return public.returnMsg(True, { 'data': '已安装', 'init': isInit })
+        return public.returnMsg(False,{ 'data': '未安装', 'init': isInit })
 
     # BTCO 前端请求扩展
     # ----------------

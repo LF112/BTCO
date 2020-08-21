@@ -51,7 +51,7 @@ module.exports = {
     publicPath: process.env.NODE_ENV === 'production' ? '././' : '/',
     assetsDir: '././static/',
     productionSourceMap: false,
-    chainWebpack(config) {
+    chainWebpack (config) {
         config.module
             .rule('svg')
             .exclude.add(resolve('src/assets/icon'))

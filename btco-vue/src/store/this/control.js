@@ -9,10 +9,10 @@ const getters = {
 }
 
 const mutations = {
-    changeSwitchOpen(state, status) {
+    changeSwitchOpen (state, status) {
         state.switchOpen = status
     },
-    updateIsDay(state, day) {
+    updateIsDay (state, day) {
         state.isDay = day
     }
 }

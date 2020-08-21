@@ -1,7 +1,7 @@
 const fs = require('fs'), Minify = require('html-minifier').minify
 
 class devCheck {
-    apply(compiler) {
+    apply (compiler) {
         compiler.plugin('watchRun', (compilation, callback) => {
             let devPath = __dirname + '/dev'
             fs.readFile(devPath + '/dev.html', (err, data) => {

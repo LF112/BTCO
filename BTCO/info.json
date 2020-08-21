@@ -1,7 +1,7 @@
 {
     "title": "BTCO",
     "name": "btco",
-    "ps": "「宝塔响应式解决方案」 - BTCO",
+    "ps": "「宝塔响应式解决方案」 - BTCO 测试版",
     "versions": "2.0",
     "checks": "/www/server/panel/plugin/btco",
     "author": "LF112",

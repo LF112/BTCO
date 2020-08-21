@@ -16,11 +16,15 @@ import store from './store'
 import '@/components/ICON'
 import btcoPOP from '@/components/btcoPOP'
 import varGlobal from '@/components/Global.vue'
-import VueResource from 'vue-resource'
 import VueClipboard from 'vue-clipboard2'
 import VeLine from 'v-charts/lib/line.common'
+import axios from 'axios'
+import CryptoJS from 'crypto-js'
+import requestCrypto from './lib/requestCrypto'
 
 Vue.config.productionTip = false
+
+requestCrypto(axios, CryptoJS)
 
 Vue.use(Icon)
 Vue.use(Input)
@@ -36,11 +40,11 @@ Vue.use(DropdownItem)
 
 Vue.component(VeLine.name, VeLine)
 
-Vue.use(VueResource)
 Vue.use(VueClipboard)
 Vue.use(btcoPOP)
 Vue.prototype._ = varGlobal
 Vue.prototype.Call = new Vue()
+Vue.prototype.$http = axios
 
 new Vue({
     router,

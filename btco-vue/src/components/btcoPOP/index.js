@@ -7,7 +7,7 @@ BTCOPOP.install = (Vue) => {
 
     Vue.prototype.$copop = {
 
-        that(MSG, timeout, callback = null, iconColor = '#fff', iconClass = 'el-icon-warning') {
+        that (MSG, timeout, callback = null, iconColor = '#fff', iconClass = 'el-icon-warning') {
 
             thisPOP = Vue.extend(POP)
             thisPOP = new thisPOP()
@@ -29,28 +29,28 @@ BTCOPOP.install = (Vue) => {
 
         },
 
-        info(MSG, timeout) {
+        info (MSG, timeout) {
             this.that(MSG, timeout, null, '#909399', 'el-icon-warning-outline')
         },
-        infoUse(MSG, callback) {
+        infoUse (MSG, callback) {
             this.that(MSG, 0, callback, '#909399', 'el-icon-warning-outline')
         },
-        load(MSG, timeout) {
+        load (MSG, timeout) {
             this.that(MSG, timeout, null, '#53a8ff', 'el-icon-loading')
         },
-        loadUse(MSG, callback) {
+        loadUse (MSG, callback) {
             this.that(MSG, 0, callback, '#53a8ff', 'el-icon-loading')
         },
-        warn(MSG, timeout) {
+        warn (MSG, timeout) {
             this.that(MSG, timeout, null, '#f56c6c')
         },
-        warnUse(MSG, callback) {
+        warnUse (MSG, callback) {
             this.that(MSG, 0, callback, '#f56c6c')
         },
-        success(MSG, timeout) {
+        success (MSG, timeout) {
             this.that(MSG, timeout, null, '#67c23a', 'el-icon-success')
         },
-        successUse(MSG, callback) {
+        successUse (MSG, callback) {
             this.that(MSG, 0, callback, '#67c23a', 'el-icon-success')
         }
 

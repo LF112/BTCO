@@ -91,43 +91,43 @@ const getters = {
 }
 
 const mutations = {
-    changeIsHTTPS(state, status) {
+    changeIsHTTPS (state, status) {
         state.isHTTPS = status
     },
-    changeShowSslChange(state, status) {
+    changeShowSslChange (state, status) {
         state.showSslChange = status
     },
-    updateIsSSL(state, ssl) {
+    updateIsSSL (state, ssl) {
         state.isSSL = ssl
     },
-    changeShowAPI(state, status) {
+    changeShowAPI (state, status) {
         state.showAPI = status
     },
-    updateIsAPI(state, api) {
+    updateIsAPI (state, api) {
         state.isAPI = api
     },
-    changeShowTwoVerify(state, status) {
+    changeShowTwoVerify (state, status) {
         state.showTwoVerify = status
     },
-    updateIsTwoVerify(state, arr) {
+    updateIsTwoVerify (state, arr) {
         state.IsTwoVerify = arr
     },
-    updateIs(state, arr) {
+    updateIs (state, arr) {
         state.Is = arr
     },
-    updatePanelIs(state, arr) {
+    updatePanelIs (state, arr) {
         state[arr[0]] = arr[1]
     },
-    changeShowPanelAccount(state, status) {
+    changeShowPanelAccount (state, status) {
         state.showPanelAccount = status
     },
-    changeShowBtAccount(state, status) {
+    changeShowBtAccount (state, status) {
         state.showBtAccount = status
     },
-    changeShowWechatApp(state, status) {
+    changeShowWechatApp (state, status) {
         state.showWechatApp = status
     },
-    changeShowBasicAuth(state, status) {
+    changeShowBasicAuth (state, status) {
         state.showBasicAuth = status
     }
 }

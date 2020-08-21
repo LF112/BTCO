@@ -59,42 +59,42 @@ const getters = {
 }
 
 const mutations = {
-    changeVersion(state, version) {
+    changeVersion (state, version) {
         state.version = version
     },
-    changeIsPro(state, status) {
+    changeIsPro (state, status) {
         state.isPro = status
     },
-    changeIsIP(state, ip) {
+    changeIsIP (state, ip) {
         state.isIP = ip
     },
-    changeIsSYS(state, sys) {
+    changeIsSYS (state, sys) {
         state.isSYS = sys
     },
-    changeIsPY(state, version) {
+    changeIsPY (state, version) {
         state.isPY = version
     },
-    changeIsTEST(state, status) {
+    changeIsTEST (state, status) {
         state.isTEST = status
     },
-    changeRunTime(state, time) {
+    changeRunTime (state, time) {
         state.runTime = time
     },
-    changeIsWebServer(state, webServer) {
+    changeIsWebServer (state, webServer) {
         state.isWebServer = webServer
     },
-    updateNetwork(state, arr) {
+    updateNetwork (state, arr) {
         state.networkUP = arr.networkUP
         state.networkDown = arr.networkDown
         state.downTotal = arr.downTotal
         state.upTotal = arr.upTotal
     },
-    updateOverview(state, web, ftp, database) {
+    updateOverview (state, web, ftp, database) {
         state.thatWEB = web
         state.thatFTP = ftp
         state.thatDATABASE = database
     },
-    changeOpenUV(state, arr) {
+    changeOpenUV (state, arr) {
         state.openUV = arr
     }
 }

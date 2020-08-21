@@ -5,6 +5,17 @@ console.log('\n %c 🎉BTCO %c https://github.com/LF112/BTCO %c BY%c LF112  \n\n
 
 let deliveryRecord = [
     [
+        'V2.1 测试版',
+        '1.插件页面算法优化',
+        '2.适配宝塔请求加密算法'
+    ],
+    [
+        'V2.0 测试版',
+        '1.首个使用webpack构建插件页面',
+        '2.使用Vue构建BTCO本体',
+        '3.细节及样式乃至是算法大调整'
+    ],
+    [
         'V1.0 正式版',
         '1.新增面板设置响应式',
         '2.伪Pjax化',
@@ -259,7 +270,7 @@ const BTCO = {
         while (Global.backgroup.q[1].x < Global.backgroup.w + Global.backgroup.f)
             d(Global.backgroup.q[0], Global.backgroup.q[1])
 
-        function d(i, j) {
+        function d (i, j) {
             evanyouDom.beginPath()
             evanyouDom.moveTo(i.x, i.y)
             evanyouDom.lineTo(j.x, j.y)
@@ -351,7 +362,9 @@ BTCO.init('BTCO', check => {
                     $.post('/plugin?action=a&s=BtcoInstallCheck&name=btco', {}, (rdata) => {
                         BTCO.loadMask(() => {
                             if (!rdata.status)  // 未安装
-                                BTCO.newUSE()
+                                if (rdata.msg.init)
+                                    BTCO.startInstall()
+                                else BTCO.newUSE()
                             else BTCO.Hello()   // 已安装
                         }, false)
                     })

@@ -13,16 +13,16 @@ const getters = {
 }
 
 const mutations = {
-    updateThisRouter(state, routerName) {
+    updateThisRouter (state, routerName) {
         state.thisRouter = routerName
     },
-    updateIsSiteNickname(state, nickname) {
+    updateIsSiteNickname (state, nickname) {
         state.isSiteNickname = nickname
     },
-    changeIsDev(state, status) {
+    changeIsDev (state, status) {
         state.isDev = status
     },
-    changeReloadServerStatus(state, status) {
+    changeReloadServerStatus (state, status) {
         state.reloadServerStatus = status
     }
 }
