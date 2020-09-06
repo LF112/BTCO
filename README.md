@@ -29,7 +29,7 @@ BT-Panel Responsive solution
 - 特征
 	- 响应式
 
-## 版本送代
+## 版本迭代
 V2.0 测试版
 
 >1.首个使用webpack构建插件页面

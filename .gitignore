@@ -3,3 +3,5 @@ push/
 node_modules
 package.json
 BTCO.zip
+BTCO/static/*
+BTCO/templates/*
